@@ -10,27 +10,20 @@ set -e
 # Nicole Labra Avila January 2025
 
 _env_setup() {
-    echo "Begin env_setup"
-    cd /shared/ucl/apps/build_scripts/
+    echo "Begin setup"
     source includes/source_includes.sh
     cd 
     module purge
     require beta-modules
     require gcc-libs/4.9.2
     
-    package_archive="${HOME}/StataNow18Linux64.tar.gz"
-   # package_archive="$/shared/ucl/apps/StataMP/installers/StataNow18Linux64.tar.gz"
+    package_archive="/shared/ucl/apps/StataMP/installers/StataNow18Linux64.tar.gz"
     package_name="stata"
     package_version="18.5"
-    unpack_dir="stata18.5"
-    mkdir ${HOME}/StataMP 
 
-    make_build_env --tmp-root=${HOME}/StataMP
-    #make_build_env --tmp-root=/dev/shm
-
-    #install_prefix="/shared/ucl/apps/StataMP"
-    install_prefix="${HOME}/StataMP/$unpack_dir"
-    module_dir="$install_prefix/module/$package_name/$package_version/.uclrc_modules"
+    make_build_env --tmp-root=/dev/shm
+    install_prefix="/shared/ucl/apps/StataMP/stata18.5"
+    module_dir="$install_prefix/.uclrc_modules"
     echo "$install_prefix"
     echo "$module_dir"
     echo "End env_setup"
@@ -38,7 +31,7 @@ _env_setup() {
 
 _file_setup() {
     echo "Begin file_setup"
-    mkdir $install_prefix
+    #mkdir $install_prefix
     cd "$install_prefix"
     tar -xvzf "$package_archive"
     echo "End file_setup"
@@ -49,7 +42,6 @@ _pre_build() {
     cd ..
 }
 _build() {      
-    mkdir -p $install_prefix
     cd "$install_prefix"
     echo "Building..."
     ./install
@@ -59,9 +51,8 @@ _build() {
 
 _post_build() {
     cd "$install_prefix"
-   # mkdir $module_dir
     echo "Post-building..."
-    make_module \
+    make_module_v2 \
         -o "${module_dir}" \
         -p "$install_prefix" \
         -r beta-modules \
@@ -91,5 +82,5 @@ _pre_build
 _build
 _post_build
 _clean_up
-#_test_
+_test_
 
