@@ -19,7 +19,8 @@ cd "$build_dir"
 archive="/shared/ucl/apps/pkg-store/Convergent_Science_Full_Package-3.1.12.tar.gz"
 manifest sha256:5ba3669cdc95b0b480a60f96ec81691b51ce2dae695f3aa1e387020c1858adbd  "$archive"
 
-tar -xvf "$archive"
+echo "Untarring many files"
+tar -xf "$archive"
 cd "Convergent_Science_Full_Package-${package_version}"
 
 mkdir -p "$install_prefix"
