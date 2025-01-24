@@ -1,0 +1,32 @@
+#!/bin/bash
+
+package_name="Convergent_Science"
+package_version="3.1.12"
+package_description="Convergent Science install for Brunel."
+
+set -o errexit -o nounset
+
+source includes/source_includes.sh
+
+module purge
+
+access_group="lgconbru"
+
+# requires ~18G space to untar.
+make_build_env --tmp-root="/dev/shm"
+
+cd "$build_dir"
+archive="/shared/ucl/apps/pkg-store/Convergent_Science_Full_Package-3.1.12.tar.gz"
+manifest sha256:5ba3669cdc95b0b480a60f96ec81691b51ce2dae695f3aa1e387020c1858adbd  "$archive"
+
+tar -xvf "$archive"
+cd "Convergent_Science_Full_Package-${package_version}"
+
+mkdir -p "$install_prefix"
+./INSTALL "$install_prefix"
+
+chgrp -R "$access_group" "$install_prefix"
+chmod -R o-rwx "$install_prefix"
+
+post_build_report
+
