@@ -17,7 +17,7 @@ _env_setup() {
     require beta-modules
     require gcc-libs/4.9.2
     
-    package_archive="/shared/ucl/apps/StataMP/installers/StataNow18Linux64.tar.gz"
+    package_archive="/tmp/skgtnl1/StataNow18Linux64.tar.gz"
     package_name="stata"
     package_version="18.5"
 
@@ -31,7 +31,7 @@ _env_setup() {
 
 _file_setup() {
     echo "Begin file_setup"
-    #mkdir $install_prefix
+#    mkdir $install_prefix
     cd "$install_prefix"
     tar -xvzf "$package_archive"
     echo "End file_setup"
