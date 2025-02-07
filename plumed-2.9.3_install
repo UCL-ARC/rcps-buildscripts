@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+
+###############################################
+# Installing PLUMED
+#
+#  Uses libmatheval
+#   which requires flex (else you get an undefined symbol yywrap error)
+#
+#  To build with gcc 10 run with GCC=yes ./plumed-2.9.3_install
+
+NAME=${NAME:-plumed}
+VERSION=${VERSION:-2.9.3}
+SRC_ARCHIVE=${SRC_ARCHIVE:-https://github.com/plumed/plumed2}
+BUILD_DIR=${BUILD_DIR:-$(mktemp -d -p /dev/shm -t "${NAME}"-build.XXXXXXXX)}
+GCC=${GCC:-no}
+
+cluster=${cluster:-$(/shared/ucl/apps/cluster-bin/whereami)}
+
+set -e
+
+# require modules for building
+source includes/source_includes.sh
+module purge
+
+if [ "$GCC" == "no" ]
+then
+  module load gcc-libs
+  module load git/2.32.0
+  module load compilers/intel/2020/release
+  module load mpi/intel/2019/update6/intel
+else
+  module load beta-modules
+  module load gcc-libs/10.2.0
+  module load git/2.32.0
+  module load compilers/gnu/10.2.0
+  # On Myriad, build with UCX
+  if [ $cluster == "myriad" ]
+  then
+      require numactl/2.0.12
+      require binutils/2.36.1/gnu-10.2.0
+      require ucx/1.9.0/gnu-10.2.0
+  fi
+  module load mpi/openmpi/4.0.5/gnu-10.2.0
+  module load openblas/0.3.13-serial/gnu-10.2.0
+fi
+
+module load flex
+module load libmatheval
+
+# set once we know which modules are loaded
+INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/$NAME/$VERSION/$COMPILER_TAG/$BLAS_TAG}
+
+cd "$BUILD_DIR"
+
+git clone "$SRC_ARCHIVE"
+
+cd plumed2
+git checkout v${VERSION}
+
+# Disable Intel only options if we detect GCC
+# fp-model precise required to make the tests pass
+IFCORE="-lifcore"
+ISTRICT="-fp-model precise"
+#IOPTS="-axSSE4.2,AVX,CORE-AVX512 -finline -funroll-loops -vec"
+# Small numerical differences in regtests if we use AVX512 (or AVX2)
+IOPTS="-axSSE4.2,AVX -finline -funroll-loops -vec"
+
+if [ "$COMPILER_TAG" == "gnu-10.2.0" ]
+then
+  IFCORE=""
+  ISTRICT=""
+  IOPTS=""
+fi
+
+if [ "$BLAS_TAG" == "openblas" ]
+then
+  # fortran needs this flag per https://github.com/plumed/plumed2/issues/1062#issuecomment-2075035605
+  # should not be needed in 2.10+
+  ./configure --prefix="$INSTALL_PREFIX" CXX=mpicxx CC=mpicc FC="mpif90 -fallow-argument-mismatch" LDFLAGS="-L${OPENBLASROOT}/lib" LIBS="-lopenblas ${IFCORE} -lmatheval -lfl" CXXFLAGS="-O3 ${IOPTS} ${ISTRICT}"
+else
+  ./configure --prefix="$INSTALL_PREFIX" CXX=mpicxx CC=mpicc FC=mpif90 LIBS="-mkl ${IFCORE} -lmatheval -lfl" CFLAGS="-O1 ${IOPTS} ${ISTRICT}"  CXXFLAGS="-O1 ${IOPTS} ${ISTRICT}"
+fi
+# Turn on Crystallization module
+touch src/crystallization.on
+
+make 2>&1 | tee make.log
+make install
+  
+# The tests also *seem* to require you to have already installed PLUMED into a prefix
+export PATH="$INSTALL_PREFIX/bin:$PATH"
+export CPATH="$INSTALL_PREFIX/include:$CPATH"
+export LIBRARY_PATH="$INSTALL_PREFIX/lib:$LIBRARY_PATH"
+export LD_LIBRARY_PATH="$INSTALL_PREFIX/lib:$LD_LIBRARY_PATH"
+
+make check 2>&1 | tee test.log
