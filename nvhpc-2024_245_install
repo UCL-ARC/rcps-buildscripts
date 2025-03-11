@@ -26,7 +26,7 @@ cd $temp_dir
 wget $SRC_ARCHIVE
 archive=$(basename "${SRC_ARCHIVE}")
 
-md5sum -c <<< "$md5 $archive" 
+md5sum -c <<< "$MD5 $archive" 
 
 
 tar -xvf $archive
