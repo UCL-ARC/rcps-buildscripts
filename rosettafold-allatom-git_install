@@ -43,9 +43,20 @@ git checkout ${GIT_TAG}
 cd rf2aa/data
 cp ${rcpsrepo}/patches/rfaa-preprocessing.py.patch preprocessing.py.patch
 patch < preprocessing.py.patch
+cd ${INSTALL_PREFIX}/RoseTTAFold-All-Atom
+cp ${rcpsrepo}/patches/rfaa-make_msa.sh.patch make_msa.sh.patch
+cp ${rcpsrepo}/patches/rfaa-make_ss.sh.patch make_ss.sh.patch
+patch < make_msa.sh.patch
+patch < make_ss.sh.patch
+
+# Script to "bless" input directories
+cp ${rcpsrepo}/files/prepare_rfaa_directory.sh ${INSTALL_PREFIX}/RoseTTAFold-All-Atom/input_prep/prepare_rfaa_input_directory
+chmod +x ${INSTALL_PREFIX}/RoseTTAFold-All-Atom/input_prep/prepare_rfaa_input_directory
+
+# Bless install directory
+${INSTALL_PREFIX}/RoseTTAFold-All-Atom/input_prep/prepare_rfaa_input_directory ${INSTALL_PREFIX}/RoseTTAFold-All-Atom
 
 # Install mamba env
-cd ${INSTALL_PREFIX}/RoseTTAFold-All-Atom
 CONDA_OVERRIDE_CUDA="12.4" mamba env create -f environment.yaml
 mamba activate RFAA
 
@@ -69,9 +80,7 @@ ln -s /shared/ucl/apps/blast/blast-2.2.26 .
 # Fix https://github.com/baker-laboratory/RoseTTAFold-All-Atom/issues/106
 chmod +x input_prep/make_ss.sh
 
-# Script to "bless" input directories
-cp ${rcpsrepo}/files/prepare_rfaa_directory.sh ${INSTALL_PREFIX}/RoseTTAFold-All-Atom/input_prep/prepare_rfaa_input_directory
-chmod +x ${INSTALL_PREFIX}/RoseTTAFold-All-Atom/input_prep/prepare_rfaa_input_directory
+
 
 # Tidy up
 rm -rf $temp_dir

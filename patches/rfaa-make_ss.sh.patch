@@ -1,0 +1,11 @@
+--- make_ss.sh.orig	2025-03-13 12:02:26.000000000 +0000
++++ make_ss.sh	2025-03-13 12:02:36.000000000 +0000
+@@ -1,6 +1,8 @@
+ #!/bin/bash
+ # From: https://github.com/RosettaCommons/RoseTTAFold
+ 
++set -e
++
+ export BLASTMAT=$PIPE_DIR/blast-2.2.26/data/
+ 
+ DATADIR="$CONDA_PREFIX/share/psipred_4.01/data"
