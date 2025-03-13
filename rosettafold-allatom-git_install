@@ -45,9 +45,11 @@ cp ${rcpsrepo}/patches/rfaa-preprocessing.py.patch preprocessing.py.patch
 patch < preprocessing.py.patch
 cd ${INSTALL_PREFIX}/RoseTTAFold-All-Atom
 cp ${rcpsrepo}/patches/rfaa-make_msa.sh.patch make_msa.sh.patch
-cp ${rcpsrepo}/patches/rfaa-make_ss.sh.patch make_ss.sh.patch
+cp ${rcpsrepo}/patches/rfaa-make_ss.sh.patch input_prep/make_ss.sh.patch
 patch < make_msa.sh.patch
+cd input_prep
 patch < make_ss.sh.patch
+cd ${INSTALL_PREFIX}/RoseTTAFold-All-Atom
 
 # Script to "bless" input directories
 cp ${rcpsrepo}/files/prepare_rfaa_directory.sh ${INSTALL_PREFIX}/RoseTTAFold-All-Atom/input_prep/prepare_rfaa_input_directory
@@ -59,6 +61,12 @@ ${INSTALL_PREFIX}/RoseTTAFold-All-Atom/input_prep/prepare_rfaa_input_directory $
 # Install mamba env
 CONDA_OVERRIDE_CUDA="12.4" mamba env create -f environment.yaml
 mamba activate RFAA
+
+# Build package
+cd rf2aa/SE3Transformer/
+pip3 install --no-cache-dir -r requirements.txt
+python3 setup.py install
+cd ../../
 
 # Set up signalp6
 signalp6-register /shared/ucl/apps/pkg-store/signalp-6.0h.fast.tar.gz
