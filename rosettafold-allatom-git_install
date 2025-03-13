@@ -28,7 +28,7 @@ temp_dir=$(mktemp -d -p /dev/shm/$(whoami)/${NAME})
 cd $temp_dir
 wget ${MAMBA_URL}
 archive=$(basename "${MAMBA_URL}")
-sha256sum -c <<< "${MAMBA_SHA256 $archive}"
+sha256sum -c <<< "${MAMBA_SHA256} ${archive}"
 bash ${archive} -b -p ${INSTALL_PREFIX}/miniforge3
 source ${INSTALL_PREFIX}/miniforge3/etc/profile.d/conda.sh
 source ${INSTALL_PREFIX}/miniforge3/etc/profile.d/mamba.sh
