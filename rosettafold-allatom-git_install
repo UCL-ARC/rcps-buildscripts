@@ -7,7 +7,7 @@ for i in ${includes_dir:=$(dirname $0 2>/dev/null)/includes}/{module_maker,requi
 
 require gcc-libs/4.9.2
 
-rcps-repo=$(pwd)
+rcpsrepo=$(pwd)
 NAME=${NAME:-"rfaa"}
 VERSION=${VERSION:-"20250304"}
 GIT_TAG=${GIT_TAG:-"6c8514053acf76da0f9edde2aa51b40abff68fa1"}
@@ -41,7 +41,7 @@ git checkout ${GIT_TAG}
 
 # patch
 cd rf2aa/data
-cp ${rcps-repo}/patches/rfaa-preprocessing.py.patch preprocessing.py.patch
+cp ${rcpsrepo}/patches/rfaa-preprocessing.py.patch preprocessing.py.patch
 patch < preprocessing.py.patch
 
 # Install mamba env
@@ -70,7 +70,7 @@ ln -s /shared/ucl/apps/blast/blast-2.2.26 .
 chmod +x input_prep/make_ss.sh
 
 # Script to "bless" input directories
-cp ${rcps-repo}/files/prepare_rfaa_directory.sh ${INSTALL_PREFIX}/RoseTTAFold-All-Atom/input_prep/prepare_rfaa_input_directory
+cp ${rcpsrepo}/files/prepare_rfaa_directory.sh ${INSTALL_PREFIX}/RoseTTAFold-All-Atom/input_prep/prepare_rfaa_input_directory
 chmod +x ${INSTALL_PREFIX}/RoseTTAFold-All-Atom/input_prep/prepare_rfaa_input_directory
 
 # Tidy up
