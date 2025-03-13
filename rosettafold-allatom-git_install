@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+
+set -e
+
+
+for i in ${includes_dir:=$(dirname $0 2>/dev/null)/includes}/{module_maker,require}_inc.sh; do . $i; done
+
+require gcc-libs/4.9.2
+
+rcps-repo=$(pwd)
+NAME=${NAME:-"rfaa"}
+VERSION=${VERSION:-"20250304"}
+GIT_TAG=${GIT_TAG:-"6c8514053acf76da0f9edde2aa51b40abff68fa1"}
+INSTALL_PREFIX=${INSTALL_PREFIX:-"/shared/ucl/apps/${NAME}/${VERSION}"}
+
+SRC_ARCHIVE=${SRC_ARCHIVE:-https://github.com/baker-laboratory/RoseTTAFold-All-Atom}
+
+MAMBA_SHA256=${MAMBA_SHA256:-2e1ad2188fe69fcdd522c2b20c08c800a5c7411b775eca768318b1540ed32e53}
+MAMBA_URL=${MAMBA_URL:-https://github.com/conda-forge/miniforge/releases/download/24.11.3-0/Miniforge3-24.11.3-0-Linux-x86_64.sh}
+
+
+mkdir -p /dev/shm/$(whoami)/${NAME}
+rm -Rf ${INSTALL_PREFIX}
+mkdir -p ${INSTALL_PREFIX}
+
+# Set up mamba
+temp_dir=$(mktemp -d -p /dev/shm/$(whoami)/${NAME})
+cd $temp_dir
+wget ${MAMBA_URL}
+archive=$(basename "${MAMBA_URL}")
+sha256sum -c <<< "${MAMBA_SHA256 $archive}"
+bash ${archive} -b -p ${INSTALL_PREFIX}/miniforge3
+source ${INSTALL_PREFIX}/miniforge3/etc/profile.d/conda.sh
+source ${INSTALL_PREFIX}/miniforge3/etc/profile.d/mamba.sh
+
+# Clone repo
+cd ${INSTALL_PREFIX}
+git clone ${SRC_ARCHIVE}
+cd RoseTTAFold-All-Atom
+git checkout ${GIT_TAG}
+
+# patch
+cd rf2aa/data
+cp ${rcps-repo}/patches/rfaa-preprocessing.py.patch preprocessing.py.patch
+patch < preprocessing.py.patch
+
+# Install mamba env
+cd ${INSTALL_PREFIX}/RoseTTAFold-All-Atom
+CONDA_OVERRIDE_CUDA="12.4" mamba env create -f environment.yaml
+mamba activate RFAA
+
+# Set up signalp6
+signalp6-register /shared/ucl/apps/pkg-store/signalp-6.0h.fast.tar.gz
+mv ${CONDA_PREFIX}/lib/python3.10/site-packages/signalp/model_weights/distilled_model_signalp6.pt ${CONDA_PREFIX}/lib/python3.10/site-packages/signalp/model_weights/ensemble_model_signalp6.pt
+
+# CS-BLAST
+mamba install bioconda::csblast
+mkdir -p csblast-2.2.3/bin
+mkdir -p csblast-2.2.3/data
+ln -s ${CONDA_PREFIX}/data/K4000.crf csblast-2.2.3/data
+ln -s ${CONDA_PREFIX}/data/K4000.lib csblast-2.2.3/data
+ln -s ${CONDA_PREFIX}/bin/csblast csblast-2.2.3/bin
+ln -s ${CONDA_PREFIX}/bin/csbuild csblast-2.2.3/bin
+find csblast-2.2.3/
+
+# Legacy Blast:
+ln -s /shared/ucl/apps/blast/blast-2.2.26 .
+
+# Fix https://github.com/baker-laboratory/RoseTTAFold-All-Atom/issues/106
+chmod +x input_prep/make_ss.sh
+
+# Tidy up
+rm -rf $temp_dir
