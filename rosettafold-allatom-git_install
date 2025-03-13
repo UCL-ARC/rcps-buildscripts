@@ -69,5 +69,9 @@ ln -s /shared/ucl/apps/blast/blast-2.2.26 .
 # Fix https://github.com/baker-laboratory/RoseTTAFold-All-Atom/issues/106
 chmod +x input_prep/make_ss.sh
 
+# Script to "bless" input directories
+cp ${rcps-repo}/files/prepare_rfaa_directory.sh ${INSTALL_PREFIX}/RoseTTAFold-All-Atom/input_prep/prepare_rfaa_input_directory
+chmod +x ${INSTALL_PREFIX}/RoseTTAFold-All-Atom/input_prep/prepare_rfaa_input_directory
+
 # Tidy up
 rm -rf $temp_dir
