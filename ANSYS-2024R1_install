@@ -8,6 +8,7 @@ set -o errexit \
 package_name="ANSYS"
 package_version="2024.R1"
 package_description="The Ansys suite provides a range of engineering-oriented physics simulation packages."
+package_variant=""
 
 source includes/source_includes.sh
 
@@ -23,7 +24,8 @@ module load gcc-libs
 
 NAME=${package_name:-ANSYS}
 VERSION=${package_version:-2024.R1}
-INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/${NAME}/${VERSION}}
+INSTALL_VARIANT=${package_variant:-}
+INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/${NAME}/${VERSION}${INSTALL_VARIANT:+-}${INSTALL_VARIANT}}
 SRC_ARCHIVE=${SRC_ARCHIVE:-/shared/ucl/apps/ANSYS/installers/${VERSION}}
 ELECTRONICS=${ELECTRONICS:-ELECTRONICS_2024R1_LINX64.tgz}
 ELECTRONICS_ADD=${ELECTRONICS_ADD:-ELECTRONICS_2024R1.1_LINX64.tgz}
