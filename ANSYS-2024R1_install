@@ -24,7 +24,7 @@ module load gcc-libs
 
 NAME=${package_name:-ANSYS}
 VERSION=${package_version:-2024.R1}
-INSTALL_VARIANT=${package_variant:-}
+INSTALL_VARIANT=${INSTALL_VARIANT:-${package_variant:-}}
 INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/${NAME}/${VERSION}${INSTALL_VARIANT:+-}${INSTALL_VARIANT}}
 SRC_ARCHIVE=${SRC_ARCHIVE:-/shared/ucl/apps/ANSYS/installers/${VERSION}}
 ELECTRONICS=${ELECTRONICS:-ELECTRONICS_2024R1_LINX64.tgz}
