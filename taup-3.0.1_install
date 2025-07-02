@@ -1,0 +1,33 @@
+#!/bin/bash
+
+package_name="taup"
+package_version="3.0.1"
+package_description="The TauP Toolkit is a seismic travel time calculator. In addition to travel times, it can calculate derivative information such as ray paths through the earth, pierce and turning points. It handles many types of velocity models and can calculate times for virtually any seismic phase with a phase parser."
+
+set -o errexit \
+    -o nounset \
+    -o pipefail
+
+source includes/source_includes.sh
+
+module purge
+
+make_build_env ""
+
+cd "$build_dir"
+wget -O TauP-3.0.1.zip https://zenodo.org/records/15426279/files/TauP-3.0.1.zip
+
+manifest \
+	sha256:569a5e1d5d9268e57e6f08ace451946b8264474a951d64bf77283523bac3f1be TauP-3.0.1.zip
+	
+
+unzip "TauP-$package_version".zip
+
+mv "TauP-$package_version" "$install_prefix/"
+
+make_module_v2 \
+    -p "$install_prefix/TauP-$package_version" \
+    -r "java/temurin-11" \
+    -v "TAUP_HOME=$install_prefix/TauP-$package_version"
+
+post_build_report
