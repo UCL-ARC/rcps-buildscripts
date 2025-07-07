@@ -20,7 +20,7 @@ make_build_env ""
 
 cd "$build_dir"
 wget "$src_archive" -O "$archive_name"
-manifest 7c63b9aa349950358b8fd323b1dc0b8c7e6ad9439362dbbdd9a38180c92b4d77  "$archive_name"
+manifest sha256:7c63b9aa349950358b8fd323b1dc0b8c7e6ad9439362dbbdd9a38180c92b4d77  "$archive_name"
 
 cd "$install_prefix"
 tar -xvf "$build_dir/$archive_name"
