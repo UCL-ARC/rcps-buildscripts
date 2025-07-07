@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+###############################################
+# Installing Paraview headless binaries 
+# 
+
+package_name="paraview"
+package_version="5.13.3"
+package_description="This module adds the headless ParaView 5.13.3 binaries to your environment. ParaView is an open-source, multi-platform data analysis and visualization application."
+archive_name="ParaView-${package_version}-osmesa-MPI-Linux-Python3.10-x86_64.tar.gz"
+src_archive="http://www.paraview.org/paraview-downloads/download.php?submit=Download&version=v5.13&type=binary&os=Linux&downloadFile=${archive_name}"
+
+set -o errexit -o nounset
+
+source includes/source_includes.sh
+
+module purge
+
+make_build_env ""
+
+cd "$build_dir"
+wget "$src_archive" -O "$archive_name"
+manifest 7c63b9aa349950358b8fd323b1dc0b8c7e6ad9439362dbbdd9a38180c92b4d77  "$archive_name"
+
+cd "$install_prefix"
+tar -xvf "$build_dir/$archive_name"
+
+make_module_v2
+
+post_build_report
+
