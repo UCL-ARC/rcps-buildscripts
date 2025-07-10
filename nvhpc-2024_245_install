@@ -17,9 +17,9 @@ MD5=${MD5:-be6059ea40ebf174bfee055cd714f186} # https://developer.download.nvidia
 SRC_ARCHIVE=${SRC_ARCHIVE:-https://developer.download.nvidia.com/hpc-sdk/${RELEASE}/${NAME}_${VERSION}_Linux_x86_64_cuda_multi.tar.gz}
 
 
-mkdir -p /scratch/$(whoami)/${NAME}
+mkdir -p /home/$(whoami)/Scratch/${NAME}
 
-temp_dir=$(mktemp -d -p /scratch/$(whoami)/${NAME})
+temp_dir=$(mktemp -d -p /home/$(whoami)/Scratch/${NAME})
 
 cd $temp_dir
 
