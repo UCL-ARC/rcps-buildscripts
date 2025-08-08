@@ -166,8 +166,13 @@ make_build_env () {
 
     if [[ "$owning_group" != "" ]]; then
         if getent group "$owning_group" >/dev/null 2>/dev/null; then
-            chgrp "$owning_group" "$install_prefix" "$build_dir" 
-            chmod o-rwx "$install_prefix" "$build_dir"
+            chgrp "$owning_group" "$build_dir" 
+            chmod o-rwx "$build_dir"
+            # For a production build, usually the install prefix won't exist until later.
+            if [[ -d "$install_prefix" ]]; then
+                chgrp "$owning_group" "$install_prefix"
+                chmod o-rwx "$install_prefix"
+            fi
             group_own_text="Install+build owned by group: $owning_group"$'\n'
         else
             echo "Error: attempted to set group ownership of build and install directories to '$owning_group' but that group does not exist." >&2
