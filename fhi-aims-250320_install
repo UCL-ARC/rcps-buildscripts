@@ -1,0 +1,66 @@
+#!/bin/bash
+
+set -o errexit -o nounset -o pipefail
+
+package_name="fhi-aims"
+package_version="250320"
+package_description="FHI-aims is an all-electron electronic structure code based on numeric atom-centered orbitals."
+
+source includes/source_includes.sh
+
+module purge
+require compilers/intel/2024.0.1
+require mpi/intel/2021.11/intel
+require cmake
+
+make_build_env --group=ag-archpc-fhiaims
+
+cd "$build_dir"
+
+tar -xf "/shared/ucl/apps/pkg-store/fhi-aims.$package_version.tgz"
+
+cd "fhi-aims.$package_version/"
+mkdir build
+cd build
+
+# If you follow the instructions as written, you'd hand-edit a copy of this cache file.
+# We're not doing that.
+#cp ../initial_cache.example.cmake ./
+
+
+if lscpu | grep -q avx512 ; then
+    elpa_arch="AVX512"
+else
+    elpa_arch="AVX2"
+fi
+
+# The top block are customised, the bottom block are copy/pasted from the example cache file
+# If you try to use both, the cache file contents override the command-line options
+# Also if you make mpif90 use ifx instead of ifort, ifx segfaults in the last link step
+cmake \
+    -DCMAKE_INSTALL_PREFIX="$install_prefix" \
+    -DCMAKE_Fortran_COMPILER="mpif90" \
+    -DCMAKE_Fortran_FLAGS="-O3 -ip -xHost -fp-model precise" \
+    -DFortran_MIN_FLAGS="-O0 -ip -fp-model precise" \
+    -DCMAKE_C_COMPILER=icx \
+    -DCMAKE_CXX_COMPILER=icpx \
+    -DCMAKE_C_FLAGS="-O3 -xHost -fp-model precise -std=gnu99" \
+    -DCMAKE_CXX_FLAGS="-O3 -xHost -fp-model precise" \
+    -DLIB_PATHS="$MKLROOT/lib/intel64" \
+    -DELPA2_KERNEL="$elpa_arch" \
+    \
+    -DLIBS="mkl_intel_lp64 mkl_sequential mkl_core mkl_blacs_intelmpi_lp64 mkl_scalapack_lp64" \
+    -DUSE_MPI=ON \
+    -DUSE_SCALAPACK=ON \
+    -DUSE_LIBXC=ON \
+    -DUSE_HDF5=OFF \
+    -DUSE_RLSY=ON \
+    -DUSE_COOP=ON \
+    ../
+make -l 10 -j
+
+make install
+
+make_module_v2 -g ag-archpc-fhiaims
+post_build_report
+
