@@ -96,6 +96,7 @@ make_build_env () {
     local prefix
     local tmp_root_dir
     local prod_apps_dir
+    local owning_group
 
     prod_apps_dir="${APPS_DIR:-/shared/ucl/apps}"
     service_user_pattern="^ccspap.\$"
@@ -103,6 +104,7 @@ make_build_env () {
 
     prefix="${package_name:-tmp.}"
     tmp_root_dir="${TMPDIR:-/tmp}"
+    owning_group=""
 
     if [[ -n "${1:-}" ]]; then
         if [[ "${1:0:2}" == "--" ]] && [[ ${#1} -gt 2 ]]; then
@@ -113,6 +115,9 @@ make_build_env () {
                         ;;
                     --prefix=*)
                         prefix="${1#--prefix=}"
+                        ;;
+                    --group=*)
+                        owning_group="${1#--group=}"
                         ;;
                     *)
                         echo "Error: unrecognised option passed to make_build_env" >&2
@@ -158,6 +163,17 @@ make_build_env () {
     else
         install_prefix="$default_install_prefix"
     fi
+
+    if [[ "$owning_group" != "" ]]; then
+        if getent group "$owning_group" >/dev/null 2>/dev/null; then
+            chgrp "$owning_group" "$install_prefix" "$build_dir" 
+            chmod o-rwx "$install_prefix" "$build_dir"
+            group_own_text="Install+build owned by group: $owning_group"$'\n'
+        else
+            echo "Error: attempted to set group ownership of build and install directories to '$owning_group' but that group does not exist." >&2
+            exit 1
+        fi
+    fi
     
     module_dir="${MODULE_DIR:-"$install_prefix/.uclrc_modules"}"
 
@@ -171,7 +187,7 @@ make_build_env () {
     Build will take place in:     $build_dir
     Modules will be put in:       $module_dir
     Package will be installed to: $install_prefix
-
+    $group_own_text
     =====================
 EOF
 }
@@ -184,6 +200,7 @@ function post_build_report() {
     #  So we catch it and test for it
     exec_list="$(find "$install_prefix" -type f -perm /u+x | head -n 10 || [[ "${PIPESTATUS[0]}" -eq 141 ]])"
     lib_dirs="$(uses_libs_from "$install_prefix")"
+    install_perms="$(stat --printf=%U:%G:%A "$install_prefix")"
     printf "
     ==========================
     =    Post Build Info     =
@@ -193,6 +210,7 @@ function post_build_report() {
     Build took place in:      %s
     Modules were put in:      %s
     Package was installed to: %s
+    Installation perms:       %s
     Package size:             %sB
 
     -- First execs (max 10) --
@@ -202,7 +220,7 @@ function post_build_report() {
 %s
 
     ==========================\n" \
-    "$package_label" "$build_dir" "$module_dir" "$install_prefix" "$build_size" "$exec_list" "$lib_dirs"
+    "$package_label" "$build_dir" "$module_dir" "$install_prefix" "$install_perms" "$build_size" "$exec_list" "$lib_dirs"
 
 
 }
