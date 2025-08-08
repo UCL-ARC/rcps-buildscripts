@@ -61,6 +61,9 @@ make -l 10 -j
 
 make install
 
+chgrp -R ag-archpc-fhiaims "$install_prefix"
+chmod -R o-rwx "$install_prefix"
+
 make_module_v2 -g ag-archpc-fhiaims
 post_build_report
 
