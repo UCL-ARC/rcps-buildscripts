@@ -173,11 +173,13 @@ make_build_env () {
                 chgrp "$owning_group" "$install_prefix"
                 chmod o-rwx "$install_prefix"
             fi
-            group_own_text="Install+build owned by group: $owning_group"$'\n'
+            printf -v group_own_text "Install+build owned by group: %s\n" "$owning_group"
         else
             echo "Error: attempted to set group ownership of build and install directories to '$owning_group' but that group does not exist." >&2
             exit 1
         fi
+    else
+        printf -v group_own_text "Using default group ownership\n"
     fi
     
     module_dir="${MODULE_DIR:-"$install_prefix/.uclrc_modules"}"
@@ -192,7 +194,7 @@ make_build_env () {
     Build will take place in:     $build_dir
     Modules will be put in:       $module_dir
     Package will be installed to: $install_prefix
-    $group_own_text
+    ${group_own_text:-}
     =====================
 EOF
 }
