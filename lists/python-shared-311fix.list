@@ -18,7 +18,7 @@ cvxopt
 cutadapt
 lxml
 astropy
-pyspglib
+#pyspglib
 scikit-learn
 scikit-image
 weblogo
