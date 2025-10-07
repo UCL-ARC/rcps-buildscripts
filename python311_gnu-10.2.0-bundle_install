@@ -29,7 +29,7 @@ require openssl/1.1.1u
 require python/3.11.4-gnu-10.2.0
 require openblas/0.3.13-serial/gnu-10.2.0
 
-NP_OPENBLAS=/shared/ucl/apps/openblas/0.3.7-serial/gnu-10.2.0/lib/libopenblas.so
+NP_OPENBLAS=/shared/ucl/apps/openblas/0.3.13-serial/gnu-10.2.0/lib/libopenblas.so
 export LAPACK=${NP_OPENBLAS}
 export BLAS=${NP_OPENBLAS}
 
