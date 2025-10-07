@@ -1,4 +1,4 @@
 pyfastaq
 numba
-boltztrap2
+boltztrap2==22.12.1
 multiqc
