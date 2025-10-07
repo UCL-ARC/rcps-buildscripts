@@ -3,7 +3,7 @@ pysam
 requests
 nose
 pytest
-numpy
+numpy=<2
 scipy
 matplotlib
 Cython
