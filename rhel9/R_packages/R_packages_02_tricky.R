@@ -22,6 +22,9 @@ install.packages ("V8", lib=mainLib, repos=repros);
 udunits2Conf <- '--with-udunits2-include=/apps/spack/0.23/deploy/2025-09/spack/opt/spack/linux-rhel9-cascadelake/gcc-12.3.0/udunits-2.2.28-7k5tsjgycgmhrhdarctbt7exdxsjcxbu/include --with-udunits2-lib=/apps/spack/0.23/deploy/2025-09/spack/opt/spack/linux-rhel9-cascadelake/gcc-12.3.0/udunits-2.2.28-7k5tsjgycgmhrhdarctbt7exdxsjcxbu/lib';
 install.packages ("udunits2", lib=mainLib, repos=repros, configure.args=udunits2Conf);
 
+# units also needs to know where udunits is
+install.packages ("units", lib=mainLib, repos=repros, configure.args=udunits2Conf);
+
 # rest of tmap after V8 and udunits2
 install.packages ("lwgeom", lib=mainLib, repos=repros);
 install.packages ("classInt", lib=mainLib, repos=repros);
@@ -34,8 +37,9 @@ install.packages ("sf", lib=mainLib, repos=repros);
 # lot of dependencies inc graphics libraries
 install.packages ("tidyverse", lib=mainLib, repos=repros);
 
-# depends gmp
-install.packages("gmp", lib=mainLib, repos=repros);
+# depends on gmp, gmp needs to know where header file is
+gmpConf <- '--with-gmp-include=/apps/spack/0.23/deploy/2025-09/spack/opt/spack/linux-rhel9-cascadelake/gcc-12.3.0/gmp-6.3.0-mqxdd7tjegdxwpem4246pmkn4hvil5hw/include';
+install.packages("gmp", lib=mainLib, repos=repros, configure.args=gmpConf);
 install.packages("Rmpfr", lib=mainLib, repos=repros);
 install.packages ("GJRM", lib=mainLib, repos=repros);
 install.packages ("MendelianRandomization", lib=mainLib, repos=repros);
