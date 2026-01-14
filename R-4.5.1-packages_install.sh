@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+##!/usr/bin/env bash
 
 ###############################################
 # Installing UCL needed additional R and Bioconductor
@@ -49,7 +49,7 @@ export RLIB_MAIN=${RLIB_MAIN:-${INSTALL_PREFIX}/lib64/R/library}
 export RLIB_DB=${RLIB_DB:-${INSTALL_PREFIX}/lib64/R/library}
 export REPROS=${REPROS:-https://cloud.r-project.org/}
 LOCALDIR=${LOCALDIR:-/shared/ucl/apps/build_scripts/files/R_UCL}
-
+export LD_LIBRARY_PATH=$RLIB_DB/fontconfig/lib:$RLIB_DB/freetype/lib:$LD_LIBRARY_PATH
 export PATH=$INSTALL_PREFIX/bin:$PATH
 
 dirname=$(dirname $0 2>/dev/null || pwd)
@@ -97,19 +97,17 @@ require plink/1.90b3.40
 require cmdstan/2.35.0/gnu-10.2.0
 require openssl/1.1.1t
 require pkg-config/0.29.2
-require freetype/2.8.1/gnu-4.9.2
+require gperf/3.0.4/gnu-4.9.2
 
 # Creating this as R 4.4.2 libraries have a lot of incompatibilities with R 4.5.1. 
 # It is better to build the packages again with R 4.5.1 of posterior.
 
 #export R_LIBS_SITE=/shared/ucl/apps/R/R-4.5.1-OpenBLAS/lib64/R/library:
 export R_LIBS_SITE=/home/skgtnl1/R/R-4.5.1-OpenBLAS/lib64/R/library:
-
 export PATH=/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/bin/:$PATH
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH\:/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH\:/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/lib 
 export PKG_LIBS="-L/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/lib"
-
-export DOWNLOAD_STATIC_LIBV8=1
+#export DOWNLOAD_STATIC_LIBV8=1
 
 # Set up ~/.R/Makevars for rstan which needs C++ 2014 stuff
 mkdir -p ~/.R
@@ -117,6 +115,7 @@ cd ~/.R
 cat > Makevars <<EOF
 CXX14 = g++ -std=c++1y
 CXX14FLAGS = -Wno-unused-variable -Wno-unused-function -fPIC
+OBJCXX = clang++ -std=c++11
 EOF
 
 # temp_dir=`mktemp -d -p /dev/shm`
@@ -130,6 +129,7 @@ read -p "Press [Enter] key to start ..."
 cd $temp_dir
 mkdir -p $RLIB_DB
 
+###################### Installing packages ####################
 #R_input=${LOCALDIR}/R_packages_UCL_1_4.5.1.R
 #R --no-save < $R_input
 
@@ -142,6 +142,47 @@ mkdir -p $RLIB_DB
 #R_input=${LOCALDIR}/R_packages_UCL_4_4.5.1.R
 #R --no-save < $R_input
 
+# Installing Freetype2 and Fontconfig locally
+
+#echo "Installing Freetype2 and Fontconfig in: " 
+#echo $RLIB_DB
+#cd $RLIB_DB
+#wget https://download.savannah.gnu.org/releases/freetype/freetype-2.14.1.tar.gz
+#tar xf freetype-2.14.1.tar.gz
+#cd freetype-2.14.1
+
+#./configure --prefix=$RLIB_DB/freetype
+#make -j4
+#make install
+
+#cd ..
+#rm -rf freetype-*
+
+export LD_LIBRARY_PATH=$RLIB_DB/freetype/lib:$LD_LIBRARY_PATH
+export FREETYPE_PREFIX=$RLIB_DB/freetype
+export PKG_CONFIG_PATH=$RLIB_DB/freetype/lib/pkgconfig:$PKG_CONFIG_PATH
+
+cd $RLIB_DB
+#wget https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.14.1.tar.gz
+#tar xf fontconfig-2.14.1.tar.gz
+#cd fontconfig-2.14.1
+
+#./configure --prefix=$RLIB_DB/fontconfig --enable-shared --disable-static CPPFLAGS="-I$FREETYPE_PREFIX/include -I$FREETYPE_PREFIX/include/freetype2" LDFLAGS="-L$FREETYPE_PREFIX/lib -Wl,-rpath,$FREETYPE_PREFIX/lib"
+#make -j4
+#make install
+
+#cd ..
+#rm -rf fontconfig-*
+
+export LD_LIBRARY_PATH=$RLIB_DB/fontconfig/lib:$LD_LIBRARY_PATH
+export PKG_CONFIG_PATH=$RLIB_DB/fontconfig/lib/pkgconfig:$PKG_CONFIG_PATH
+
+echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
+echo "PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
+#echo "Here LDD"
+#ldd $(which R)
+#echo "end LDD"
+
 R_input=${LOCALDIR}/R_packages_UCL_5_4.5.1.R
 R --no-save < $R_input
 
@@ -149,5 +190,3 @@ R --no-save < $R_input
 #R_input=${LOCALDIR}/Bioconductor_UCL_1_4.1.1.R
 #R --no-save < $R_input
   
-
-
