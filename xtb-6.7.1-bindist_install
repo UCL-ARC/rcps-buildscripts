@@ -1,0 +1,31 @@
+#!/bin/bash
+
+package_name="xtb"
+package_version="6.7.1"
+package_description="XTB is a package for performing semiempirical extended tight-binding calculations."
+package_variant="bindist"
+
+set -o errexit \
+    -o nounset \
+    -o pipefail
+
+source includes/source_includes.sh
+
+module purge
+
+make_build_env ""
+
+cd "$build_dir"
+wget -O xtb-6.7.1-linux-x86_64.tar.xz https://github.com/grimme-lab/xtb/releases/download/v6.7.1/xtb-6.7.1-linux-x86_64.tar.xz
+
+manifest \
+	sha256:62a8d18778286e815292ee53d76ce447daf460a4dea3782c0f25cbac7019b5df xtb-6.7.1-linux-x86_64.tar.xz
+	
+mkdir -p "$install_prefix"
+cd "$install_prefix"
+tar --strip-components=1 -xf "$build_dir/xtb-6.7.1-linux-x86_64.tar.xz"
+
+make_module_v2
+chmod a+rX "$module_dir"
+post_build_report
+
