@@ -17,25 +17,25 @@ _env_setup() {
     require compilers/gnu/10.2.0
     require cmake/3.21.1
     require gperf/3.0.4/gnu-4.9.2
-    require /home/skgtnl1/freetype-2.14.1/module/freetype/2.14.1/.uclrc_modules
+    require freetype/2.14.1
 
     package_name="fontconfig"
     package_version="2.14.1"
     unpack_dir="fontconfig-2.14.1"
    
-   #package_archive="$/shared/ucl/apps/Fontconfig/installers/Fontconfig-2.14.1.tar.gz$
-    package_archive="${HOME}/${unpack_dir}"
+    package_archive="$/shared/ucl/apps/Fontconfig/installers/"
+    #package_archive="${HOME}/${unpack_dir}"
 
-    make_build_env --tmp-root=${HOME}/
-    #make_build_env --tmp-root=/dev/shm
+    #make_build_env --tmp-root=${HOME}/
+    make_build_env --tmp-root=/dev/shm
    
-    mkdir -p ${package_archive} 
+    #mkdir -p ${package_archive} 
     cd ${package_archive} 
     wget https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.14.1.tar.gz 
  
     #install_prefix="/shared/ucl/apps/${package_name}/${package_version}"
-    install_prefix="${HOME}/${unpack_dir}"
-    module_dir="$install_prefix/module/$package_name/$package_version/.uclrc_modules"
+    #install_prefix="${HOME}/${unpack_dir}"
+    #module_dir="$install_prefix/module/$package_name/$package_version/.uclrc_modules"
 
     mkdir -p ${install_prefix}
 
@@ -47,7 +47,7 @@ _env_setup() {
 _file_setup() {
     echo "Begin file_setup"
     cd $install_prefix
-    tar -xvzf "${unpack_dir}.tar.gz"
+    tar -xvzf "${package_archive}/${unpack_dir}.tar.gz"
     echo "End file_setup"
 }
 
@@ -74,7 +74,7 @@ _post_build() {
         -r compilers/gnu/10.2.0 \
         -r cmake/3.21.1 \
         -r gperf/3.0.4/gnu-4.9.2 \
-        -r /home/skgtnl1/freetype-2.14.1/module/freetype/2.14.1/.uclrc_modules \
+        -r freetype/2.14.1 \
         -c fontconfig
     cd ..
     echo "End post-building"
