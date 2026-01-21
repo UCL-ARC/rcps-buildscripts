@@ -21,19 +21,19 @@ _env_setup() {
     package_version="2.14.1"
     unpack_dir="freetype-2.14.1"
    
-   #package_archive="$/shared/ucl/apps/Freetype/installers/freetype-2.14.1.tar.gz$
-    package_archive="${HOME}/${unpack_dir}"
+    package_archive="$/shared/ucl/apps/Freetype/installers/$
+    #package_archive="${HOME}/${unpack_dir}"
 
-    make_build_env --tmp-root=${HOME}
-    #make_build_env --tmp-root=/dev/shm
+    #make_build_env --tmp-root=${HOME}
+    make_build_env --tmp-root=/dev/shm
    
-    mkdir -p ${package_archive} 
+    #mkdir -p ${package_archive} 
     cd ${package_archive} 
     wget https://download.savannah.gnu.org/releases/freetype/freetype-2.14.1.tar.gz 
  
     #install_prefix="/shared/ucl/apps/${package_name}/${package_version}"
-    install_prefix="${HOME}/${unpack_dir}"
-    module_dir="$install_prefix/module/$package_name/$package_version/.uclrc_modules"
+    #install_prefix="${HOME}/${unpack_dir}"
+    #module_dir="$install_prefix/module/$package_name/$package_version/.uclrc_modules"
 
     mkdir -p ${install_prefix}
 
@@ -45,7 +45,7 @@ _env_setup() {
 _file_setup() {
     echo "Begin file_setup"
     cd "$install_prefix"
-    tar -xvzf "${unpack_dir}.tar.gz"
+    tar -xvzf "${package_archive}/${unpack_dir}.tar.gz"
     echo "End file_setup"
 }
 
