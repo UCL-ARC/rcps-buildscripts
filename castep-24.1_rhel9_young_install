@@ -54,7 +54,8 @@ patch -p1 -i castep_cmake_libxc523.patch
 mkdir build
 cmake -B build -DWITH_MPI=ON -DWITH_LIBXC=ON -DWITH_OpenMP=ON -DWITH_FOXCML=OFF -DWITH_QUIP=OFF \
                -DWITH_GRIMMED3=ON -DWITH_GRIMMED4=ON -DWITH_DLMG=ON -DBUILD=fast -DCOMMS_ARCH=mpi \
-               -DFFT=fftw3 -DMATHLIBS=openblas -DCMAKE_INSTALL_PREFIX="$install_prefix"
+               -DFFT=fftw3 -DMATHLIBS=openblas -DCMAKE_VERBOSE_MAKEFILE=ON \
+               -DCMAKE_INSTALL_PREFIX="$install_prefix"
 
 cmake --build build -t all -j
 cmake --build build -t check
