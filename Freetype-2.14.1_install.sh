@@ -21,7 +21,7 @@ _env_setup() {
     package_version="2.14.1"
     unpack_dir="freetype-2.14.1"
    
-    package_archive="$/shared/ucl/apps/Freetype/installers/$
+    package_archive="$/shared/ucl/apps/Freetype/installers/"
     #package_archive="${HOME}/${unpack_dir}"
 
     #make_build_env --tmp-root=${HOME}
@@ -91,9 +91,9 @@ _test_(){
 }
 
 _env_setup
-_file_setup
-#_pre_build
-_build
-_post_build
-_clean_up
-#_test
+#_file_setup
+##_pre_build
+#_build
+#_post_build
+#_clean_up
+##_test
