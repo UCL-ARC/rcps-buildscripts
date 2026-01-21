@@ -83,7 +83,6 @@ require mpi/openmpi/4.0.5/gnu-10.2.0
 require jags/4.3.1/gnu-10.2.0-openblas
 require perl/5.22.0
 require libtool/2.4.6
-require freetype/2.8.1/gnu-4.9.2
 require graphicsmagick/1.3.21
 require python3/3.9-gnu-10.2.0
 require sqlite/3.36.0/gnu-10.2.0
@@ -98,6 +97,8 @@ require cmdstan/2.35.0/gnu-10.2.0
 require openssl/1.1.1t
 require pkg-config/0.29.2
 require gperf/3.0.4/gnu-4.9.2
+require /home/skgtnl1/freetype-2.14.1/module/freetype/2.14.1/.uclrc_modules
+require /home/skgtnl1/fontconfig-2.14.1/module/fontconfig/2.14.1/.uclrc_modules
 
 # Creating this as R 4.4.2 libraries have a lot of incompatibilities with R 4.5.1. 
 # It is better to build the packages again with R 4.5.1 of posterior.
@@ -141,47 +142,6 @@ mkdir -p $RLIB_DB
 
 #R_input=${LOCALDIR}/R_packages_UCL_4_4.5.1.R
 #R --no-save < $R_input
-
-# Installing Freetype2 and Fontconfig locally
-
-#echo "Installing Freetype2 and Fontconfig in: " 
-#echo $RLIB_DB
-#cd $RLIB_DB
-#wget https://download.savannah.gnu.org/releases/freetype/freetype-2.14.1.tar.gz
-#tar xf freetype-2.14.1.tar.gz
-#cd freetype-2.14.1
-
-#./configure --prefix=$RLIB_DB/freetype
-#make -j4
-#make install
-
-#cd ..
-#rm -rf freetype-*
-
-export LD_LIBRARY_PATH=$RLIB_DB/freetype/lib:$LD_LIBRARY_PATH
-export FREETYPE_PREFIX=$RLIB_DB/freetype
-export PKG_CONFIG_PATH=$RLIB_DB/freetype/lib/pkgconfig:$PKG_CONFIG_PATH
-
-cd $RLIB_DB
-#wget https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.14.1.tar.gz
-#tar xf fontconfig-2.14.1.tar.gz
-#cd fontconfig-2.14.1
-
-#./configure --prefix=$RLIB_DB/fontconfig --enable-shared --disable-static CPPFLAGS="-I$FREETYPE_PREFIX/include -I$FREETYPE_PREFIX/include/freetype2" LDFLAGS="-L$FREETYPE_PREFIX/lib -Wl,-rpath,$FREETYPE_PREFIX/lib"
-#make -j4
-#make install
-
-#cd ..
-#rm -rf fontconfig-*
-
-export LD_LIBRARY_PATH=$RLIB_DB/fontconfig/lib:$LD_LIBRARY_PATH
-export PKG_CONFIG_PATH=$RLIB_DB/fontconfig/lib/pkgconfig:$PKG_CONFIG_PATH
-
-echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
-echo "PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
-#echo "Here LDD"
-#ldd $(which R)
-#echo "end LDD"
 
 R_input=${LOCALDIR}/R_packages_UCL_5_4.5.1.R
 R --no-save < $R_input

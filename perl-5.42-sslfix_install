@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# first build perl
+# use this perl's cpan to pull down Net-SSLeay
+# don't let cpan install it, just pull it down and then
+# OPENSSL_PREFIX=/shared/ucl/apps/openssl/1.1.1u /myriadfs/home/ccaeorb/Scratch/perlInstall/perl-5.42.0-custom/bin/perl Makefile.PL
+# Also install Bundle::LWP and LWP::Protocol::https through cpan
+
+package_name="perl"
+package_version="5.42"
+package_variant="sslfix"
+package_description="Perl with the Net::SSLeay and LWP modules installed, configured to work with TLS 1.2"
+
+current_dir=$(pwd -P)
+build_dir="$current_dir/perl-5.42-temp"
+install_dir="/shared/ucl/apps/perl/perl-5.42-$package_variant"
+module_dir="$install_dir/share/module"
+
+echo "$build_dir"
+echo "$install_dir"
+echo "$module_dir"
+
+set -o errexit \
+    -o nounset \
+    -o pipefail \
+    -e
+
+source includes/source_includes.sh
+
+module purge
+module load gcc-libs/10.2.0
+module load compilers/gnu/10.2.0
+require openssl/1.1.1u
+
+echo $(module list)
+
+rm -rf "$build_dir"
+mkdir "$build_dir"
+cd "$build_dir"
+
+wget https://www.cpan.org/src/5.0/perl-5.42.0.tar.gz
+tar -xvf perl-5.42.0.tar.gz
+cd perl-5.42.0
+
+export PERL5LIB=$install_dir/share/perl5
+export PERL_MM_USE_DEFAULT=1
+
+./Configure -des -Dprefix=$install_dir -Dusethreads
+make
+make install
+
+cd "$build_dir"
+
+OPENSSL_PREFIX=/shared/ucl/apps/openssl/1.1.1u $install_dir/bin/cpan Net::SSLeay Bundle::LWP LWP::Protocol::https
+
+cd "$current_dir"
+rm -rf "$build_dir"
+
+make_module_v2
+chmod a+rX "$module_dir"
+post_build_report
