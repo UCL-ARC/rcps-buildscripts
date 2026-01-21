@@ -66,13 +66,13 @@ _build() {
 _post_build() {
     cd "$install_prefix"
     echo "Post-building..."
-    make_module_v2 \
-        -o "${module_dir}" \
-        -p "$install_prefix" \
-        -r gcc-libs/10.2.0 \
-        -r compilers/gnu/10.2.0 \
-        -r cmake/3.21.1 \
-        -c freetype
+    make_module_v2 
+#        -o "${module_dir}" \
+#        -p "$install_prefix" \
+#        -r gcc-libs/10.2.0 \
+#        -r compilers/gnu/10.2.0 \
+#        -r cmake/3.21.1 \
+#        -c freetype
     cd ..
     echo "End post-building"
 }
