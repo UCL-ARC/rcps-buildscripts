@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+
+# This recipe should only be needed on RHEL9 Young (temporarily?). 
+# On Kathleen, Spack builds CASTEP 23 and 24 fine.
+# For avx2 version build on GPU or older Michael node with package_variant=avx2
+set -o errexit 
+
+
+package_name="castep"
+package_version="24.1"
+# Optional: 
+package_variant=""
+package_description="CASTEP is a program that uses density functional theory to calculate the properties of materials from first principles."
+APPS_DIR="/apps"
+
+source includes/source_includes.sh
+
+package_file="castep-24.1.tar.gz"
+
+module purge
+module load ucl-stack/2025-12
+module load compilers/gcc/12.3.0/gcc-12.3.0-avx2
+module load cmake/3.30.5/gcc-12.3.0-avx2    	
+module load fftw/3.3.10/gcc-12.3.0-avx2 	#fftw@3.3.10 ~openmp
+module load gmake/4.4.1/gcc-12.3.0-avx2 	
+module load openblas/0.3.28/gcc-12.3.0-avx2  	#openblas@0.3.28 threads=none
+module load mpi/openmpi/4.1.6/gcc-12.3.0-avx2 	
+module load perl/5.40.0/gcc-12.3.0-avx2  	
+module load python/3.11.6/gcc-12.3.0-avx2 	
+module load rsync/3.3.0/gcc-12.3.0-avx2-lxgsan6 
+
+export COMPILER_TAG="gcc-12.3.0"
+
+# The CASTEP tests are about 2GB so we build in /dev/shm instead of /tmp (the default)
+make_build_env "castep" 
+
+# We've had problems in the past where "fast" builds didn't pass on Legion --
+#  you might need to cluster-check and downgrade to "intermediate" if that happens
+build_opt_level="fast"
+
+cd "$build_dir"
+
+cp "/apps/pkg-store/spack-mirror/castep/$package_file" ./
+
+tar -xf "$package_file"
+
+cd "CASTEP-24.1"
+pwd
+
+# apply libxc patch - comes from Spack package repo, is in our hpc-spacksites repo too
+cp /home/ccspapp/Scratch/spack/0.23/hpc-spack/repos/dev/packages/castep/castep_cmake_libxc523.patch .
+patch -p1 -i castep_cmake_libxc523.patch
+
+mkdir build
+cmake -B build -DWITH_MPI=ON -DWITH_LIBXC=ON -DWITH_OpenMP=ON -DWITH_FOXCML=OFF -DWITH_QUIP=OFF -DWITH_GRIMMED3=ON -DWITH_GRIMMED4=ON -DWITH_DLMG=ON -DBUILD=fast -DCOMMS_ARCH=mpi -DFFT=fftw3 -DMATHLIBS=openblas -DARCH=linux_x86_64_gfortran10 -DCMAKE_INSTALL_PREFIX="$install_prefix"
+
+#cmake --build . -t all -j
+make
+make check
+make install
+
+echo "Installed to: $install_prefix"
+
+chgrp -R ag-archpc-castep "$install_prefix"
+chmod -R o-rx "$install_prefix"
+
+make_module_v2 -g ag-archpc-castep
+
+echo "Module files put in: $module_dir" >&2
+chmod a+rx "$module_dir"
+post_build_report
+
+cd "$owd"
+if [[ -n "$build_dir" ]]; then
+    'rm' -Rf "${build_dir}"
+fi
+
