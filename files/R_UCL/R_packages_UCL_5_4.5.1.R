@@ -6,14 +6,12 @@
 # June 2016
 # Update April 2020 - to remove problem packages that
 # need re-building for GNU 9.2.0
-# Update August 2021 - to add additional packages needed for IHI 
-teaching apps
+# Update August 2021 - to add additional packages needed for IHI teaching apps
 # Update September 2021 - for R 4.1.1
 # Updated January 2023 - to add nlmixr2 for R 4.2.0
 # Updated April 2023 - to fix build of rjags
 # Updated October 2023 - to add arrow and VIM packages.
-# Updated march 2024 to add quanteda.textstats and 
-quanteda.textmodels
+# Updated march 2024 to add quanteda.textstats and quanteda.textmodels
 # Updated June 2024 to try and resolve the V8 problem
 # R 4.4.2 attempting to fix V8 by reverting to an older version
 
@@ -34,8 +32,7 @@ repros;
 # For JAGS - added March 2014 fixed April 2023
 
 #install.packages ("coda", lib=mainLib, repos=repros);
-#install.packages ("rjags", configure.args="--enable-rpath", 
-lib=mainLib, repos=repros);
+#install.packages ("rjags", configure.args="--enable-rpath", lib=mainLib, repos=repros);
 #install.packages ("abind", lib=mainLib, repos=repros);
 #install.packages ("R2WinBUGS", lib=mainLib, repos=repros);
 
@@ -95,8 +92,7 @@ lib=mainLib, repos=repros);
 #install.packages ("R.devices", lib=mainLib, repos=repros);
 #install.packages ("R.rsp", lib=mainLib, repos=repros);
 
-# Moving into Bioconductor packages as aroma.core now depnds on some 
-Bioconductor packages.
+# Moving into Bioconductor packages as aroma.core now depnds on some Bioconductor packages.
 
 #install.packages ("R.huge", lib=mainLib, repos=repros);
 #install.packages ("truncnorm", lib=mainLib, repos=repros);
@@ -150,14 +146,10 @@ Bioconductor packages.
 #install.packages("curl", lib=mainLib, repos=repros);
 
 # for R 4.4.2 this might work:
-#packageurl <- 
-"https://cran.r-project.org/src/contrib/Archive/V8/V8_5.0.1.tar.gz"
+#packageurl <- "https://cran.r-project.org/src/contrib/Archive/V8/V8_5.0.1.tar.gz"
 #install.packages(packageurl, repos=NULL, type="source")
-#udunits2Conf <- 
-'--with-udunits2-include=/shared/ucl/apps/udunits/2.2.28/gnu-10.2.0/include 
---with-udunits2-lib=/shared/ucl/apps/udunits/2.2.28/gnu-10.2.0/lib';
-#install.packages ("udunits2", lib=mainLib, repos=repros, 
-configure.args=udunits2Conf);
+#udunits2Conf <- '--with-udunits2-include=/shared/ucl/apps/udunits/2.2.28/gnu-10.2.0/include --with-udunits2-lib=/shared/ucl/apps/udunits/2.2.28/gnu-10.2.0/lib';
+#install.packages ("udunits2", lib=mainLib, repos=repros, configure.args=udunits2Conf);
 #install.packages ("lwgeom", lib=mainLib, repos=repros);
 #install.packages ("classInt", lib=mainLib, repos=repros);
 #install.packages ("tmap", lib=mainLib, repos=repros);
@@ -173,8 +165,6 @@ configure.args=udunits2Conf);
 #install.packages ("ids", lib=mainLib, repos=repros);
 
 remotes::install_github("r-lib/systemfonts")
-#install.packages("systemfonts", lib=mainLib, repos=repros, 
-dependencies=TRUE)
 install.packages ("textshaping", lib=mainLib, repos=repros);
 #install.packages ("googledrive", lib=mainLib, repos=repros);
 #install.packages ("googlesheets4", lib=mainLib, repos=repros);
@@ -198,8 +188,7 @@ install.packages ("tidyverse", lib=mainLib, repos=repros);
 #install.packages ("GJRM", lib=mainLib, repos=repros);
 #install.packages ("rlist", lib=mainLib, repos=repros);
 
-# For Benjamin Lauderdale (b.lauderdale@ucl.ac.uk) 24th September 
-2019
+# For Benjamin Lauderdale (b.lauderdale@ucl.ac.uk) 24th September 2019
 
 #install.packages ("ltm", lib=mainLib, repos=repros);
 #install.packages ("poLCA", lib=mainLib, repos=repros);
@@ -207,20 +196,13 @@ install.packages ("tidyverse", lib=mainLib, repos=repros);
 #install.packages ("topicmodels", lib=mainLib, repos=repros);
 
 # Extra packages for devtools. Ellipsis is already installed. 
-#install.packages ("lifecycle", 
-repos="https://cran.ma.imperial.ac.uk/src/contrib/lifecycle_1.0.4.tar.gz");
-#install.packages ("memoise", 
-repos="https://cran.ma.imperial.ac.uk/src/contrib/memoise_2.0.1.tar.gz");
-#install.packages ("remotes", 
-repos="https://cran.ma.imperial.ac.uk/src/contrib/remotes_2.5.0.tar.gz");
-#install.packages ("purrr", 
-repos="https://www.stats.bris.ac.uk/R/src/contrib/purrr_1.2.0.tar.gz");
-#install.packages ("gitcreds", 
-repos="https://www.stats.bris.ac.uk/R/src/contrib/gitcreds_0.1.2.tar.gz");
-#install.packages ("desc", 
-repos="https://www.stats.bris.ac.uk/R/src/contrib/desc_1.4.3.tar.gz");
-#install.packages ("callr", 
-repos="https://www.stats.bris.ac.uk/R/src/contrib/callr_3.7.6.tar.gz");
+#install.packages ("lifecycle", repos="https://cran.ma.imperial.ac.uk/src/contrib/lifecycle_1.0.4.tar.gz");
+#install.packages ("memoise", repos="https://cran.ma.imperial.ac.uk/src/contrib/memoise_2.0.1.tar.gz");
+#install.packages ("remotes", repos="https://cran.ma.imperial.ac.uk/src/contrib/remotes_2.5.0.tar.gz");
+#install.packages ("purrr", repos="https://www.stats.bris.ac.uk/R/src/contrib/purrr_1.2.0.tar.gz");
+#install.packages ("gitcreds", repos="https://www.stats.bris.ac.uk/R/src/contrib/gitcreds_0.1.2.tar.gz");
+#install.packages ("desc", repos="https://www.stats.bris.ac.uk/R/src/contrib/desc_1.4.3.tar.gz");
+#install.packages ("callr", repos="https://www.stats.bris.ac.uk/R/src/contrib/callr_3.7.6.tar.gz");
 #devtools::install_github ("quanteda/quanteda.corpora", force=TRUE);
 
 # For Covid-19 - April 2020
@@ -254,8 +236,7 @@ repos="https://www.stats.bris.ac.uk/R/src/contrib/callr_3.7.6.tar.gz");
 #install.packages ("plinkQC", lib=mainLib, repos=repros);
 #install.packages ("dplyr", lib=mainLib, repos=repros);
 #install.packages ("docopt", lib=mainLib, repos=repros);
-#install.packages ("MendelianRandomization", lib=mainLib, 
-repos=repros);
+#install.packages ("MendelianRandomization", lib=mainLib, repos=repros);
 
 # Some historic datasets - useful for examples - September 2021
 #install.packages ("HistData", lib=mainLib, repos=repros);
@@ -268,11 +249,9 @@ repos=repros);
 
 # for POLS0010 - March 2024
 #install.packages ("quanteda.textstats", lib=mainLib, repos=repros);
-#install.packages ("quanteda.textmodels", lib=mainLib, 
-repos=repros);
+#install.packages ("quanteda.textmodels", lib=mainLib, repos=repros);
 
 # for jose.arciniegas@ucl.ac.uk - June 2024
-#install.packages ("cmdstanr", repos = 
-"https://stan-dev.r-universe.dev");
+#install.packages ("cmdstanr", repos = "https://stan-dev.r-universe.dev");
 
 # End of R_packages_UCL_5
