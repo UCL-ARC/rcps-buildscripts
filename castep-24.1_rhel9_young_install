@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-# This recipe should only be needed on Young (temporarily?). On Kathleen, Spack builds CASTEP 23 and 24 fine.
+# This recipe should only be needed on RHEL9 Young (temporarily?). 
+# On Kathleen, Spack builds CASTEP 23 and 24 fine.
 # For avx2 version build on GPU or older Michael node with package_variant=avx2
 set -o errexit 
 
@@ -10,6 +11,7 @@ package_version="24.1"
 # Optional: 
 package_variant=""
 package_description="CASTEP is a program that uses density functional theory to calculate the properties of materials from first principles."
+APPS_DIR="/apps"
 
 source includes/source_includes.sh
 
@@ -39,11 +41,10 @@ build_opt_level="fast"
 cd "$build_dir"
 
 cp "/apps/pkg-store/spack-mirror/castep/$package_file" ./
-#manifest sha256:ca5c357f6108cff758184e74667a549a0e4d18d5658adc33ebd0ec140383b6ee "$package_file"
 
 tar -xf "$package_file"
 
-cd "castep-24.1"
+cd "CASTEP-24.1"
 pwd
 
 # apply libxc patch - comes from Spack package repo, is in our hpc-spacksites repo too
