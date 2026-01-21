@@ -23,14 +23,15 @@ _env_setup() {
     package_version="2.14.1"
     unpack_dir="fontconfig-2.14.1"
    
-    package_archive="$/shared/ucl/apps/Fontconfig/installers/"
+    package_archive="/shared/ucl/apps/${package_name}/installers/"
     #package_archive="${HOME}/${unpack_dir}"
 
+    mkdir -p ${package_archive}
     #make_build_env --tmp-root=${HOME}/
     make_build_env --tmp-root=/dev/shm
    
     #mkdir -p ${package_archive} 
-    cd ${package_archive} 
+    cd ${package_archive}
     wget https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.14.1.tar.gz 
  
     #install_prefix="/shared/ucl/apps/${package_name}/${package_version}"
