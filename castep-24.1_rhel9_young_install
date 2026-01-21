@@ -51,7 +51,8 @@ pwd
 cp /home/ccspapp/Scratch/spack/0.23/hpc-spack/repos/dev/packages/castep/castep_cmake_libxc523.patch .
 patch -p1 -i castep_cmake_libxc523.patch
 
-cmake -B . -DWITH_MPI=ON -DWITH_LIBXC=ON -DWITH_OpenMP=ON -DWITH_FOXCML=OFF -DWITH_QUIP=OFF -DWITH_GRIMMED3=ON -DWITH_GRIMMED4=ON -DWITH_DLMG=ON -DBUILD=fast -DCOMMS_ARCH=mpi -DFFT=fftw3 -DMATHLIBS=openblas -DARCH=linux_x86_64_gfortran10 -DCMAKE_INSTALL_PREFIX="$install_prefix"
+mkdir build
+cmake -B build -DWITH_MPI=ON -DWITH_LIBXC=ON -DWITH_OpenMP=ON -DWITH_FOXCML=OFF -DWITH_QUIP=OFF -DWITH_GRIMMED3=ON -DWITH_GRIMMED4=ON -DWITH_DLMG=ON -DBUILD=fast -DCOMMS_ARCH=mpi -DFFT=fftw3 -DMATHLIBS=openblas -DARCH=linux_x86_64_gfortran10 -DCMAKE_INSTALL_PREFIX="$install_prefix"
 
 #cmake --build . -t all -j
 make
