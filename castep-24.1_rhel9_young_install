@@ -15,7 +15,7 @@ APPS_DIR="/apps"
 
 source includes/source_includes.sh
 
-package_file="castep-24.1.tar.xz"
+package_file="castep-24.1.tar.gz"
 
 module purge
 module load ucl-stack/2025-12
