@@ -168,8 +168,8 @@ repros;
 #install.packages ("googledrive", lib=mainLib, repos=repros);
 #install.packages ("googlesheets4", lib=mainLib, repos=repros);
 install.packages ("ragg", lib=mainLib, repos=repros);
-remotes::install_github("r-lib/systemfonts")
-install.packages ("textshaping", lib=mainLib, repos=repros);
+#remotes::install_github("r-lib/systemfonts")
+#install.packages ("textshaping", lib=mainLib, repos=repros);
 #install.packages ("rvest", lib=mainLib, repos=repros);
 install.packages ("tidyverse", lib=mainLib, repos=repros);
 
