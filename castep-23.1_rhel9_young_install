@@ -9,7 +9,7 @@ set -o errexit
 package_name="castep"
 package_version="23.1"
 # Optional: 
-package_variant=""
+package_variant="${package_variant:-}"
 package_description="CASTEP is a program that uses density functional theory to calculate the properties of materials from first principles."
 APPS_DIR="/apps"
 
