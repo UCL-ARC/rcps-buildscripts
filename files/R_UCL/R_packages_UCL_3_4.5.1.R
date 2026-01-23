@@ -27,14 +27,11 @@ install.packages ("saemix", lib=mainLib, repos=repros);
 # For Margarida Cabrita Lopes margarida.lopes@ucl.ac.uk
 
 # Removed from CRAN for R 3.4.0 - use RNetCDF
-#
-# install.packages ("ncdf", lib=mainLib, repos=repros);
 
 install.packages ("RNetCDF", lib=mainLib, repos=repros);
 
 
-# For Dr Jiaqiu Wang (jiaqiu.wang@ucl.ac.uk) (ucesjw0) - added March 
-2013
+# For Dr Jiaqiu Wang (jiaqiu.wang@ucl.ac.uk) (ucesjw0) - added March 2013
 
 install.packages ("mclust", lib=mainLib, repos=repros);
 install.packages ("fpc", lib=mainLib, repos=repros);
