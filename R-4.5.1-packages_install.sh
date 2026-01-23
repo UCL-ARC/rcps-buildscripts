@@ -49,13 +49,13 @@ export RLIB_MAIN=${RLIB_MAIN:-${INSTALL_PREFIX}/lib64/R/library}
 export RLIB_DB=${RLIB_DB:-${INSTALL_PREFIX}/lib64/R/library}
 export REPROS=${REPROS:-https://cloud.r-project.org/}
 LOCALDIR=${LOCALDIR:-/shared/ucl/apps/build_scripts/files/R_UCL}
-export LD_LIBRARY_PATH=$RLIB_DB/fontconfig/lib:$RLIB_DB/freetype/lib:$LD_LIBRARY_PATH
 export PATH=$INSTALL_PREFIX/bin:$PATH
 
 dirname=$(dirname $0 2>/dev/null || pwd)
 INCLUDES_DIR=${INCLUDES_DIR:-${dirname}/includes}
 source ${INCLUDES_DIR}/module_maker_inc.sh
 source ${INCLUDES_DIR}/require_inc.sh
+source ${INCLUDES_DIR}/source_includes.sh
 
 WHEREAMI=${WHEREAMI:-$(/shared/ucl/apps/cluster-bin/whereami)}
 cluster=$WHEREAMI
@@ -82,6 +82,7 @@ require ucx/1.9.0/gnu-10.2.0
 require mpi/openmpi/4.0.5/gnu-10.2.0
 require jags/4.3.1/gnu-10.2.0-openblas
 require perl/5.22.0
+require freetype/2.14.1/gnu-10.2.0
 require libtool/2.4.6
 require graphicsmagick/1.3.21
 require python3/3.9-gnu-10.2.0
@@ -96,9 +97,9 @@ require plink/1.90b3.40
 require cmdstan/2.35.0/gnu-10.2.0
 require openssl/1.1.1t
 require pkg-config/0.29.2
-require gperf/3.0.4/gnu-4.9.2
-require /home/skgtnl1/freetype-2.14.1/module/freetype/2.14.1/.uclrc_modules
-require /home/skgtnl1/fontconfig-2.14.1/module/fontconfig/2.14.1/.uclrc_modules
+require gperf/3.0.4/gnu-4.9.2 
+require fontconfig/2.14.1/gnu-10.2.0
+require ~/libwebp-1.4.0/module/libwebp/1.4.0/.uclrc_modules/libwebp/1.4.0/gnu-10.2.0
 
 # Creating this as R 4.4.2 libraries have a lot of incompatibilities with R 4.5.1. 
 # It is better to build the packages again with R 4.5.1 of posterior.
@@ -106,7 +107,7 @@ require /home/skgtnl1/fontconfig-2.14.1/module/fontconfig/2.14.1/.uclrc_modules
 #export R_LIBS_SITE=/shared/ucl/apps/R/R-4.5.1-OpenBLAS/lib64/R/library:
 export R_LIBS_SITE=/home/skgtnl1/R/R-4.5.1-OpenBLAS/lib64/R/library:
 export PATH=/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/bin/:$PATH
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH\:/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/lib 
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH\:/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/lib:/usr/lib64 
 export PKG_LIBS="-L/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/lib"
 #export DOWNLOAD_STATIC_LIBV8=1
 
@@ -117,15 +118,17 @@ cat > Makevars <<EOF
 CXX14 = g++ -std=c++1y
 CXX14FLAGS = -Wno-unused-variable -Wno-unused-function -fPIC
 OBJCXX = clang++ -std=c++11
+CPPFLAGS += -I/shared/ucl/apps/freetype/2.14.1/gnu-10.2.0/include/freetype2
+LDFLAGS  += -L/shared/ucl/apps/freetype/2.14.1/gnu-10.2.0/lib
 EOF
 
 # temp_dir=`mktemp -d -p /dev/shm`
 #temp_dir='/home/ccspapp/Software/R/Packages'
 temp_dir=`mkdir -p /home/skgtnl1/R-packages-temp`
-echo "Building in $temp_dir ..."
-cd $temp_dir
-module list
-read -p "Press [Enter] key to start ..."
+#echo "Building in $temp_dir ..."
+#cd $temp_dir
+#module list
+#read -p "Press [Enter] key to start ..."
 
 cd $temp_dir
 mkdir -p $RLIB_DB
@@ -142,6 +145,8 @@ mkdir -p $RLIB_DB
 
 #R_input=${LOCALDIR}/R_packages_UCL_4_4.5.1.R
 #R --no-save < $R_input
+
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH\:/usr/lib64/pkgconfig/
 
 R_input=${LOCALDIR}/R_packages_UCL_5_4.5.1.R
 R --no-save < $R_input
