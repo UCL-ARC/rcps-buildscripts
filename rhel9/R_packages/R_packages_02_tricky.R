@@ -56,7 +56,6 @@ install.packages ("arrow", lib=mainLib, repos=repros);
 # quanteda and friends
 install.packages ("quanteda", lib=mainLib, repos=repros);
 install.packages ("topicmodels", lib=mainLib, repos=repros);
-install.packages ("devtools", lib=mainLib, repos=repros);
 remotes::install_github ("quanteda/quanteda.corpora");
 install.packages ("quanteda.textstats", lib=mainLib, repos=repros);
 install.packages ("quanteda.textmodels", lib=mainLib, repos=repros);
