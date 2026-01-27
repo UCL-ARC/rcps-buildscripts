@@ -93,7 +93,8 @@ BiocManager::install ("GenomeGraphs", type="source", lib=mainLib); (NOT AVAILABL
 # Removed from Bioconductor 3.5
 #BiocManager::install ("VariantAnnotation", type="source", lib=mainLib);
 #BiocManager::install ("biovizBase", type="source", lib=mainLib);
-BiocManager::install ("Gviz", type="source", lib=mainLib);
+install.packages("interp")
+BiocManager::install ("Gviz", type="source", lib=mainLib); # Depend on interp
 #BiocManager::install ("annmap", type="source", lib=mainLib);
 
 # For Adam Levine (a.levine@ucl.ac.uk) - added August 2013
@@ -164,21 +165,20 @@ BiocManager::install ("pkgmaker", type="source", lib=mainLib);(NOT AVAILABLE FOR
 #BiocManager::install ("Illumina450ProbeVariants.db", type="source", lib=dbLib);
 #BiocManager::install ("sva", type="source", lib=mainLib);
 #BiocManager::install ("IlluminaHumanMethylation450kmanifest", type="source", lib=dbLib);
-BiocManager::install ("methylumi", type="source", lib=mainLib);
+#BiocManager::install ("methylumi", type="source", lib=mainLib);
 #BiocManager::install ("nleqslv", type="source", lib=mainLib);
-BiocManager::install ("lumi", type="source", lib=mainLib);
+#BiocManager::install ("lumi", type="source", lib=mainLib);
 # BiocManager::install ("IlluminaHumanMethylation450k.db", type="source", lib=dbLib);
-BiocManager::install ("FDb.InfiniumMethylation.hg19", type="source", lib=mainLib);
-BiocManager::install ("IlluminaHumanMethylationEPICanno.ilm10b4.hg19", lib=mainLib); # Added April 2019
+#BiocManager::install ("FDb.InfiniumMethylation.hg19", type="source", lib=mainLib);
+#BiocManager::install ("IlluminaHumanMethylationEPICanno.ilm10b4.hg19", lib=mainLib); # Added April 2019
 #BiocManager::install ("ROC", type="source", lib=mainLib);
-BiocManager::install ("wateRmelon", type="source", lib=mainLib);
-
+#BiocManager::install ("wateRmelon", type="source", lib=mainLib);
+                                                                    
 # Removed from CRAN and Bioconductor for R 3.4.0
 #
 # BiocManager::install ("RPVM", type="source", lib=mainLib);
-
 #install.packages ("ruv", lib=mainLib, repos=repros);
-BiocManager::install ("ChAMP", type="source", lib=mainLib);
+BiocManager::install ("ChAMP", type="source", lib=mainLib); # Dependency Gviz
 
 # For Ana Paula Leite (ana.leite@ucl.ac.uk) - added June 2016
 
