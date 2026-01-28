@@ -19,7 +19,7 @@
 #$ -N R-4.5.1-extra-packages-build
 
 # 6. Select the MPI parallel environment with 2 processes (to make sure MPI is setup)
-#$ -pe mpi 2
+#$ -pe mpi 1
 
 # 7. Set the working directory to somewhere in your scratch space.  This is
 # a necessary step with the upgraded software stack as compute nodes cannot
