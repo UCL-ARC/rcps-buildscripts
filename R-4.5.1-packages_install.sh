@@ -100,17 +100,17 @@ require pkg-config/0.29.2
 require gperf/3.0.4/gnu-4.9.2 
 require fontconfig/2.14.1/gnu-10.2.0
 require libwebp/1.4.0/gnu-10.2.0
-require /home/skgtnl1/zlib-1.3.1/module/zlib/1.3.1/.uclrc_modules/zlib/1.3.1/gnu-10.2.0
+require zlib/1.3.1/gnu-10.2.0
 
 # Creating this as R 4.4.2 libraries have a lot of incompatibilities with R 4.5.1. 
 # It is better to build the packages again with R 4.5.1 of posterior.
 
-#export R_LIBS_SITE=/shared/ucl/apps/R/R-4.5.1-OpenBLAS/lib64/R/library:
-export R_LIBS_SITE=/home/skgtnl1/R/R-4.5.1-OpenBLAS/lib64/R/library:
+export R_LIBS_SITE=/shared/ucl/apps/R/R-4.5.1-OpenBLAS/lib64/R/library:
+#export R_LIBS_SITE=/home/skgtnl1/R/R-4.5.1-OpenBLAS/lib64/R/library:
 export PATH=/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/bin/:$PATH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH\:/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/lib:/usr/lib64 
 export PKG_LIBS="-L/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/lib"
-#export DOWNLOAD_STATIC_LIBV8=1
+export DOWNLOAD_STATIC_LIBV8=1
 
 # Set up ~/.R/Makevars for rstan which needs C++ 2014 stuff
 mkdir -p ~/.R
@@ -123,34 +123,32 @@ CPPFLAGS += -I/shared/ucl/apps/freetype/2.14.1/gnu-10.2.0/include/freetype2
 LDFLAGS  += -L/shared/ucl/apps/freetype/2.14.1/gnu-10.2.0/lib
 EOF
 
-# temp_dir=`mktemp -d -p /dev/shm`
-#temp_dir='/home/ccspapp/Software/R/Packages'
-temp_dir=`mkdir -p /home/skgtnl1/R-packages-temp`
-#echo "Building in $temp_dir ..."
-#cd $temp_dir
-#module list
-#read -p "Press [Enter] key to start ..."
+temp_dir=`mktemp -d -p /dev/shm`
+#temp_dir=`mkdir -p /home/skgtnl1/R-packages-temp`
+echo "Building in $temp_dir ..."
+cd $temp_dir
+module list
+read -p "Press [Enter] key to start ..."
 
 cd $temp_dir
 mkdir -p $RLIB_DB
 
 ###################### Installing packages ####################
-#R_input=${LOCALDIR}/R_packages_UCL_1_4.5.1.R
-#R --no-save < $R_input
+R_input=${LOCALDIR}/R_packages_UCL_1_4.5.1.R
+R --no-save < $R_input
 
-#R_input=${LOCALDIR}/R_packages_UCL_2_4.5.1.R
-#R --no-save < $R_input
+R_input=${LOCALDIR}/R_packages_UCL_2_4.5.1.R
+R --no-save < $R_input
 
-#R_input=${LOCALDIR}/R_packages_UCL_3_4.5.1.R
-#R --no-save < $R_input
+R_input=${LOCALDIR}/R_packages_UCL_3_4.5.1.R
+R --no-save < $R_input
 
-#R_input=${LOCALDIR}/R_packages_UCL_4_4.5.1.R
-#R --no-save < $R_input
+R_input=${LOCALDIR}/R_packages_UCL_4_4.5.1.R
+R --no-save < $R_input
 
-#export PKG_CONFIG_PATH=$PKG_CONFIG_PATH\:/usr/lib64/pkgconfig/
-
-#R_input=${LOCALDIR}/R_packages_UCL_5_4.5.1.R
-#R --no-save < $R_input
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH\:/usr/lib64/pkgconfig/
+R_input=${LOCALDIR}/R_packages_UCL_5_4.5.1.R
+R --no-save < $R_input
 
 # Now to install Bioconductor.
 R_input=${LOCALDIR}/Bioconductor_UCL_1_4.5.1.R
