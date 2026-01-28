@@ -43,8 +43,8 @@
 set -e
 
 VERSION=${VERSION:-4.5.1}   
-#INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/R/R-${VERSION}-OpenBLAS}
-INSTALL_PREFIX=${INSTALL_PREFIX:-/home/skgtnl1/R/R-${VERSION}-OpenBLAS}
+INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/R/R-${VERSION}-OpenBLAS}
+#INSTALL_PREFIX=${INSTALL_PREFIX:-/home/skgtnl1/R/R-${VERSION}-OpenBLAS}
 export RLIB_MAIN=${RLIB_MAIN:-${INSTALL_PREFIX}/lib64/R/library}
 export RLIB_DB=${RLIB_DB:-${INSTALL_PREFIX}/lib64/R/library}
 export REPROS=${REPROS:-https://cloud.r-project.org/}
