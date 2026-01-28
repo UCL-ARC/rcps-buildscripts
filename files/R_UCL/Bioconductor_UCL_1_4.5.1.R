@@ -39,20 +39,20 @@ BiocManager::install ()
 #BiocManager::install ("AnnotationDbi", type="source", lib=mainLib);
 #BiocManager::install ("annotate", type="source", lib=mainLib);
 #BiocManager::install ("biomaRt", type="source", lib=mainLib);
-BiocManager::install ("zlibbioc", type="source", lib=mainLib); (NOT AVAILABLE FOR Bioconductor version '3.22', https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages )
+BiocManager::install ("zlibbioc", type="source", lib=mainLib); #(NOT AVAILABLE FOR Bioconductor version '3.22', https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages )
 #BiocManager::install ("DynDoc", type="source", lib=mainLib);
 #BiocManager::install ("affyio", type="source", lib=mainLib);
 #BiocManager::install ("preprocessCore", type="source", lib=mainLib);
-BiocManager::install ("BiocInstaller", type="source", lib=mainLib);  (NOT AVAILABLE FOR Bioconductor version '3.22')
+BiocManager::install ("BiocInstaller", type="source", lib=mainLib);  #(NOT AVAILABLE FOR Bioconductor version '3.22')
 #BiocManager::install ("affy", type="source", lib=mainLib);
 #BiocManager::install ("gcrma", type="source", lib=mainLib);
 #BiocManager::install ("affyPLM", type="source", lib=mainLib);
 #BiocManager::install ("genefilter", type="source", lib=mainLib);
-BiocManager::install ("simpleaffy", type="source", lib=mainLib); (NOT AVAILABLE FOR Bioconductor version '3.22')
-BiocManager::install ("affyQCReport", type="source", lib=mainLib); (NOT AVAILABLE FOR Bioconductor version '3.22')
+BiocManager::install ("simpleaffy", type="source", lib=mainLib); #(NOT AVAILABLE FOR Bioconductor version '3.22')
+BiocManager::install ("affyQCReport", type="source", lib=mainLib); #(NOT AVAILABLE FOR Bioconductor version '3.22')
 #BiocManager::install ("affydata", type="source", lib=mainLib);
 #BiocManager::install ("GO.db", type="source", lib=dbLib);
-BiocManager::install ("KEGG.db", type="source", lib=dbLib); (NOT AVAILABLE FOR Bioconductor version '3.22')
+BiocManager::install ("KEGG.db", type="source", lib=dbLib); #(NOT AVAILABLE FOR Bioconductor version '3.22')
 #BiocManager::install ("annaffy", type="source", lib=mainLib);
 #BiocManager::install ("geneplotter", type="source", lib=mainLib);
 #BiocManager::install ("org.Hs.eg.db", type="source", lib=dbLib);
@@ -87,7 +87,7 @@ BiocManager::install ("KEGG.db", type="source", lib=dbLib); (NOT AVAILABLE FOR B
 
 # For Somdutta Dhir (somdutta.dhir@ucl.ac.uk) - added February 2013
 
-BiocManager::install ("GenomeGraphs", type="source", lib=mainLib); (NOT AVAILABLE FOR Bioconductor version '3.22', https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages )
+BiocManager::install ("GenomeGraphs", type="source", lib=mainLib); #(NOT AVAILABLE FOR Bioconductor version '3.22', https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages )
 #BiocManager::install ("GenomicFeatures", type="source", lib=mainLib);
 
 # Removed from Bioconductor 3.5
@@ -107,7 +107,7 @@ BiocManager::install ("Gviz", type="source", lib=mainLib); # Depend on interp
 #BiocManager::install ("edgeR", type="source", lib=mainLib);
 #BiocManager::install ("BeadDataPackR", type="source", lib=mainLib);
 #BiocManager::install ("illuminaio", type="source", lib=mainLib);
-BiocManager::install ("beadarray", type="source", lib=mainLib); (NOT AVAILABLE FOR Bioconductor version '3.22')
+BiocManager::install ("beadarray", type="source", lib=mainLib); #(NOT AVAILABLE FOR Bioconductor version '3.22')
 BiocManager::install ("beadarrayExampleData", type="source", lib=mainLib); # Dependency beadarray
 #BiocManager::install ("AnnotationForge", type="source", lib=dbLib);
 #::install ("illuminaHumanv4.db", type="source", lib=dbLib);
@@ -125,18 +125,18 @@ BiocManager::install ("beadarrayExampleData", type="source", lib=mainLib); # Dep
 # For Javier Herrero (javier.herrero@ucl.ac.uk) - added Sept 2014 - all new in BC 2.14
 
 #BiocManager::install ("DNAcopy", type="source", lib=mainLib);
-BiocManager::install ("Ringo", type="source", lib=mainLib); (NOT AVAILABLE FOR Bioconductor version '3.22')
+BiocManager::install ("Ringo", type="source", lib=mainLib);# (NOT AVAILABLE FOR Bioconductor version '3.22')
 #BiocManager::install ("affxparser", type="source", lib=mainLib);
 #BiocManager::install ("aroma.light", type="source", lib=mainLib);
 #install.packages ("aroma.apd", lib=mainLib, repos=repros);
 #install.packages ("aroma.affymetrix", lib=mainLib, repos=repros);
 #install.packages ("aroma.core", lib=mainLib, repos=repros);
-BiocManager::install ("Repitools", type="source", lib=mainLib); (NOT AVAILABLE FOR Bioconductor version '3.22')
+BiocManager::install ("Repitools", type="source", lib=mainLib);# (NOT AVAILABLE FOR Bioconductor version '3.22')
 
 # For Dapeng Wang (dapeng.wang@ucl.ac.uk) - added Sept 2014
 
 #BiocManager::install ("Rsubread", type="source", lib=mainLib);
-BiocManager::install ("DESeq", type="source", lib=mainLib); (NOT AVAILABLE FOR Bioconductor version '3.22')
+BiocManager::install ("DESeq", type="source", lib=mainLib);# (NOT AVAILABLE FOR Bioconductor version '3.22')
 #BiocManager::install ("genomeIntervals", type="source", lib=mainLib);
 BiocManager::install ("ShortRead", type="source", lib=mainLib);
 BiocManager::install ("easyRNASeq", type="source", lib=mainLib);
@@ -153,7 +153,7 @@ BiocManager::install ("easyRNASeq", type="source", lib=mainLib);
 # For Xiayi Ke (sejjxke@ucl.ac.uk) - added Feb 2015
 
 #BiocManager::install ("registry", type="source", lib=mainLib);
-BiocManager::install ("pkgmaker", type="source", lib=mainLib);(NOT AVAILABLE FOR Bioconductor version '3.22')
+BiocManager::install ("pkgmaker", type="source", lib=mainLib);#(NOT AVAILABLE FOR Bioconductor version '3.22')
 #BiocManager::install ("rngtools", type="source", lib=mainLib);
 #BiocManager::install ("doRNG", type="source", lib=mainLib);
 #BiocManager::install ("bumphunter", type="source", lib=mainLib);
