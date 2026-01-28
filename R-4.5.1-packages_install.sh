@@ -99,7 +99,8 @@ require openssl/1.1.1t
 require pkg-config/0.29.2
 require gperf/3.0.4/gnu-4.9.2 
 require fontconfig/2.14.1/gnu-10.2.0
-require ~/libwebp-1.4.0/module/libwebp/1.4.0/.uclrc_modules/libwebp/1.4.0/gnu-10.2.0
+require libwebp/1.4.0/gnu-10.2.0
+require /home/skgtnl1/zlib-1.3.1/module/zlib/1.3.1/.uclrc_modules/zlib/1.3.1/gnu-10.2.0
 
 # Creating this as R 4.4.2 libraries have a lot of incompatibilities with R 4.5.1. 
 # It is better to build the packages again with R 4.5.1 of posterior.
@@ -146,12 +147,12 @@ mkdir -p $RLIB_DB
 #R_input=${LOCALDIR}/R_packages_UCL_4_4.5.1.R
 #R --no-save < $R_input
 
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH\:/usr/lib64/pkgconfig/
+#export PKG_CONFIG_PATH=$PKG_CONFIG_PATH\:/usr/lib64/pkgconfig/
 
-R_input=${LOCALDIR}/R_packages_UCL_5_4.5.1.R
-R --no-save < $R_input
+#R_input=${LOCALDIR}/R_packages_UCL_5_4.5.1.R
+#R --no-save < $R_input
 
 # Now to install Bioconductor.
-#R_input=${LOCALDIR}/Bioconductor_UCL_1_4.1.1.R
-#R --no-save < $R_input
+R_input=${LOCALDIR}/Bioconductor_UCL_1_4.5.1.R
+R --no-save < $R_input
   
