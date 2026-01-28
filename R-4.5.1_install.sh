@@ -116,8 +116,8 @@ require flex/2.5.39
 package_name="R"
 package_version="4.5.1"
 
-instal_prefix=$INSTALL_PREFIX
-module_dir="$install_prefix/module/${package_name}/${package_version}/.uclrc_modules"
+install_prefix=$INSTALL_PREFIX
+module_dir="${install_prefix}/module/${package_name}/${package_version}/.uclrc_modules"
 cd "$INSTALL_PREFIX"
 echo "Post-building..."
 make_module_v2
