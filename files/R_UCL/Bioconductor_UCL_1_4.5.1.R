@@ -17,7 +17,6 @@
 mainLib <- Sys.getenv ("RLIB_MAIN");
 dbLib <- Sys.getenv ("RLIB_DB");
 repros <- Sys.getenv ("REPROS");
-options(repos = c(CRAN = "https://cloud.r-project.org"))
 mainLib;
 dbLib;
 repros;
@@ -94,6 +93,7 @@ BiocManager::install ("GenomeGraphs", type="source", lib=mainLib); #(NOT AVAILAB
 # Removed from Bioconductor 3.5
 #BiocManager::install ("VariantAnnotation", type="source", lib=mainLib);
 #BiocManager::install ("biovizBase", type="source", lib=mainLib);
+#options(repos = c(CRAN = "https://cloud.r-project.org"))
 #install.packages("interp", type="source", lib=mainLib);
 #BiocManager::install ("Gviz", type="source", lib=mainLib); # Depend on interp
 #BiocManager::install ("annmap", type="source", lib=mainLib);
@@ -182,6 +182,7 @@ BiocManager::install ("pkgmaker", type="source", lib=mainLib);#(NOT AVAILABLE FO
 #BiocManager::install ("ChAMP", type="source", lib=mainLib); # Dependency Gviz
 
 # For Ana Paula Leite (ana.leite@ucl.ac.uk) - added June 2016
+options(repos = c(CRAN = "https://cloud.r-project.org"))
 install.packages("brio")
 BiocManager::install ("EBSeq", type="source", lib=mainLib);
 
