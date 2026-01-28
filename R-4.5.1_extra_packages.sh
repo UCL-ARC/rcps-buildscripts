@@ -11,8 +11,8 @@
 #$ -l h_rt=12:0:0
 
 # 3. Request 4 gigabyte of RAM per process.
-##$ -l mem=8G
-#$ -l mem=160G
+#$ -l mem=8G
+##$ -l mem=160G
 
 #$ -j y
 
@@ -35,8 +35,9 @@ module unload compilers mpi gcc-libs
 workdir=/home/ccspapp/Scratch/R/work
 #=/home/skgtnl1/Scratch/R/work
 mkdir -p $workdir
-export TMPDIR=$workdircd ..
+export TMPDIR=$workdir
+cd ..
 
 cd /shared/ucl/apps/build_scripts
-./R-4.5.1_packages_install.sh 
+./R-4.5.1-packages_install.sh 
 echo "Finished build."
