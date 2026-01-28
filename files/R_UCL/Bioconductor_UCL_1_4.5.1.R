@@ -182,9 +182,9 @@ BiocManager::install ("pkgmaker", type="source", lib=mainLib);#(NOT AVAILABLE FO
 #BiocManager::install ("ChAMP", type="source", lib=mainLib); # Dependency Gviz
 
 # For Ana Paula Leite (ana.leite@ucl.ac.uk) - added June 2016
-options(repos = c(CRAN = "https://cloud.r-project.org"))
-install.packages("brio")
-BiocManager::install ("EBSeq", type="source", lib=mainLib);
+#options(repos = c(CRAN = "https://cloud.r-project.org"))
+#install.packages("brio")
+#BiocManager::install ("EBSeq", type="source", lib=mainLib);
 
 # Required for the cancerit suite (https://github.com/cancerit)
 
