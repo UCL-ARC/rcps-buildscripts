@@ -11,7 +11,7 @@
 #$ -l h_rt=12:0:0
 
 # 3. Request 4 gigabyte of RAM per process.
-#$ -l mem=4G
+#$ -l mem=80G
 
 #$ -j y
 
@@ -19,7 +19,7 @@
 #$ -N R-4.5.1-extra-packages-build
 
 # 6. Select the MPI parallel environment with 2 processes (to make sure MPI is setup)
-#$ -pe mpi 42
+#$ -pe mpi 2
 
 # 7. Set the working directory to somewhere in your scratch space.  This is
 # a necessary step with the upgraded software stack as compute nodes cannot
