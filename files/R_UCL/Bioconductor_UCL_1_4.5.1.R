@@ -93,9 +93,9 @@ BiocManager::install ("GenomeGraphs", type="source", lib=mainLib); #(NOT AVAILAB
 # Removed from Bioconductor 3.5
 #BiocManager::install ("VariantAnnotation", type="source", lib=mainLib);
 #BiocManager::install ("biovizBase", type="source", lib=mainLib);
-options(repos = c(CRAN = "https://cloud.r-project.org"))
-install.packages("interp", type="source", lib=mainLib);
-BiocManager::install ("Gviz", type="source", lib=mainLib); # Depend on interp
+#options(repos = c(CRAN = "https://cloud.r-project.org"))
+#install.packages("interp", type="source", lib=mainLib);
+#BiocManager::install ("Gviz", type="source", lib=mainLib); # Depend on interp
 #BiocManager::install ("annmap", type="source", lib=mainLib);
 
 # For Adam Levine (a.levine@ucl.ac.uk) - added August 2013
@@ -139,8 +139,8 @@ BiocManager::install ("Repitools", type="source", lib=mainLib);# (NOT AVAILABLE 
 #BiocManager::install ("Rsubread", type="source", lib=mainLib);
 BiocManager::install ("DESeq", type="source", lib=mainLib);# (NOT AVAILABLE FOR Bioconductor version '3.22')
 #BiocManager::install ("genomeIntervals", type="source", lib=mainLib);
-BiocManager::install ("ShortRead", type="source", lib=mainLib);
-BiocManager::install ("easyRNASeq", type="source", lib=mainLib);
+#BiocManager::install ("ShortRead", type="source", lib=mainLib);
+#BiocManager::install ("easyRNASeq", type="source", lib=mainLib);
 #BiocManager::install ("DESeq2", type="source", lib=mainLib);
 
 # For Ran Gu (ran.gu.10@ucl.ac.uk) - added Oct 2014
@@ -179,7 +179,7 @@ BiocManager::install ("pkgmaker", type="source", lib=mainLib);#(NOT AVAILABLE FO
 #
 # BiocManager::install ("RPVM", type="source", lib=mainLib);
 #install.packages ("ruv", lib=mainLib, repos=repros);
-BiocManager::install ("ChAMP", type="source", lib=mainLib); # Dependency Gviz
+#BiocManager::install ("ChAMP", type="source", lib=mainLib); # Dependency Gviz
 
 # For Ana Paula Leite (ana.leite@ucl.ac.uk) - added June 2016
 
@@ -187,46 +187,45 @@ BiocManager::install ("EBSeq", type="source", lib=mainLib);
 
 # Required for the cancerit suite (https://github.com/cancerit)
 
-BiocManager::install ("copynumber", type="source", lib=mainLib);
+BiocManager::install ("copynumber", type="source", lib=mainLib);#(NOT AVAILABLE FOR Bioconductor version '3.22')
 
 # For Athina Dritsoula (athina.dritsoula.09@ucl.ac.uk) - added Feb and March 2017
 
-BiocManager::install ("goseq", type="source", lib=mainLib);
-BiocManager::install ("missMethyl", type="source", lib=dbLib);
+#BiocManager::install ("goseq", type="source", lib=mainLib);
+#BiocManager::install ("missMethyl", type="source", lib=dbLib);
 
 # For Evgeny Galimov (e.galimov@ucl.ac.uk) - added Aug 2017
 
-BiocManager::install ("DEXSeq", type="source", lib=mainLib);
+#BiocManager::install ("DEXSeq", type="source", lib=mainLib);
 
 # For Dean Cornish (dean.cornish.19@ucl.ac.uk) - added Aug 2021
 
-BiocManager::install ("karyoploteR", type="source", lib=mainLib);
+#BiocManager::install ("karyoploteR", type="source", lib=mainLib);
 
 # Additional CRAN packages
-install.packages ("PSCBS", lib=mainLib, repos=repros);
+#install.packages ("PSCBS", lib=mainLib, repos=repros);
 
 # INLA - updated with extra packages and to fix binary install of INLA itself with a version that
 # will run on RedHat 7.
 # Updated March 2024 as additional R packasges needed from CRAN
 
-install.packages ("fmesher", lib=mainLib, repos=repros);
-install.packages ("Ecdat", lib=mainLib, repos=repros);
-install.packages ("HKprocess", lib=mainLib, repos=repros);
-install.packages ("mlogit", lib=mainLib, repos=repros);
-install.packages ("splancs", lib=mainLib, repos=repros);
-install.packages ("tidyterra", lib=mainLib, repos=repros);
-install.packages ("INLAspacetime", lib=mainLib, repos=repros);
+#install.packages ("fmesher", lib=mainLib, repos=repros);
+#install.packages ("Ecdat", lib=mainLib, repos=repros);
+install.packages ("HKprocess", lib=mainLib, repos=repros); #(NOT AVAILABLE FOR this version of R
+#install.packages ("mlogit", lib=mainLib, repos=repros);
+# ("splancs", lib=mainLib, repos=repros);
+#install.packages ("tidyterra", lib=mainLib, repos=repros);
+#install.packages ("INLAspacetime", lib=mainLib, repos=repros);
 
 # install.packages ("INLA", lib=mainLib, repos=c(getOption("repros"), INLA="https://inla.r-inla-download.org/R/stable"), dep=TRUE);
 
-install.packages("INLA", lib=mainLib, repos=c(getOption("repros"), INLA="https://inla.r-inla-download.org/R/testing"), dep=TRUE);
+#("INLA", lib=mainLib, repos=c(getOption("repros"), INLA="https://inla.r-inla-download.org/R/testing"), dep=TRUE);
 
 # Replace binary INLA that doesn't work on redHat 7 with one that does. NOTE: interactive will prompt
 # you to choose the correct binary. - Updated Feb 2023
 #
-library (INLA);
-inla.binary.install();
-1
+#library (INLA);
+#inla.binary.install();
 
 # End of Bioconductor_UCL_1
 
