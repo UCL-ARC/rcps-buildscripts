@@ -39,7 +39,8 @@ BiocManager::install ()
 #BiocManager::install ("AnnotationDbi", type="source", lib=mainLib);
 #BiocManager::install ("annotate", type="source", lib=mainLib);
 #BiocManager::install ("biomaRt", type="source", lib=mainLib);
-BiocManager::install ("zlibbioc", type="source", lib=mainLib); #(NOT AVAILABLE FOR Bioconductor version '3.22', https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages )
+#BiocManager::install ("zlibbioc", type="source", lib=mainLib); #(NOT AVAILABLE FOR Bioconductor version '3.22', https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages )
+install.packages("https://bioconductor.org/packages/3.20/bioc/src/contrib/zlibbioc_1.54.0.tar.gz", repos = NULL, type = "source")
 #BiocManager::install ("DynDoc", type="source", lib=mainLib);
 #BiocManager::install ("affyio", type="source", lib=mainLib);
 #BiocManager::install ("preprocessCore", type="source", lib=mainLib);
