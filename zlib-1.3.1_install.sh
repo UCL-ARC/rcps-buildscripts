@@ -21,17 +21,17 @@ _env_setup() {
     package_version="1.3.1"
     unpack_dir="zlib-1.3.1"
    
-    #package_archive="/shared/ucl/apps/${package_name}/installers/"
-    package_archive="${HOME}/${unpack_dir}"
+    package_archive="/shared/ucl/apps/${package_name}/installers/"
+    #package_archive="${HOME}/${unpack_dir}"
     mkdir -p ${package_archive}   
     cd ${package_archive} 
     wget https://zlib.net/zlib-1.3.1.tar.gz 
  
-    make_build_env --tmp-root=${HOME}
-    #make_build_env --tmp-root=/dev/shm
+    #make_build_env --tmp-root=${HOME}
+    make_build_env --tmp-root=/dev/shm
 
-    install_prefix="${HOME}/${unpack_dir}"
-    module_dir="$install_prefix/module/$package_name/$package_version/.uclrc_modules"
+    #install_prefix="${HOME}/${unpack_dir}"
+    #module_dir="$install_prefix/module/$package_name/$package_version/.uclrc_modules"
 
     mkdir -p ${install_prefix}
 

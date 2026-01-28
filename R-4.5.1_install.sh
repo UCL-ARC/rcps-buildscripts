@@ -34,10 +34,9 @@
 # updated:
 
 VERSION=${VERSION:-4.5.1}
-#INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/R/R-${VERSION}-OpenBLAS}
-INSTALL_PREFIX=${INSTALL_PREFIX:-/home/skgtnl1/R/R-${VERSION}-OpenBLAS}
+INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/R/R-${VERSION}-OpenBLAS}
+#INSTALL_PREFIX=${INSTALL_PREFIX:-/home/skgtnl1/R/R-${VERSION}-OpenBLAS}
 SRC_ARCHIVE=${SRC_ARCHIVE:- https://cran.r-project.org/src/base/R-4/R-${VERSION}.tar.gz}
-# SRC_ARCHIVE=${SRC_ARCHIVE:- /home/skgtnl1/Software/R//R-${VERSION}.tar.gz}
 
 export PATH=$INSTALL_PREFIX/bin:$PATH
 
@@ -67,9 +66,9 @@ require flex/2.5.39
 # And for doing the MPI support:
 require mpi/openmpi/4.0.5/gnu-10.2.0
 
-temp_dir=`mktemp -d -p /home/skgtnl1`
-# temp_dir=`mktemp -d -p /dev/shm`
-# temp_dir='/home/ccspapp/Software/R'
+#temp_dir=`mktemp -d -p /home/skgtnl1`
+temp_dir=`mktemp -d -p /dev/shm`
+
 echo "Building in $temp_dir ..."
 cd $temp_dir
 module list
@@ -113,3 +112,14 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$INSTALL_PREFIX/lib64
 make test 2>&1 | tee make-test_log
 ./test 2>&1 | tee -a make-test_log
 
+ 
+package_name="R"
+package_version="4.5.1"
+
+instal_prefix=$INSTALL_PREFIX
+module_dir="$install_prefix/module/${package_name}/${package_version}/.uclrc_modules"
+cd "$INSTALL_PREFIX"
+echo "Post-building..."
+make_module_v2
+cd ..
+echo "End post-building"
