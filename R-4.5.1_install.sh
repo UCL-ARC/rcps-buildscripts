@@ -44,6 +44,7 @@ dirname=$(dirname $0 2>/dev/null || pwd)
 INCLUDES_DIR=${INCLUDES_DIR:-${dirname}/includes}
 source ${INCLUDES_DIR}/module_maker_inc.sh
 source ${INCLUDES_DIR}/require_inc.sh
+source ${INCLUDES_DIR}/source_includes.sh
 
 module purge 
 require gcc-libs/10.2.0
@@ -64,55 +65,54 @@ require pcre2/10.37/gnu-10.2.0
 require flex/2.5.39
 
 # And for doing the MPI support:
-require mpi/openmpi/4.0.5/gnu-10.2.0
+#require mpi/openmpi/4.0.5/gnu-10.2.0
 
 #temp_dir=`mktemp -d -p /home/skgtnl1`
-temp_dir=`mktemp -d -p /dev/shm`
+#temp_dir=`mktemp -d -p /dev/shm`
 
-echo "Building in $temp_dir ..."
-cd $temp_dir
-module list
-read -p "Press [Enter] key to start ..."
+#echo "Building in $temp_dir ..."
+#cd $temp_dir
+#module list
+#read -p "Press [Enter] key to start ..."
 
-cd $temp_dir
-wget $SRC_ARCHIVE
+#cd $temp_dir
+#wget $SRC_ARCHIVE
 
-tar xvzf R-${VERSION}.tar.gz
-cd R-${VERSION}
+#tar xvzf R-${VERSION}.tar.gz
+#cd R-${VERSION}
 
-read -p "Press [Enter] key to start configure ..."
-./configure -C --prefix=${INSTALL_PREFIX} \
-  --with-2025blas \
-  --enable-R-shlib \
-  --with-recommended-packages \
-  --with-x \
-  --with-readline=yes \
-  --with-blas="-L /shared/ucl/apps/openblas/0.3.13-serial/gnu-10.2.0/lib -lopenblas" \
-  --enable-BLAS-shlib 2>&1 | tee configure-command-OpenBLAS_log
+#read -p "Press [Enter] key to start configure ..."
+#./configure -C --prefix=${INSTALL_PREFIX} \
+#  --with-2025blas \
+#  --enable-R-shlib \
+#  --with-recommended-packages \
+#  --with-x \
+#  --with-readline=yes \
+#  --with-blas="-L /shared/ucl/apps/openblas/0.3.13-serial/gnu-10.2.0/lib -lopenblas" \
+#  --enable-BLAS-shlib 2>&1 | tee configure-command-OpenBLAS_log
 
-read -p "Press [Enter] key to start make..."
-make 2>&1 | tee make-OpenBLAS_log
-read -p "Press [Enter] key to start make check..."
-make check 2>&1 | tee make-check-OpenBLAS_log
-read -p "Press [Enter] key to start make pdf.."
-make pdf  2>&1 | tee make-pdf_log
-read -p "Press [Enter] key to start make install..."
-make install 2>&1 | tee make-install_log
-read -p "Press [Enter] key to start make install pdf ..."
-make install-pdf 2>&1 | tee make-install-pdf_log
-read -p "Press [Enter] key to start make install tests ..."
-make install-tests
+#read -p "Press [Enter] key to start make..."
+#make 2>&1 | tee make-OpenBLAS_log
+#read -p "Press [Enter] key to start make check..."
+#make check 2>&1 | tee make-check-OpenBLAS_log
+#read -p "Press [Enter] key to start make pdf.."
+#make pdf  2>&1 | tee make-pdf_log
+#read -p "Press [Enter] key to start make install..."
+#make install 2>&1 | tee make-install_log
+#read -p "Press [Enter] key to start make install pdf ..."
+#make install-pdf 2>&1 | tee make-install-pdf_log
+#read -p "Press [Enter] key to start make install tests ..."
+#make install-tests
 
 # Build standalone libRmath library
-read -p "Press [Enter] key to start build libRmath ..."
-cd src/nmath/standalone
-make 2>&1 | tee make-libRmath_log
-make install 2>&1 | tee make-libRmath-install_log
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$INSTALL_PREFIX/lib64
-make test 2>&1 | tee make-test_log
-./test 2>&1 | tee -a make-test_log
+#read -p "Press [Enter] key to start build libRmath ..."
+#cd src/nmath/standalone
+#make 2>&1 | tee make-libRmath_log
+#make install 2>&1 | tee make-libRmath-install_log
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$INSTALL_PREFIX/lib64
+#make test 2>&1 | tee make-test_log
+#./test 2>&1 | tee -a make-test_log
 
- 
 package_name="R"
 package_version="4.5.1"
 
