@@ -25,8 +25,8 @@
 # a necessary step with the upgraded software stack as compute nodes cannot
 # write to $HOME.
 # Replace "<your_UCL_id>" with your UCL user ID :)
-##$ -wd /home/ccspapp/Scratch/R
-#$ -wd /home/skgtnl1/Scratch/R
+#$ -wd /home/ccspapp/Scratch/R
+##$ -wd /home/skgtnl1/Scratch/R
 
 #module use --append ~ccspapp/lib/modulefiles/applications
 module unload compilers mpi gcc-libs
