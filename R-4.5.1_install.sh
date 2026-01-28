@@ -117,7 +117,7 @@ package_name="R"
 package_version="4.5.1"
 
 install_prefix=$INSTALL_PREFIX
-module_dir="${install_prefix}/module/${package_name}/${package_version}/.uclrc_modules"
+module_dir="${install_prefix}/.uclrc_modules"
 cd "$INSTALL_PREFIX"
 echo "Post-building..."
 
@@ -129,7 +129,7 @@ make_module \
     -r openblas/0.3.13-serial/gnu-10.2.0 \
     -r java/21.0.4 \
     -r fftw/3.3.9/gnu-10.2.0 \
-    -r ghostscript/9.19/gnu-4.9.\
+    -r ghostscript/9.19/gnu-4.9.2\
     -r texinfo/6.6/gnu-4.9.2 \
     -r texlive/2019 \
     -r gsl/2.7/gnu-10.2.0 \
