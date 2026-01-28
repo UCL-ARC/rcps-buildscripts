@@ -65,7 +65,7 @@ require pcre2/10.37/gnu-10.2.0
 require flex/2.5.39
 
 # And for doing the MPI support:
-#require mpi/openmpi/4.0.5/gnu-10.2.0
+require mpi/openmpi/4.0.5/gnu-10.2.0
 
 #temp_dir=`mktemp -d -p /home/skgtnl1`
 #temp_dir=`mktemp -d -p /dev/shm`
@@ -138,6 +138,7 @@ make_module \
     -r netcdf/4.9.2/gnu-10.2.0 \
     -r pcre2/10.37/gnu-10.2.0 \
     -r flex/2.5.39 \
+    -r mpi/openmpi/4.0.5/gnu-10.2.0 \
     -c r
 cd ..
 echo "End post-building"
