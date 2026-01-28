@@ -37,5 +37,5 @@ mkdir -p $workdir
 export TMPDIR=$workdircd ..
 
 cd /shared/ucl/apps/build_scripts
-./R-4.5.1_packages_install 
+./R-4.5.1_packages_install.sh 
 echo "Finished build."
