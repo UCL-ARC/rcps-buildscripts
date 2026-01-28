@@ -120,6 +120,27 @@ install_prefix=$INSTALL_PREFIX
 module_dir="${install_prefix}/module/${package_name}/${package_version}/.uclrc_modules"
 cd "$INSTALL_PREFIX"
 echo "Post-building..."
-make_module_v2
+
+make_module \
+    -o "${module_dir}/r/${package_version}-openblas/gnu-10.2.0" \
+    -p "$install_prefix" \
+    -r gcc-libs/10.2.0 \
+    -r compilers/gnu/10.2.0 \
+    -r openblas/0.3.13-serial/gnu-10.2.0 \
+    -r java/21.0.4 \
+    -r fftw/3.3.9/gnu-10.2.0 \
+    -r ghostscript/9.19/gnu-4.9.\
+    -r texinfo/6.6/gnu-4.9.2 \
+    -r texlive/2019 \
+    -r gsl/2.7/gnu-10.2.0 \
+    -r hdf/5-1.10.6/gnu-10.2.0 \
+    -r udunits/2.2.28/gnu-10.2.0 \
+    -r netcdf/4.9.2/gnu-10.2.0 \
+    -r pcre2/10.37/gnu-10.2.0 \
+    -r flex/2.5.39 \
+    -c r
 cd ..
 echo "End post-building"
+
+
+
