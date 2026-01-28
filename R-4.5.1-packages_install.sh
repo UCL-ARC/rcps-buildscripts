@@ -128,7 +128,7 @@ temp_dir=`mktemp -d -p /dev/shm`
 echo "Building in $temp_dir ..."
 cd $temp_dir
 module list
-read -p "Press [Enter] key to start ..."
+#read -p "Press [Enter] key to start ..."
 
 cd $temp_dir
 mkdir -p $RLIB_DB
