@@ -93,7 +93,7 @@ BiocManager::install ("GenomeGraphs", type="source", lib=mainLib); #(NOT AVAILAB
 # Removed from Bioconductor 3.5
 #BiocManager::install ("VariantAnnotation", type="source", lib=mainLib);
 #BiocManager::install ("biovizBase", type="source", lib=mainLib);
-install.packages("interp")
+install.packages("interp", type="source", lib=mainLib);
 BiocManager::install ("Gviz", type="source", lib=mainLib); # Depend on interp
 #BiocManager::install ("annmap", type="source", lib=mainLib);
 
