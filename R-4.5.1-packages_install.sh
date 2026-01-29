@@ -134,14 +134,14 @@ cd $temp_dir
 mkdir -p $RLIB_DB
 
 ###################### Installing packages ####################
-R_input=${LOCALDIR}/R_packages_UCL_1_4.5.1.R
-R --no-save < $R_input
+#R_input=${LOCALDIR}/R_packages_UCL_1_4.5.1.R
+#R --no-save < $R_input
 
-R_input=${LOCALDIR}/R_packages_UCL_2_4.5.1.R
-R --no-save < $R_input
+#R_input=${LOCALDIR}/R_packages_UCL_2_4.5.1.R
+#R --no-save < $R_input
 
-R_input=${LOCALDIR}/R_packages_UCL_3_4.5.1.R
-R --no-save < $R_input
+#R_input=${LOCALDIR}/R_packages_UCL_3_4.5.1.R
+#R --no-save < $R_input
 
 R_input=${LOCALDIR}/R_packages_UCL_4_4.5.1.R
 R --no-save < $R_input
