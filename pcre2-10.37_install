@@ -8,7 +8,7 @@ for i in ${includes_dir:=$(dirname $0 2>/dev/null)/includes}/{module_maker,requi
 
 package_name="pcre2"
 package_version="10.37"
-src_urls=https://ftp.pcre.org/pub/pcre/pcre2-${package_version}.tar.bz2
+src_urls=https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.37/pcre2-${package_version}.tar.bz2
 # Optional: 
 # package_variant=""
 package_description="PCRE (Perl-compatible regular expressions) is a C library implementing regular expression pattern-matching using the same semantics as Perl 5."
