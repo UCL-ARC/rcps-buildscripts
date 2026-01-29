@@ -28,6 +28,10 @@
 # Replace "<your_UCL_id>" with your UCL user ID :)
 #$ -wd /home/ccspapp/Scratch/R
 
+# For Young and Michael
+#$ -P Free
+#$ -A Test_allocation
+
 module unload compilers mpi gcc-libs
 
 workdir=/home/ccspapp/Scratch/R/work
