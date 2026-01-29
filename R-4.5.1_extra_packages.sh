@@ -11,8 +11,8 @@
 #$ -l h_rt=24:0:0
 
 # 3. Request 4 gigabyte of RAM per process.
-#$ -l mem=8G
-##$ -l mem=160G
+##$ -l mem=8G
+#$ -l mem=160G
 
 #$ -j y
 
