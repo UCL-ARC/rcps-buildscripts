@@ -8,11 +8,11 @@
 #$ -S /bin/bash
 
 # 2. Request 6 hours of wallclock time (format hours:minutes:seconds).
-#$ -l h_rt=12:0:0
+#$ -l h_rt=24:0:0
 
 # 3. Request 4 gigabyte of RAM per process.
-#$ -l mem=8G
-##$ -l mem=160G
+##$ -l mem=8G
+#$ -l mem=160G
 
 #$ -j y
 
@@ -27,13 +27,11 @@
 # write to $HOME.
 # Replace "<your_UCL_id>" with your UCL user ID :)
 #$ -wd /home/ccspapp/Scratch/R
-##$ -wd /home/skgtnl1/Scratch/R
 
-#module use --append ~ccspapp/lib/modulefiles/applications
 module unload compilers mpi gcc-libs
 
 workdir=/home/ccspapp/Scratch/R/work
-#=/home/skgtnl1/Scratch/R/work
+
 mkdir -p $workdir
 export TMPDIR=$workdir
 cd ..
