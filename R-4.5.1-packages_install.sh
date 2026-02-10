@@ -134,21 +134,21 @@ cd $temp_dir
 mkdir -p $RLIB_DB
 
 ###################### Installing packages ####################
-R_input=${LOCALDIR}/R_packages_UCL_1_4.5.1.R
-R --no-save < $R_input
+#R_input=${LOCALDIR}/R_packages_UCL_1_4.5.1.R
+#R --no-save < $R_input
 
-R_input=${LOCALDIR}/R_packages_UCL_2_4.5.1.R
-R --no-save < $R_input
+#R_input=${LOCALDIR}/R_packages_UCL_2_4.5.1.R
+#R --no-save < $R_input
 
-R_input=${LOCALDIR}/R_packages_UCL_3_4.5.1.R
-R --no-save < $R_input
+#R_input=${LOCALDIR}/R_packages_UCL_3_4.5.1.R
+#R --no-save < $R_input
 
-R_input=${LOCALDIR}/R_packages_UCL_4_4.5.1.R
-R --no-save < $R_input
+#R_input=${LOCALDIR}/R_packages_UCL_4_4.5.1.R
+#R --no-save < $R_input
 
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH\:/usr/lib64/pkgconfig/
-R_input=${LOCALDIR}/R_packages_UCL_5_4.5.1.R
-R --no-save < $R_input
+#export PKG_CONFIG_PATH=$PKG_CONFIG_PATH\:/usr/lib64/pkgconfig/
+#R_input=${LOCALDIR}/R_packages_UCL_5_4.5.1.R
+#R --no-save < $R_input
 
 # Now to install Bioconductor.
 R_input=${LOCALDIR}/Bioconductor_UCL_1_4.5.1.R
