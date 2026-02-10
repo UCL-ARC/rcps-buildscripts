@@ -43,8 +43,8 @@
 set -e
 
 VERSION=${VERSION:-4.5.1}   
-#INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/R/R-${VERSION}-OpenBLAS}
-INSTALL_PREFIX=${INSTALL_PREFIX:-/home/skgtnl1/R/R-${VERSION}-OpenBLAS}
+INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/R/R-${VERSION}-OpenBLAS}
+#INSTALL_PREFIX=${INSTALL_PREFIX:-/home/skgtnl1/R/R-${VERSION}-OpenBLAS}
 export RLIB_MAIN=${RLIB_MAIN:-${INSTALL_PREFIX}/lib64/R/library}
 export RLIB_DB=${RLIB_DB:-${INSTALL_PREFIX}/lib64/R/library}
 export REPROS=${REPROS:-https://cloud.r-project.org/}
@@ -128,7 +128,7 @@ temp_dir=`mktemp -d -p /dev/shm`
 echo "Building in $temp_dir ..."
 cd $temp_dir
 module list
-read -p "Press [Enter] key to start ..."
+#read -p "Press [Enter] key to start ..."
 
 cd $temp_dir
 mkdir -p $RLIB_DB

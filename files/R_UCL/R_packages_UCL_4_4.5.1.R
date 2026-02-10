@@ -12,8 +12,7 @@ mainLib;
 dbLib;
 repros;
 
-# For Dr Gioia Altobelli g.altobelli@ucl.ac.uk - added Oct 2013 
-updated Mar 2014
+# For Dr Gioia Altobelli g.altobelli@ucl.ac.uk - added Oct 2013 updated Mar 2014
 
 install.packages ("hwriter", lib=mainLib, repos=repros);
 install.packages ("statmod", lib=mainLib, repos=repros);
