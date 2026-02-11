@@ -63,55 +63,79 @@ require udunits/2.2.28/gnu-10.2.0
 require netcdf/4.9.2/gnu-10.2.0
 require pcre2/10.37/gnu-10.2.0
 require flex/2.5.39
-
-# And for doing the MPI support:
+require zlib/1.3.1/gnu-10.2.0 
+require cmake/3.21.1  
+require curl/7.86.0/gnu-4.9.2
+require numactl/2.0.12
+require binutils/2.36.1/gnu-10.2.0
+require ucx/1.9.0/gnu-10.2.0
+require jags/4.3.1/gnu-10.2.0-openblas
+require perl/5.22.0
+require freetype/2.14.1/gnu-10.2.0
+require libtool/2.4.6
+require graphicsmagick/1.3.21
+require python3/3.9-gnu-10.2.0
+require sqlite/3.36.0/gnu-10.2.0
+require proj.4/9.2.0/gnu-10.2.0
+require gdal/3.3.3/gnu-10.2.0
+require geos/3.9.1/gnu-10.2.0
+require gmt/6.5.0/gnu-10.2.0
+require protobuf/3.17.3/gnu-10.2.0
+require jq/1.5/gnu-4.9.2
+require plink/1.90b3.40
+require cmdstan/2.35.0/gnu-10.2.0
+require openssl/1.1.1t
+require pkg-config/0.29.2
+require gperf/3.0.4/gnu-4.9.2 
+require fontconfig/2.14.1/gnu-10.2.0
+require libwebp/1.4.0/gnu-10.2.0
 require mpi/openmpi/4.0.5/gnu-10.2.0
 
 #temp_dir=`mktemp -d -p /home/skgtnl1`
 temp_dir=`mktemp -d -p /dev/shm`
 
-echo "Building in $temp_dir ..."
-cd $temp_dir
-module list
-read -p "Press [Enter] key to start ..."
+#echo "Building in $temp_dir ..."
+#cd $temp_dir
+#module list
+#read -p "Press [Enter] key to start ..."
 
-cd $temp_dir
-wget $SRC_ARCHIVE
+#cd $temp_dir
+#wget $SRC_ARCHIVE
 
-tar xvzf R-${VERSION}.tar.gz
-cd R-${VERSION}
+#tar xvzf R-${VERSION}.tar.gz
+#cd R-${VERSION}
 
-read -p "Press [Enter] key to start configure ..."
-./configure -C --prefix=${INSTALL_PREFIX} \
-  --with-2025blas \
-  --enable-R-shlib \
-  --with-recommended-packages \
-  --with-x \
-  --with-readline=yes \
-  --with-blas="-L /shared/ucl/apps/openblas/0.3.13-serial/gnu-10.2.0/lib -lopenblas" \
-  --enable-BLAS-shlib 2>&1 | tee configure-command-OpenBLAS_log
+#read -p "Press [Enter] key to start configure ..."
+#./configure -C --prefix=${INSTALL_PREFIX} \
+#  --with-2025blas \
+#  --enable-R-shlib \
+#  --with-recommended-packages \
+#  --with-x \
+#  --with-readline=yes \
+#  --with-blas="-L /shared/ucl/apps/openblas/0.3.13-serial/gnu-10.2.0/lib -lopenblas" \
+#  --enable-BLAS-shlib 2>&1 | tee configure-command-OpenBLAS_log
 
-read -p "Press [Enter] key to start make..."
-make 2>&1 | tee make-OpenBLAS_log
-read -p "Press [Enter] key to start make check..."
-make check 2>&1 | tee make-check-OpenBLAS_log
-read -p "Press [Enter] key to start make pdf.."
-make pdf  2>&1 | tee make-pdf_log
-read -p "Press [Enter] key to start make install..."
-make install 2>&1 | tee make-install_log
-read -p "Press [Enter] key to start make install pdf ..."
-make install-pdf 2>&1 | tee make-install-pdf_log
-read -p "Press [Enter] key to start make install tests ..."
-make install-tests
+#read -p "Press [Enter] key to start make..."
+#make 2>&1 | tee make-OpenBLAS_log
+#read -p "Press [Enter] key to start make check..."
+#make check 2>&1 | tee make-check-OpenBLAS_log
+#read -p "Press [Enter] key to start make pdf.."
+#make pdf  2>&1 | tee make-pdf_log
+#read -p "Press [Enter] key to start make install..."
+#make install 2>&1 | tee make-install_log
+#read -p "Press [Enter] key to start make install pdf ..."
+#make install-pdf 2>&1 | tee make-install-pdf_log
+#read -p "Press [Enter] key to start make install tests ..."
+#make install-tests
 
 # Build standalone libRmath library
-read -p "Press [Enter] key to start build libRmath ..."
-cd src/nmath/standalone
-make 2>&1 | tee make-libRmath_log
-make install 2>&1 | tee make-libRmath-install_log
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$INSTALL_PREFIX/lib64
-make test 2>&1 | tee make-test_log
-./test 2>&1 | tee -a make-test_log
+#read -p "Press [Enter] key to start build libRmath ..."
+#cd src/nmath/standalone
+#make 2>&1 | tee make-libRmath_log
+#make install 2>&1 | tee make-libRmath-install_log
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$INSTALL_PREFIX/lib64
+#make test 2>&1 | tee make-test_log
+#./test 2>&1 | tee -a make-test_log
 
 package_name="R"
 package_version="4.5.1"
@@ -139,6 +163,32 @@ make_module \
     -r pcre2/10.37/gnu-10.2.0 \
     -r flex/2.5.39 \
     -r mpi/openmpi/4.0.5/gnu-10.2.0 \
+    -r zlib/1.3.1/gnu-10.2.0 \
+    -r cmake/3.21.1 \
+    -r curl/7.86.0/gnu-4.9.2 \
+    -r numactl/2.0.12 \
+    -r binutils/2.36.1/gnu-10.2.0 \
+    -r ucx/1.9.0/gnu-10.2.0 \
+    -r jags/4.3.1/gnu-10.2.0-openblas \
+    -r perl/5.22.0 \
+    -r freetype/2.14.1/gnu-10.2.0 \
+    -r libtool/2.4.6 \
+    -r graphicsmagick/1.3.21 \
+    -r python3/3.9-gnu-10.2.0 \
+    -r sqlite/3.36.0/gnu-10.2.0 \
+    -r proj.4/9.2.0/gnu-10.2.0 \
+    -r gdal/3.3.3/gnu-10.2.0 \
+    -r geos/3.9.1/gnu-10.2.0 \
+    -r gmt/6.5.0/gnu-10.2.0 \
+    -r protobuf/3.17.3/gnu-10.2.0 \
+    -r jq/1.5/gnu-4.9.2 \
+    -r plink/1.90b3.40 \
+    -r cmdstan/2.35.0/gnu-10.2.0 \
+    -r openssl/1.1.1t \
+    -r pkg-config/0.29.2 \
+    -r gperf/3.0.4/gnu-4.9.2 \
+    -r fontconfig/2.14.1/gnu-10.2.0 \
+    -r libwebp/1.4.0/gnu-10.2.0 \    
     -c r
 cd ..
 echo "End post-building"
