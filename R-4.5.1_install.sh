@@ -188,7 +188,7 @@ make_module \
     -r pkg-config/0.29.2 \
     -r gperf/3.0.4/gnu-4.9.2 \
     -r fontconfig/2.14.1/gnu-10.2.0 \
-    -r libwebp/1.4.0/gnu-10.2.0 \    
+    -r libwebp/1.4.0/gnu-10.2.0 \
     -c r
 cd ..
 echo "End post-building"
