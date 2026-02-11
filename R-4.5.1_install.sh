@@ -153,7 +153,7 @@ make_module \
     -r openblas/0.3.13-serial/gnu-10.2.0 \
     -r java/21.0.4 \
     -r fftw/3.3.9/gnu-10.2.0 \
-    -r ghostscript/9.19/gnu-4.9.2\
+    -r ghostscript/9.19/gnu-4.9.2 \
     -r texinfo/6.6/gnu-4.9.2 \
     -r texlive/2019 \
     -r gsl/2.7/gnu-10.2.0 \
