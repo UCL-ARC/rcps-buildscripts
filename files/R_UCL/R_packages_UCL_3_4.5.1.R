@@ -28,7 +28,7 @@ repros;
 
 # Removed from CRAN for R 3.4.0 - use RNetCDF
 
-#install.packages ("RNetCDF", lib=mainLib, repos=repros);
+install.packages ("RNetCDF", lib=mainLib, repos=repros);
 
 
 # For Dr Jiaqiu Wang (jiaqiu.wang@ucl.ac.uk) (ucesjw0) - added March 2013
