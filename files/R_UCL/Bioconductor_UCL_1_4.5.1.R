@@ -189,19 +189,19 @@ BiocManager::install ()
 # INLA - updated with extra packages and to fix binary install of INLA itself with a version that will run on RedHat 7.
 # Updated March 2024 as additional R packasges needed from CRAN
 
-#install.packages ("fmesher", lib=mainLib, repos=repros);
-#install.packages ("Ecdat", lib=mainLib, repos=repros);
+install.packages ("fmesher", lib=mainLib, repos=repros);
+install.packages ("Ecdat", lib=mainLib, repos=repros);
 #install.packages ("mlogit", lib=mainLib, repos=repros);
 #install.packages ("splancs", lib=mainLib, repos=repros);
-#install.packages ("tidyterra", lib=mainLib, repos=repros);
-#install.packages ("INLAspacetime", lib=mainLib, repos=repros);
+install.packages ("tidyterra", lib=mainLib, repos=repros);
+install.packages ("INLAspacetime", lib=mainLib, repos=repros);
 #install.packages ("INLA", lib=mainLib, repos=c(getOption("repros"), INLA="https://inla.r-inla-download.org/R/stable"), dep=TRUE);
 
 # Replace binary INLA that doesn't work on redHat 7 with one that does. NOTE: interactive will prompt
 # you to choose the correct binary. - Updated Feb 2023
 
-#library (INLA);
-#inla.binary.install();
+library (INLA);
+inla.binary.install();
 
 # For Elizabeth Boyse (ucbtea5@ucl.ac.uk) - added on 10/02/2026
 
