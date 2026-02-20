@@ -1,0 +1,7 @@
+CXX14 = g++ -std=c++1y
+CXX14FLAGS = -Wno-unused-variable -Wno-unused-function -fPIC
+OBJCXX = clang++ -std=c++11
+CPPFLAGS += -I/shared/ucl/apps/freetype/2.14.1/gnu-10.2.0/include/freetype2
+CPPFLAGS += -I/lustre/apps/spack/0.23/deploy/2025-05/spack/opt/spack/linux-rhel9-cascadelake/gcc-12.3.0/gmp-6.3.0-hbyx7szeavpb5ufjh3envirs6jvieu7q/include
+LDFLAGS  += -L/shared/ucl/apps/freetype/2.14.1/gnu-10.2.0/lib
+LDFLAGS  += -L/lustre/apps/spack/0.23/deploy/2025-05/spack/opt/spack/linux-rhel9-cascadelake/gcc-12.3.0/gmp-6.3.0-hbyx7szeavpb5ufjh3envirs6jvieu7q/lib
