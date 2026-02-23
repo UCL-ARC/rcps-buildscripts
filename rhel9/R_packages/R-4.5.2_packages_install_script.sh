@@ -23,7 +23,7 @@ export TMP=$temp_dir
 # which has the LD and CFLAGS point to the Spack gmp installation
 git clone https://github.com/UCL-ARC/rcps-buildscripts.git
 mv ~/.R/Makevars ~/.R/Makevars.bak
-cp rcps-buildscripts/R-gmp-Makevars ~/.R/Makevars
+cp rcps-buildscripts/rhel9/R_packages/R-gmp-Makevars ~/.R/Makevars
 
 # sf install is handled in its own script due to module conflicts
 module purge
