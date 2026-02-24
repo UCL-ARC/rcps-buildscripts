@@ -28,8 +28,7 @@ repros;
 
 # Removed from CRAN for R 3.4.0 - use RNetCDF
 
-netcdfConf <- '--with-netcdf-include=/shared/ucl/apps/NetCDF/4.9.2-intel-2022/include --with-netcdf-lib=/shared/ucl/apps/NetCDF/4.9.2-intel-2022/lib';
-install.packages ("RNetCDF", lib=mainLib, repos=repros, configure.args=netcdfConf);
+install.packages ("RNetCDF", lib=mainLib, repos=repros);
 
 # For Dr Jiaqiu Wang (jiaqiu.wang@ucl.ac.uk) (ucesjw0) - added March 2013
 
