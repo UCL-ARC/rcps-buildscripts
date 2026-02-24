@@ -149,7 +149,10 @@ install.packages ("rjags", configure.args="--enable-rpath", lib=mainLib, repos=r
 
 #packageurl <- "https://cran.r-project.org/src/contrib/Archive/V8/V8_5.0.1.tar.gz"
 #install.packages(packageurl, repos=NULL, type="source")
-udunits2Conf <- '--with-udunits2-include=/shared/ucl/apps/udunits/2.2.28/gnu-10.2.0/include --with-udunits2-lib=/shared/ucl/apps/udunits/2.2.28/gnu-10.2.0/lib';
+# For Myriad and Kathleen
+#udunits2Conf <- '--with-udunits2-include=/shared/ucl/apps/udunits/2.2.28/gnu-10.2.0/include --with-udunits2-lib=/shared/ucl/apps/udunits/2.2.28/gnu-10.2.0/lib'; 
+# For Young and Michael
+udunits2Conf <- '--with-udunits2-include=/shared/ucl/apps/udunits/2.2.28/include --with-udunits2-lib=/shared/ucl/apps/udunits/2.2.28/lib';
 install.packages ("udunits2", lib=mainLib, repos=repros, configure.args=udunits2Conf);
 install.packages ("lwgeom", lib=mainLib, repos=repros);
 install.packages ("classInt", lib=mainLib, repos=repros);
