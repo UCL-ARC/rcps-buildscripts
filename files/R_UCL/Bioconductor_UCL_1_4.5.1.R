@@ -206,7 +206,7 @@ install.packages ("INLAspacetime", lib=mainLib, repos=repros);
 
 # For Elizabeth Boyse (ucbtea5@ucl.ac.uk) - added on 10/02/2026
 
-BiocManager::install ("dada2", type="source", lib=mainLib);
+#BiocManager::install ("dada2", type="source", lib=mainLib);
 
 # End of Bioconductor_UCL_1
 
