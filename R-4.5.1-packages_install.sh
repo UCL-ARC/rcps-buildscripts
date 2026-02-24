@@ -107,8 +107,8 @@ require zlib/1.3.1/gnu-10.2.0
 
 export R_LIBS_SITE=/shared/ucl/apps/R/R-4.5.1-OpenBLAS/lib64/R/library:
 #export R_LIBS_SITE=/home/skgtnl1/R/R-4.5.1-OpenBLAS/lib64/R/library:
-export PATH=/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/bin/:$PATH
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH\:/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/lib:/usr/lib64 
+export PATH=/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/bin/:/shared/ucl/apps/NetCDF/4.9.2-intel-2022/:/shared/ucl/apps/udunits/2.2.28/:$PATH
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH\:/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/lib:/usr/lib64:/shared/ucl/apps/NetCDF/4.9.2-intel-2022/lib:/shared/ucl/apps/udunits/2.2.28/lib
 export PKG_LIBS="-L/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/lib"
 export DOWNLOAD_STATIC_LIBV8=1
 
@@ -121,10 +121,6 @@ CXX14FLAGS = -Wno-unused-variable -Wno-unused-function -fPIC
 OBJCXX = clang++ -std=c++11
 CPPFLAGS += -I/shared/ucl/apps/freetype/2.14.1/gnu-10.2.0/include/freetype2
 LDFLAGS  += -L/shared/ucl/apps/freetype/2.14.1/gnu-10.2.0/lib
-CPPFLAGS += -I/shared/ucl/apps/NetCDF/4.9.2-intel-2022/include/
-LDFLAGS  += -L/shared/ucl/apps/NetCDF/4.9.2-intel-2022/lib
-CPPFLAGS += -I/shared/ucl/apps/udunits/2.2.28/include/
-LDFLAGS  += -L/shared/ucl/apps/udunits/2.2.28/lib
 EOF
 
 temp_dir=`mktemp -d -p /dev/shm`
