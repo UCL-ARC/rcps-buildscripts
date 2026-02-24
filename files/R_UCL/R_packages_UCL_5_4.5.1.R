@@ -31,7 +31,7 @@ repros;
 # For JAGS - added March 2014 fixed April 2023
 
 #install.packages ("coda", lib=mainLib, repos=repros);
-install.packages ("rjags", configure.args="--enable-rpath", lib=mainLib, repos=repros);
+#install.packages ("rjags", configure.args="--enable-rpath", lib=mainLib, repos=repros);
 #install.packages ("abind", lib=mainLib, repos=repros);
 #install.packages ("R2WinBUGS", lib=mainLib, repos=repros);
 
@@ -154,9 +154,9 @@ install.packages ("rjags", configure.args="--enable-rpath", lib=mainLib, repos=r
 # For Young and Michael
 udunits2Conf <- '--with-udunits2-include=/shared/ucl/apps/udunits/2.2.28/include --with-udunits2-lib=/shared/ucl/apps/udunits/2.2.28/lib';
 install.packages ("udunits2", lib=mainLib, repos=repros, configure.args=udunits2Conf);
-install.packages ("lwgeom", lib=mainLib, repos=repros);
+install.packages ("lwgeom", lib=mainLib, repos=repros, configure.args=udunits2Conf);
 install.packages ("classInt", lib=mainLib, repos=repros);
-install.packages ("tmap", lib=mainLib, repos=repros);
+install.packages ("tmap", lib=mainLib, repos=repros, configure.args=udunits2Conf);
 
 # For Lucia Conde (l.conde@ucl.ac.uk) May 2017
 
@@ -217,7 +217,7 @@ install.packages ("png", lib=mainLib, repos=repros);
 
 # For Covid-19 - April 2020
 
-install.packages ("spdep", lib=mainLib, repos=repros);
+install.packages ("spdep", lib=mainLib, repos=repros), configure.args=udunits2Conf;
 install.packages ("Rfast", lib=mainLib, repos=repros);
 
 # For Ricardo Silva (ricardo.silva@ucl.ac.uk) - September 2020
