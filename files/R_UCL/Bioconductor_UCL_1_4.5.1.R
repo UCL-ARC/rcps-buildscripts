@@ -195,7 +195,7 @@ install.packages ("Ecdat", lib=mainLib, repos=repros);
 #install.packages ("splancs", lib=mainLib, repos=repros);
 install.packages ("tidyterra", lib=mainLib, repos=repros);
 install.packages ("INLAspacetime", lib=mainLib, repos=repros);
-#install.packages ("INLA", lib=mainLib, repos=c(getOption("repros"), INLA="https://inla.r-inla-download.org/R/stable"), dep=TRUE);
+install.packages ("INLA", lib=mainLib, repos=c(getOption("repros"), INLA="https://inla.r-inla-download.org/R/stable"), dep=TRUE);
 
 # Replace binary INLA that doesn't work on redHat 7 with one that does. NOTE: interactive will prompt
 # you to choose the correct binary. - Updated Feb 2023
