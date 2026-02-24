@@ -182,7 +182,7 @@ install.packages ("tmap", lib=mainLib, repos=repros, configure.args=udunits2Conf
 
 # For Cheng Zhang  (cheng.zhang@ucl.ac.uk) May 2018
 
-install.packages ("png", lib=mainLib, repos=repros);
+#install.packages ("png", lib=mainLib, repos=repros);
 
 # For Laura Zieger (l.zieger@ucl.ac.uk) Dec 2018
 
@@ -218,7 +218,7 @@ install.packages ("png", lib=mainLib, repos=repros);
 # For Covid-19 - April 2020
 
 install.packages ("spdep", lib=mainLib, repos=repros, configure.args=udunits2Conf);
-install.packages ("Rfast", lib=mainLib, repos=repros);
+#install.packages ("Rfast", lib=mainLib, repos=repros);
 
 # For Ricardo Silva (ricardo.silva@ucl.ac.uk) - September 2020
 
