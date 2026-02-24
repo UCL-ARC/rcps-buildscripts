@@ -107,7 +107,7 @@ require zlib/1.3.1/gnu-10.2.0
 
 export R_LIBS_SITE=/shared/ucl/apps/R/R-4.5.1-OpenBLAS/lib64/R/library:
 #export R_LIBS_SITE=/home/skgtnl1/R/R-4.5.1-OpenBLAS/lib64/R/library:
-export PATH=/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/bin/:/shared/ucl/apps/udunits/2.2.28/:$PATH
+export PATH=/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/bin/:/shared/ucl/apps/udunits/2.2.28/bin/:/shared/ucl/apps/protobuf/3.17.3/bin/:/shared/ucl/apps/NetCDF/4.9.2-intel-2022/bin:$PATH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH\:/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/lib:/usr/lib64:/shared/ucl/apps/udunits/2.2.28/lib
 export PKG_LIBS="-L/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/lib"
 export DOWNLOAD_STATIC_LIBV8=1
@@ -118,7 +118,7 @@ cd ~/.R
 cat > Makevars <<EOF
 CXX14 = g++ -std=c++1y
 CXX14FLAGS = -Wno-unused-variable -Wno-unused-function -fPIC
-OBJCXX = clang++ -std=c++11
+OBJCXX = clang++ -std=c++113
 CPPFLAGS += -I/shared/ucl/apps/freetype/2.14.1/gnu-10.2.0/include/freetype2
 LDFLAGS  += -L/shared/ucl/apps/freetype/2.14.1/gnu-10.2.0/lib 
 EOF
