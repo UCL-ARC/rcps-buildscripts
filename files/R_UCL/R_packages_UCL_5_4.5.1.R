@@ -239,7 +239,7 @@ install.packages ("spdep", lib=mainLib, repos=repros, configure.args=udunits2Con
 
 # For Adam Dennett (a.dennett@ucl.ac.uk) - December 2020.
 
-install.packages ("geojsonio", lib=mainLib, repos=repros);
+install.packages ("geojsonio", lib=mainLib, repos=repros, configure.args=udunits2Conf);
 
 # For IHI teaching apps (j.thygesen@ucl.ac.uk) - August 2021.
 
