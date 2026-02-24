@@ -139,14 +139,14 @@ mkdir -p $RLIB_DB
 
 #R_input=${LOCALDIR}/R_packages_UCL_2_4.5.1.R
 #R --no-save < $R_input
-
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH\:/shared/ucl/apps/NetCDF/4.9.2-intel-2022/lib/pkgconfig/
 R_input=${LOCALDIR}/R_packages_UCL_3_4.5.1.R
 R --no-save < $R_input
 
 #R_input=${LOCALDIR}/R_packages_UCL_4_4.5.1.R
 #R --no-save < $R_input
 
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH\:/usr/lib64/pkgconfig
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH\:/usr/lib64/pkgconfig:/shared/ucl/apps/protobuf/3.17.3/lib/pkgconfig/:
 R_input=${LOCALDIR}/R_packages_UCL_5_4.5.1.R
 R --no-save < $R_input
 
