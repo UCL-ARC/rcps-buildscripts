@@ -108,8 +108,10 @@ require zlib/1.3.1/gnu-10.2.0
 export R_LIBS_SITE=/shared/ucl/apps/R/R-4.5.1-OpenBLAS/lib64/R/library:
 #export R_LIBS_SITE=/home/skgtnl1/R/R-4.5.1-OpenBLAS/lib64/R/library:
 export PATH=/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/bin/:/shared/ucl/apps/NetCDF/4.9.2-intel-2022/:/shared/ucl/apps/udunits/2.2.28/:$PATH
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH\:/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/lib:/usr/lib64:/shared/ucl/apps/NetCDF/4.9.2-intel-2022/lib:/shared/ucl/apps/udunits/2.2.28/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH\:/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/lib:/usr/lib64:/shared/ucl/apps/NetCDF/4.9.2-intel-2022/lib:/shared/ucl/apps/NetCDF/4.9.2-intel-2022/lib
 export PKG_LIBS="-L/shared/ucl/apps/curl/7.86.0/gnu-4.9.2/lib"
+export PKG_LIBS="-L/shared/ucl/apps/NetCDF/4.9.2-intel-2022/lib"
+export PKG_LIBS="-L/shared/ucl/apps/NetCDF/4.9.2-intel-2022/lib"
 export DOWNLOAD_STATIC_LIBV8=1
 
 # Set up ~/.R/Makevars for rstan which needs C++ 2014 stuff
@@ -146,7 +148,7 @@ R --no-save < $R_input
 #R_input=${LOCALDIR}/R_packages_UCL_4_4.5.1.R
 #R --no-save < $R_input
 
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH\:/usr/lib64/pkgconfig/
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH\:/usr/lib64/pkgconfig/"
 R_input=${LOCALDIR}/R_packages_UCL_5_4.5.1.R
 R --no-save < $R_input
 
