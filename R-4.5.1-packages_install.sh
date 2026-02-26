@@ -71,8 +71,8 @@ require texinfo/6.6/gnu-4.9.2
 require texlive/2019
 require gsl/2.7/gnu-10.2.0
 require hdf/5-1.10.6/gnu-10.2.0
-#require udunits/2.2.28/gnu-10.2.0
-#require netcdf/4.9.2/gnu-10.2.0
+require udunits/2.2.28/gnu-10.2.0
+require netcdf/4.9.2/gnu-10.2.0
 require pcre2/10.37/gnu-10.2.0
 require flex/2.5.39
 require curl/7.86.0/gnu-4.9.2
@@ -91,7 +91,7 @@ require proj.4/9.2.0/gnu-10.2.0
 require gdal/3.3.3/gnu-10.2.0
 require geos/3.9.1/gnu-10.2.0
 require gmt/6.5.0/gnu-10.2.0
-#require protobuf/3.17.3/gnu-10.2.0
+require protobuf/3.17.3/gnu-10.2.0
 require jq/1.5/gnu-4.9.2
 require plink/1.90b3.40
 require cmdstan/2.35.0/gnu-10.2.0
@@ -134,17 +134,17 @@ cd $temp_dir
 mkdir -p $RLIB_DB
 
 ###################### Installing packages ####################
-#R_input=${LOCALDIR}/R_packages_UCL_1_4.5.1.R
-#R --no-save < $R_input
+R_input=${LOCALDIR}/R_packages_UCL_1_4.5.1.R
+R --no-save < $R_input
 
-#R_input=${LOCALDIR}/R_packages_UCL_2_4.5.1.R
-#R --no-save < $R_input
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH\:/shared/ucl/apps/NetCDF/4.9.2-intel-2022/lib/pkgconfig/
+R_input=${LOCALDIR}/R_packages_UCL_2_4.5.1.R
+R --no-save < $R_input
+
 R_input=${LOCALDIR}/R_packages_UCL_3_4.5.1.R
 R --no-save < $R_input
 
-#R_input=${LOCALDIR}/R_packages_UCL_4_4.5.1.R
-#R --no-save < $R_input
+R_input=${LOCALDIR}/R_packages_UCL_4_4.5.1.R
+R --no-save < $R_input
 
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH\:/usr/lib64/pkgconfig:/shared/ucl/apps/protobuf/3.17.3/lib/pkgconfig/:
 R_input=${LOCALDIR}/R_packages_UCL_5_4.5.1.R
