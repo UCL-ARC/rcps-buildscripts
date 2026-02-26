@@ -14,49 +14,47 @@ repros;
 
 # For Stefan Frank
 
-#install.packages ("Rcpp", lib=mainLib, repos=repros);
-#install.packages ("minqa", lib=mainLib, repos=repros);
-#install.packages ("nloptr", lib=mainLib, repos=repros);
-#install.packages ("RcppEigen", lib=mainLib, repos=repros);
-#install.packages ("lme4", lib=mainLib, repos=repros);
+install.packages ("Rcpp", lib=mainLib, repos=repros);
+install.packages ("minqa", lib=mainLib, repos=repros);
+install.packages ("nloptr", lib=mainLib, repos=repros);
+install.packages ("RcppEigen", lib=mainLib, repos=repros);
+install.packages ("lme4", lib=mainLib, repos=repros);
 
 # For Julie Bertrand j.bertrand@ucl.ac.uk - Added Jan 2013
 
-#install.packages ("saemix", lib=mainLib, repos=repros);
+install.packages ("saemix", lib=mainLib, repos=repros);
 
 # For Margarida Cabrita Lopes margarida.lopes@ucl.ac.uk
-
-# Removed from CRAN for R 3.4.0 - use RNetCDF
 
 install.packages ("RNetCDF", lib=mainLib, repos=repros);
 
 # For Dr Jiaqiu Wang (jiaqiu.wang@ucl.ac.uk) (ucesjw0) - added March 2013
 
-#install.packages ("mclust", lib=mainLib, repos=repros);
-#install.packages ("fpc", lib=mainLib, repos=repros);
+install.packages ("mclust", lib=mainLib, repos=repros);
+install.packages ("fpc", lib=mainLib, repos=repros);
 
 # For Dr Lucio Castilho (l.vinicius@ucl.ac.uk) - added April 2013
 
-#install.packages ("BaSTA", lib=mainLib, repos=repros);
+install.packages ("BaSTA", lib=mainLib, repos=repros);
 
 # For Dr Xiayi Ke x.ke@ucl.ac.uk added June 2013
 
-#install.packages ("corpcor", lib=mainLib, repos=repros);
+install.packages ("corpcor", lib=mainLib, repos=repros);
 
 # For Adam Levine (a.levine@ucl.ac.uk) - added August 2013
 
-#install.packages ("dynamicTreeCut", lib=mainLib, repos=repros);
-#install.packages ("flashClust", lib=mainLib, repos=repros);
-#install.packages ("reshape", lib=mainLib, repos=repros);
-#install.packages ("doParallel", lib=mainLib, repos=repros);
+install.packages ("dynamicTreeCut", lib=mainLib, repos=repros);
+install.packages ("flashClust", lib=mainLib, repos=repros);
+install.packages ("reshape", lib=mainLib, repos=repros);
+install.packages ("doParallel", lib=mainLib, repos=repros);
 install.packages ("WGCNA", lib=mainLib, repos=repros);
 
 # For Dr Elsa Arcaute (e.arcaute@ucl.ac.uk) - added September 2013
 
-# ("igraph", lib=mainLib, repos=repros);
+install.packages("igraph", lib=mainLib, repos=repros);
 
 # For Dr Jiaqiu Wang (jiaqiu.wang@ucl.ac.uk) - added September 2013
 
-#install.packages ("inline", lib=mainLib, repos=repros);
+install.packages ("inline", lib=mainLib, repos=repros);
 
 # End of R_packages_UCL_3
