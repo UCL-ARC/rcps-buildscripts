@@ -5,6 +5,7 @@ CPPFLAGS += -I/shared/ucl/apps/freetype/2.14.1/gnu-10.2.0/include/freetype2
 CPPFLAGS += -I/lustre/apps/spack/0.23/deploy/2025-05/spack/opt/spack/linux-rhel9-cascadelake/gcc-12.3.0/gmp-6.3.0-hbyx7szeavpb5ufjh3envirs6jvieu7q/include
 CPPFLAGS += -I/lustre/apps/spack/0.23/deploy/2025-09/spack/opt/spack/linux-rhel9-cascadelake/gcc-12.3.0/gsl-2.8-j2e6gyyof2ttpanqb4rmbz5k36nyrllg/include
 CPPFLAGS += -I/lustre/apps/spack/0.23/deploy/2025-09/spack/opt/spack/linux-rhel9-cascadelake/gcc-12.3.0/proj-8.1.0-ixzcevwsy6gm4x3otwavfm2san56ml3j/include
+CFLAGS += -I/lustre/apps/spack/0.23/deploy/2025-09/spack/opt/spack/linux-rhel9-cascadelake/gcc-12.3.0/proj-8.1.0-ixzcevwsy6gm4x3otwavfm2san56ml3j/include
 LDFLAGS  += -L/shared/ucl/apps/freetype/2.14.1/gnu-10.2.0/lib
 LDFLAGS  += -L/lustre/apps/spack/0.23/deploy/2025-05/spack/opt/spack/linux-rhel9-cascadelake/gcc-12.3.0/gmp-6.3.0-hbyx7szeavpb5ufjh3envirs6jvieu7q/lib
 LDFLAGS  += -L/lustre/apps/spack/0.23/deploy/2025-09/spack/opt/spack/linux-rhel9-cascadelake/gcc-12.3.0/gsl-2.8-j2e6gyyof2ttpanqb4rmbz5k36nyrllg/lib
