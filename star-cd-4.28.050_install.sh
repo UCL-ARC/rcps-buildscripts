@@ -5,6 +5,12 @@
 #
 # Updated for version 4.28.050 March 2026
 
+dirname=$(dirname $0 2>/dev/null || pwd)
+INCLUDES_DIR=${INCLUDES_DIR:-${dirname}/includes}
+source ${INCLUDES_DIR}/module_maker_inc.sh
+source ${INCLUDES_DIR}/require_inc.sh
+source ${INCLUDES_DIR}/source_includes.sh
+
 NAME=${NAME:-STAR-CD}
 VERSION=${VERSION:-4.28.050}
 INSTALL_PREFIX=${INSTALL_PREFIX:-/apps/${NAME}/${VERSION}}
