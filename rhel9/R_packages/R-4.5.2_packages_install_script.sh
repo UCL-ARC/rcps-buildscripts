@@ -17,7 +17,7 @@ export TMP=$temp_dir
 # which has the LD and CFLAGS point to the Spack gmp installation
 git clone https://github.com/UCL-ARC/rcps-buildscripts.git
 mv ~/.R/Makevars ~/.R/Makevars.bak
-cp rcps-buildscripts/rhel9/R_packages/R-gmp-Makevars ~/.R/Makevars
+cp rcps-buildscripts/rhel9/R_packages/R-Makevars ~/.R/Makevars
 
 # Use these environments to make the modules available
 module use /apps/spack/0.23/deploy/2025-09/modules/linux-rhel9-cascadelake
