@@ -53,11 +53,12 @@ archive=$(basename "${SRC_ARCHIVE}")
 package_name="STAR-CD"
 package_version="4.28.050"
 
-install_prefix=$INSTALL_PREFIX
+install_prefix=$INSTALL_PREFIX/ICE/$ICE_VER
 module_dir="${install_prefix}/.uclrc_modules"
 cd "$install_prefix"
 echo "Post-building..."
 echo "$install_prefix"
+echo "$module_dir"
 
 make_module \
     -o "${module_dir}/${package_name}/${package_version}" \
