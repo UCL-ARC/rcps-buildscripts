@@ -57,9 +57,10 @@ install_prefix=$INSTALL_PREFIX
 module_dir="${install_prefix}/.uclrc_modules"
 cd "$install_prefix"
 echo "Post-building..."
+echo "$install_prefix"
 
 make_module \
-    -o "${module_dir}/r/${package_version}-openblas/gnu-10.2.0" \
+    -o "${module_dir}/${package_name}/${package_version}" \
     -p "$install_prefix" \
     -c star-cd
 cd ..
