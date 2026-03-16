@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# RHEL 9 GULP install for Spack stack
+
+set -o errexit -o nounset -o pipefail
+
+package_name="gulp"
+package_version="6.4"
+package_description="GULP (General Utility Lattice Program) performs a variety of types of simulation on materials using boundary conditions of 0-D (molecules and clusters), 1-D (polymers), 2-D (surfaces, slabs and grain boundaries), or 3-D (periodic solids). Focuses on analytical solutions through the use of lattice dynamics where possible, rather than on molecular dynamics. A variety of force fields can be used. Built with FoX and without plumed."
+APPS_DIR="/apps"
+
+package_file="gulp-6.4.tar.gz"
+
+# require modules for building
+source includes/source_includes.sh
+module purge
+module load ucl-stack/2026-03
+module load compilers/gcc/12.3.0/gcc-12.3.0
+module load fftw/3.3.10/gcc-12.3.0
+module load gmake/4.4.1/gcc-12.3.0
+module load mpi/openmpi/4.1.6/gcc-12.3.0
+
+export COMPILER_TAG="gcc-12.3.0"
+
+make_build_env ""
+
+# builds in place
+cd "$install_prefix"
+
+tar -xf "/apps/pkg-store/$package_file"
+
+cd "gulp-${package_version}/Src"
+
+# modify mkgulp to build GULP with its own FoX
+sed -i.orig -e '/UDEFS=/s/-DNOFOX//' -e '/INC=/s/-I../-I.. -I..\/FoX-4.1.2\/objs\/finclude/' mkgulp
+
+# -m is mpi, -f is fftw3
+./mkgulp -m -f 2>&1 | tee make.log
+
+make_module_v2
+
+post_build_report
+
