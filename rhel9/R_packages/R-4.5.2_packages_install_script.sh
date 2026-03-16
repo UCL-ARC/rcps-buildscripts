@@ -6,6 +6,7 @@ mkdir -p /apps/r-libs/4.5.2/library
 # used in the R_packages_ install files
 export R_LIBS_SITE="/apps/r-libs/4.5.2/library"
 export REPROS="https://cloud.r-project.org/"
+export RLIB_DB=${RLIB_DB:-/home/ccspapp/Scratch/R/R-4.5.2-OpenBLAS/library}
 export RLIB_MAIN="$R_HOME/library" # may not need to do this - not used in install files anymore
 
 temp_dir="/home/ccspapp/Scratch/R/r-4.5.2_tmp"
@@ -25,6 +26,7 @@ module use /apps/spack/0.23/deploy/2025-09/modules/lustre/apps/spack/0.23/deploy
 module use /apps/spack/0.23/deploy/2025-09/modules/lustre/apps/spack/0.23/deploy/2025-09/spack/var/spack/environments/r452/linux-rhel9-cascadelake
 
 module purge
+module load -v bzip2
 module load -v cmdstan
 module load -v compilers/gcc/12.3.0/gcc-12.3.0
 module load -v gdal
@@ -37,24 +39,29 @@ module load -v imagemagick
 module load -v libwebp
 module load -v jags
 module load -v jq
-#module load -v mpi/openmpi/4.1.6/gcc-12.3.0
 module load -v mysql
 module load -v plink
 module load -v plink2
 module load -v proj
+module load -v protobuf
 module load -v r/4.5.2/gcc-12.3.0
 module load -v texlive
+module load -v xproto
+module load -v xz
 module load -v udunits
-module load -v protobuf
 
 # completed
 R --no-save < R-4.5.2_packages_01_most.R 2>&1 | tee R-4.5.2_packages_01_most.R.log
 
-# in progress
+# completed
 R --no-save < R-4.5.2_packages_02_tricky.R 2>&1 | tee R-4.5.2_packages_02_tricky.R.log
 
-# not written or tried yet
-#R --no-save < R-4.5.2_packages_03_bioconductor.R 2>&1 | tee R-4.5.2_packages_03_bioconductor.R.log
+# completed
+R --no-save < R-4.5.2_packages_03_bioconductor.R 2>&1 | tee R-4.5.2_packages_03_bioconductor.R.log
+
+# in progress
+module load -v mpi/openmpi/4.1.6/gcc-12.3.0
+R --no-save < R-4.5.2_packages_04_mpi.R 2>&1 | tee R-4.5.2_packages_04_mpi.R.log
 
 # cleaning up the buildscripts and Makevars
 mv ~/.R/Makevars.bak ~/.R/Makevars
