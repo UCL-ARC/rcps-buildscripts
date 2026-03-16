@@ -15,8 +15,7 @@ source includes/source_includes.sh
 
 module purge
 #module load ucl-stack/2025-05
-# temporary
-#module use /apps/spack/0.23/deploy/2025-09/modules/linux-rhel9-cascadelake/
+# temporary - these need to be part of a ucl-stack
 module use /apps/spack/0.23/deploy/2025-09/spack/var/spack/environments/ompi416_ifort/modules/linux-rhel9-cascadelake/
 module load compilers/intel-oneapi/2024.2.1/gcc-12.3.0
 module load intel-oneapi-compilers-classic/2021.13.1/oneapi-2024.2.1
