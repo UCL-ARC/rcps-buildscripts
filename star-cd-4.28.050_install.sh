@@ -53,7 +53,7 @@ sed -i -e "s|STARFLAGS=|STARFLAGS=-nodefile \$TMPDIR/machines -scratch=\$TMPDIR|
 package_name="STAR-CD"
 package_version="4.28.050"
 
-install_prefix=$INSTALL_PREFIX/ICE/$ICE_VER
+install_prefix=$INSTALL_PREFIX
 module_dir="${install_prefix}/.uclrc_modules"
 cd "$install_prefix"
 echo "Post-building..."
