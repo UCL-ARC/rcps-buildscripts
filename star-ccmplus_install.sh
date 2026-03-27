@@ -22,8 +22,9 @@ _env_setup() {
     module_dir="${install_prefix}/{package_version}/${install_prefix}{package_version}/star/"
     echo "Install prefix: $install_prefix"
     echo "Module dir: $module_dir"
+    mkdir -p ${install_prefix}
 
-    package_src="${install_prefix}/installer"
+    package_src="/apps/pkg-store"
     package_file="${package_name}${package_version}_01_linux-x86_64.tar.gz"
     echo "$package_src"
     echo "package_file"
@@ -56,8 +57,7 @@ _post_build() {
 }
 
 _clean_up() {
-    #rm -Rf ${temp_dir:-ERROR_TEMP_DIR_NOT_SET}
-    :
+    rm -Rf "${package_src}/starccm+_${package_version}"
 }
 
 _env_setup
@@ -65,4 +65,4 @@ _file_setup
 #_pre_build
 _build
 _post_build
-#_clean_up
+_clean_up
