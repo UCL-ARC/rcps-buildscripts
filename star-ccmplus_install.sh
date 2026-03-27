@@ -19,15 +19,15 @@ _env_setup() {
 
     #For home install only
     install_prefix="/apps/${package_name}"
-    module_dir="${install_prefix}/${package_version}/${install_prefix}{package_version}/star/"
-    echo "Install prefix: $install_prefix"
-    echo "Module dir: $module_dir"
-    mkdir -p ${install_prefix}
+    module_dir="${install_prefix}/${package_version}/${install_prefix}${package_version}/star/"
+#    echo "Install prefix: $install_prefix"
+#    echo "Module dir: $module_dir"
+#    mkdir -p ${install_prefix}
 
     package_src="/apps/pkg-store"
     package_file="${package_name}${package_version}_01_linux-x86_64.tar.gz"
-    echo "$package_src"
-    echo "package_file"
+#    echo "Package source dir: $package_src"
+#    echo "Package filename: $package_file"
 }
 
 _file_setup() {
@@ -61,8 +61,8 @@ _clean_up() {
 }
 
 _env_setup
-_file_setup
+#_file_setup
 #_pre_build
-_build
+#_build
 _post_build
 _clean_up
