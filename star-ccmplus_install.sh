@@ -61,8 +61,8 @@ _clean_up() {
 }
 
 _env_setup
-#_file_setup
-_pre_build
+_file_setup
+#_pre_build
 _build
 _post_build
 _clean_up
