@@ -22,7 +22,7 @@ _env_setup() {
     module_dir="/apps/${package_name}/${package_version}/${package_name}${package_version}/star/"
     echo "Install prefix: $install_prefix"
     echo "Module dir: $module_dir"
-#    mkdir -p ${install_prefix}
+    mkdir -p ${install_prefix}
 
     package_src="/apps/pkg-store"
     package_file="${package_name}${package_version}_01_linux-x86_64.tar.gz"
@@ -62,7 +62,7 @@ _clean_up() {
 
 _env_setup
 #_file_setup
-#_pre_build
-#_build
+_pre_build
+_build
 _post_build
 _clean_up
