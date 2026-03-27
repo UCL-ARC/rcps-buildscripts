@@ -19,7 +19,7 @@ _env_setup() {
 
     #For home install only
     install_prefix="/apps/${package_name}"
-    module_dir="/apps/${package_name}/${package_version}/${install_prefix}${package_version}/star/"
+    module_dir="/apps/${package_name}/${package_version}/${package_name}${package_version}/star/"
     echo "Install prefix: $install_prefix"
     echo "Module dir: $module_dir"
 #    mkdir -p ${install_prefix}
