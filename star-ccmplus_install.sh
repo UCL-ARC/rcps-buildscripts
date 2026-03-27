@@ -20,14 +20,14 @@ _env_setup() {
     #For home install only
     install_prefix="/apps/${package_name}"
     module_dir="${install_prefix}/${package_version}/${install_prefix}${package_version}/star/"
-#    echo "Install prefix: $install_prefix"
-#    echo "Module dir: $module_dir"
+    echo "Install prefix: $install_prefix"
+    echo "Module dir: $module_dir"
 #    mkdir -p ${install_prefix}
 
     package_src="/apps/pkg-store"
     package_file="${package_name}${package_version}_01_linux-x86_64.tar.gz"
-#    echo "Package source dir: $package_src"
-#    echo "Package filename: $package_file"
+    echo "Package source dir: $package_src"
+    echo "Package filename: $package_file"
 }
 
 _file_setup() {
@@ -50,7 +50,7 @@ _build() {
 _post_build() {
     echo "Post-building..."
     make_module \
-        -o "${module_dir}/.uclrc_modules " \
+        -o "${module_dir}/.uclrc_modules" \
         -p "${module_dir}" \
         -c star-ccm+
     cd ..
