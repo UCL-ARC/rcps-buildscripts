@@ -22,19 +22,19 @@ function manifest() {
                 md5sum -c <<<"$digest  $file"
                 ;;
             "sha1")
-                shasum -c <<<"$digest  $file"
+                sha1sum -c <<<"$digest  $file"
                 ;;
             "sha224")
-                shasum -a 224 -c <<<"$digest  $file"
+                sha224sum -c <<<"$digest  $file"
                 ;;
             "sha256")
-                shasum -a 256 -c <<<"$digest  $file"
+                sha256sum -c <<<"$digest  $file"
                 ;;
             "sha384")
-                shasum -a 384 -c <<<"$digest  $file"
+                sha384sum -c <<<"$digest  $file"
                 ;;
             "sha512")
-                shasum -a 512 -c <<<"$digest  $file"
+                sha512sum -c <<<"$digest  $file"
                 ;;
             *)
                 :

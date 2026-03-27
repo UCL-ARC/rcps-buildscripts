@@ -5,6 +5,12 @@
 #
 # Updated for version 4.28.050 March 2026
 
+dirname=$(dirname $0 2>/dev/null || pwd)
+INCLUDES_DIR=${INCLUDES_DIR:-${dirname}/includes}
+source ${INCLUDES_DIR}/module_maker_inc.sh
+source ${INCLUDES_DIR}/require_inc.sh
+source ${INCLUDES_DIR}/source_includes.sh
+
 NAME=${NAME:-STAR-CD}
 VERSION=${VERSION:-4.28.050}
 INSTALL_PREFIX=${INSTALL_PREFIX:-/apps/${NAME}/${VERSION}}
@@ -24,6 +30,9 @@ archive=$(basename "${SRC_ARCHIVE}")
 
 cd $temp_dir
 tar -xvf $SRC_ARCHIVE
+
+# remove offending ancient libm
+rm -f "${temp_dir}"/tools/software/P7ZIP/9.20/linux64*/lib/libm.so.6
 
 # pick components and answer questions interactively - choose A for all.
 sh setup
@@ -48,9 +57,11 @@ install_prefix=$INSTALL_PREFIX
 module_dir="${install_prefix}/.uclrc_modules"
 cd "$install_prefix"
 echo "Post-building..."
+echo "$install_prefix"
+echo "$module_dir"
 
 make_module \
-    -o "${module_dir}/r/${package_version}-openblas/gnu-10.2.0" \
+    -o "${module_dir}/${package_name}/${package_version}" \
     -p "$install_prefix" \
     -c star-cd
 cd ..
