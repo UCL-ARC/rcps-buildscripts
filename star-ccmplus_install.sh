@@ -50,7 +50,7 @@ _build() {
 _post_build() {
     echo "Post-building..."
     make_module \
-        -o "${module_dir}/.uclrc_modules" \
+        -o "${module_dir}/.uclrc_modules/${package_name}/${package_version}" \
         -p "${module_dir}" \
         -c star-ccm+
     cd ..
