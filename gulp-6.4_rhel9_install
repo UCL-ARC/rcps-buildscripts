@@ -25,6 +25,7 @@ export COMPILER_TAG="gcc-12.3.0"
 make_build_env ""
 
 # builds in place
+mkdir -p "$install_prefix"
 cd "$install_prefix"
 
 tar -xf "/apps/pkg-store/$package_file"
