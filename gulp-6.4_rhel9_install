@@ -32,8 +32,11 @@ tar -xf "/apps/pkg-store/$package_file"
 
 cd "gulp-${package_version}/Src"
 
-# modify mkgulp to build GULP with its own FoX
-#sed -i.orig -e '/UDEFS=/s/-DNOFOX//' -e '/INC=/s/-I../-I.. -I..\/FoX-4.1.2\/objs\/finclude/' mkgulp
+# get location of this fftw from something in the bin directory
+fftw_bin=$(which fftw-wisdom)
+
+# modify mkgulp to build GULP with its own FoX and find fftw libs
+sed -i.orig -e '/UDEFS=/s/-DNOFOX//' -e "/FLIBS=/s/-L\/usr\/local\/lib/-L${fftw_bin}\/..\/lib/" mkgulp
 
 # -m is mpi, -f is fftw3
 ./mkgulp -m -f 2>&1 | tee make.log
