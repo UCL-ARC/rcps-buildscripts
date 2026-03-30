@@ -38,7 +38,8 @@ fftw_bin=$(dirname $(which fftw-wisdom))
 
 # modify mkgulp to build GULP with its own FoX and find fftw libs
 # use pipes as delimiter because ${fftw_bin} has unescapable /
-sed -i.orig -e '/UDEFS=/s|-DNOFOX||' -e "/FLIBS=/s|-L/usr/local/lib|-L${fftw_bin}/../lib|" -e "/INC=/s|-I..|-I.. -I${fftw_bin}/../include|" mkgulp
+# need to include -ffree-line-length-none as some lines too long
+sed -i.orig -e '/RUNF90=/s|mpif90 -fallow-argument-mismatch|mpif90 -fallow-argument-mismatch -ffree-line-length-none|' -e '/UDEFS=/s|-DNOFOX||' -e "/FLIBS=/s|-L/usr/local/lib|-L${fftw_bin}/../lib|" -e "/INC=/s|-I..|-I.. -I${fftw_bin}/../include|" mkgulp
 
 # -m is mpi, -f is fftw3
 ./mkgulp -m -f 2>&1 | tee make.log
