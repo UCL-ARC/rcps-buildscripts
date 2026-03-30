@@ -33,7 +33,7 @@ tar -xf "/apps/pkg-store/$package_file"
 cd "gulp-${package_version}/Src"
 
 # modify mkgulp to build GULP with its own FoX
-sed -i.orig -e '/UDEFS=/s/-DNOFOX//' -e '/INC=/s/-I../-I.. -I..\/FoX-4.1.2\/objs\/finclude/' mkgulp
+#sed -i.orig -e '/UDEFS=/s/-DNOFOX//' -e '/INC=/s/-I../-I.. -I..\/FoX-4.1.2\/objs\/finclude/' mkgulp
 
 # -m is mpi, -f is fftw3
 ./mkgulp -m -f 2>&1 | tee make.log
