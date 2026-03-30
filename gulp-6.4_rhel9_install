@@ -16,7 +16,8 @@ source includes/source_includes.sh
 module purge
 module use /apps/spack/0.23/deploy/2026-03/modules/linux-rhel9-cascadelake
 module load compilers/gcc/12.3.0/gcc-12.3.0
-module load fftw/3.3.10/gcc-12.3.0
+# needs an FFTW with openmpi for fftw3-mpi.f03
+module load fftw/3.3.10-openmpi-omp
 module load gmake/4.4.1
 module load mpi/openmpi/4.1.6/gcc-12.3.0
 
@@ -37,7 +38,7 @@ fftw_bin=$(dirname $(which fftw-wisdom))
 
 # modify mkgulp to build GULP with its own FoX and find fftw libs
 # use pipes as delimiter because ${fftw_bin} has unescapable /
-sed -i.orig -e '/UDEFS=/s|-DNOFOX||' -e "/FLIBS=/s|-L/usr/local/lib|-L${fftw_bin}/../lib|" mkgulp
+sed -i.orig -e '/UDEFS=/s|-DNOFOX||' -e "/FLIBS=/s|-L/usr/local/lib|-L${fftw_bin}/../lib|" -e "/INC=/s|-I..|-I.. -I${fftw_bin}/../include|" mkgulp
 
 # -m is mpi, -f is fftw3
 ./mkgulp -m -f 2>&1 | tee make.log
