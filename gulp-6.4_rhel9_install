@@ -20,6 +20,7 @@ module load gmake/4.4.1
 module load mpi/openmpi/4.1.6/gcc-12.3.0
 # needs an FFTW with openmpi for fftw3-mpi.f03
 module load fftw/3.3.10-openmpi-omp
+module load openblas/0.3.28/gcc-12.3.0
 
 export COMPILER_TAG="gcc-12.3.0"
 
