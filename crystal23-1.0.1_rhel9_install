@@ -93,9 +93,8 @@ make_module_v2 \
     -v CRY23_EXEDIR="$install_prefix/bin/Linux-ifort_i64/v1.0.1" \
     -v CRY23_UTILS="$install_prefix/utils23" \
     -v CRY23_TEST="$install_prefix/test_cases/inputs" \
-    -e PATH:"$install_prefix/bin/Linux-ifort17_XE_emt64" \
-    -e PATH:"$install_prefix/utils17" \
-    -e PATH:"$install_prefix/crgra2006"
+    -e PATH:"$install_prefix/bin/Linux-ifort_i64/v1.0.1" \
+    -e PATH:"$install_prefix/utils23"
 
 chgrp -R ag-archpc-crystal "$install_prefix"
 chmod -R o-rwx "$install_prefix"
