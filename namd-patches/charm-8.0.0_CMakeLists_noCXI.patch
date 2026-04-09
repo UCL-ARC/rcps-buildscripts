@@ -1,0 +1,12 @@
+--- CMakeLists.txt.bak  2026-04-08 16:55:02.000000000 +0100
++++ CMakeLists.txt      2026-04-08 17:00:37.000000000 +0100
+@@ -1036,6 +1036,9 @@
+ if(CMK_BUILD_ON_CXI)
+	set(CMK_CXI 1)
+	set(CXI ON)
++else()
++        set(CMK_CXI 0)
++        set(CXI OFF)
+ endif()
+ 
+ foreach(l BUILDOPTS CMK_AMPI_WITH_ROMIO CMK_BUILD_PYTHON CMK_CAN_LINK_FORTRAN
