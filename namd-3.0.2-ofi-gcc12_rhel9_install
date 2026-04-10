@@ -20,6 +20,7 @@ APPS_DIR="/apps"
 source includes/source_includes.sh
 
 module purge
+module use /apps/spack/0.23/deploy/2026-03/modules/linux-rhel9-cascadelake
 module load compilers/gcc/12.3.0/gcc-12.3.0
 module load cmake/3.30.5/gcc-12.3.0
 module load gmake/4.4.1
