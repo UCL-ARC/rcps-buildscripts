@@ -48,8 +48,7 @@ function manifest() {
     fi
 }
 
-add_prefix_to_env () 
-{ 
+function add_prefix_to_env () { 
     if [ -z "$1" ] || [ ! -d "$1" ]; then
         echo "Error: invalid path specified" 1>&2;
     else
@@ -92,18 +91,42 @@ add_prefix_to_env ()
     fi
 }
 
-make_build_env () {
+function setup_env_diffs () {
+    declare -g apps_dir
+    declare -g apps_ver
+
+    if [[ -d "/apps" ]]; then
+        # 2026 (RHEL9+) environment
+        apps_dir="/apps"
+        apps_ver=2026
+    elif [[ -d "/shared/ucl/apps" ]]; then
+        # pre-2026 (RHEL7) environment
+        apps_dir="/shared/ucl/apps"
+        apps_ver=2015
+    else
+        printf "Error: cannot determine app root or intended build environment.\n" >&2
+        exit 1
+    fi
+}
+
+function make_build_env () {
     local prefix
     local tmp_root_dir
-    local prod_apps_dir
     local owning_group
+    local prod_apps_dir
 
-    prod_apps_dir="${APPS_DIR:-/shared/ucl/apps}"
+    # The point of this function is to set up the build environment with the following global-but-unexported variables:
+    declare -g module_dir
+    declare -g build_dir
+    declare -g package_label
+    declare -g install_prefix
+
+    prod_apps_dir="${APPS_DIR:-${apps_dir:?apps dir is unset: something has gone wrong}}"
     service_user_pattern="^ccspap.\$"
     # NB: ccspapp and ccspap2 are both service users
 
     prefix="${package_name:-tmp.}"
-    tmp_root_dir="${TMPDIR:-/tmp}"
+    tmp_root_dir="${TMPDIR:-${XDG_RUNTIME_DIR:-/tmp}}"
     owning_group=""
 
     if [[ -n "${1:-}" ]]; then
@@ -115,6 +138,9 @@ make_build_env () {
                         ;;
                     --prefix=*)
                         prefix="${1#--prefix=}"
+                        ;;
+                    --prod-install-prefix=*)
+                        prod_install_prefix="${1#--prod-install-prefix=}"
                         ;;
                     --group=*)
                         owning_group="${1#--group=}"
@@ -154,7 +180,7 @@ make_build_env () {
         reason_for_test_install="current user is not service user"
     fi
     
-    default_install_prefix="${INSTALL_PREFIX:-${prod_apps_dir}/${package_label}}"
+    default_install_prefix="${prod_install_prefix:-${INSTALL_PREFIX:-${prod_apps_dir}/${package_label}}}"
     if [[ -n "${reason_for_test_install:-}" ]]; then
         echo "Warning: default install prefix is a temporary directory because $reason_for_test_install"
         echo "         otherwise install prefix would have been $default_install_prefix"
@@ -191,11 +217,14 @@ make_build_env () {
 
     Package label:                $package_label
     Current working dir:          $owd
+    Detected apps setup version:  $apps_ver
+    Using apps dir:               $prod_apps_dir
     Build will take place in:     $build_dir
     Modules will be put in:       $module_dir
     Package will be installed to: $install_prefix
     ${group_own_text:-}
     =====================
+
 EOF
 }
 
@@ -261,4 +290,8 @@ function github_download() {
     done
 }
 
+function init() {
+    setup_env_diffs
+}
+init
 
