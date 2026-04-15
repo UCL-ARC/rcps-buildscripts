@@ -1,0 +1,97 @@
+#!/usr/bin/env bash
+
+###############################################
+# Installing NAMD
+#
+# You need to register and download a copy of NAMD and put the tar file 
+# somewhere.
+# This MPI version is for OmniPath clusters because charm++ OFI is currenty seg faulting on RHEL 9
+
+# Need to use the following modules:
+
+set -e
+
+package_name="namd"
+package_version="3.0.2"
+package_variant="mpi"
+package_description="NAMD is a parallel molecular dynamics code designed for high-performance simulation of large biomolecular systems. This is the MPI version."
+APPS_DIR="/apps"
+
+source includes/source_includes.sh
+
+module purge
+module use /apps/spack/0.23/deploy/2026-03/modules/linux-rhel9-cascadelake
+module load compilers/gcc/12.3.0/gcc-12.3.0
+module load cmake/3.30.5/gcc-12.3.0
+module load gmake/4.4.1
+module load fftw/3.3.10/gcc-12.3.0
+module load tcl/8.6.12
+
+export COMPILER_TAG="gcc-12.3.0"
+
+NANAME=${NANAME:-NAMD_${package_version}_Source}
+SRC_ARCHIVE=${SRC_ARCHIVE:-/apps/pkg-store/NAMD_${package_version}_Source.tar.gz}
+
+CHARMVER=${CHARMVER:-8.0.0}
+CHARMARC=${CHARMARC:-"mpi-linux-x86_64-smp"}
+
+make_build_env --tmp-root="/dev/shm"
+
+mkdir -p "$install_prefix"
+
+cd "$build_dir"
+
+tar zxvf "$SRC_ARCHIVE"
+
+ln -fsT `pwd`/${NANAME} "${install_prefix}/${NANAME}"
+
+cd "${install_prefix}/${NANAME}"
+
+# Fix for charm not being able to find f90
+#mkdir uclbuildsupport
+#ln -s `which $FC` uclbuildsupport/f90
+#ln -s `which $FC` uclbuildsupport/f77
+#ln -s `which $FC` uclbuildsupport/g77
+
+#export PATH=`pwd`/uclbuildsupport:$PATH
+
+tar xvf charm-${CHARMVER}.tar
+
+cd charm-${CHARMVER}
+
+cp /apps/build_scripts/namd-patches/charm-8.0.0_CMakeLists_noCXI.patch .
+patch -p0 -i charm-8.0.0_CMakeLists_noCXI.patch 
+
+./build charm++ ${CHARMARC} gcc gfortran --no-build-shared --with-production #-xHost -DCMK_OPTIMIZE
+
+cd ..
+
+cd arch
+
+# get location of this fftw from something in the bin directory, and tcl from $TCL_LIBRARY
+fftw_bin=$(dirname $(which fftw-wisdom))
+sed -i.bak -e '/FFTDIR=/s|$(HOME)/fftw3|'"${fftw_bin}"'/..|' Linux-x86_64.fftw3
+sed -i.bak -e '/TCLDIR=/s|TCLDIR=/Projects/namd2/tcl/tcl8.6.13-linux-x86_64-threaded|TCLDIR=$(TCL_LIBRARY)/../..|' Linux-x86_64.tcl
+
+cp Linux-x86_64-g++.arch Linux-x86_64-mpi-g++.arch
+sed -i.bak 's|multicore-linux-x86_64|mpi-linux-x86_64-gcc-gfortran|g' Linux-x86_64-mpi-g++.arch
+
+cd ..
+./config Linux-x86_64-mpi-g++ --with-fftw3 --charm-arch ${CHARMARC}-gcc-gfortran 
+
+cd Linux-x86_64-mpi-g++
+make
+
+cd ${build_dir}/${NANAME}/Linux-x86_64-mpi-g++
+rm ${install_prefix}/${NANAME}
+mkdir -p ${install_prefix}/${NANAME}/bin
+for a in charmrun flipbinpdb flipdcd namd3 psfgen sortreplicas
+do
+  echo "Installing $a"
+  cp $a ${install_prefix}/${NANAME}/bin
+done
+
+make_module_v2
+
+post_build_report
+
