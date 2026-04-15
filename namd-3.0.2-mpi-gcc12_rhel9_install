@@ -22,6 +22,7 @@ source includes/source_includes.sh
 module purge
 module use /apps/spack/0.23/deploy/2026-03/modules/linux-rhel9-cascadelake
 module load compilers/gcc/12.3.0/gcc-12.3.0
+module load mpi/openmpi/4.1.6/gcc-12.3.0
 module load cmake/3.30.5/gcc-12.3.0
 module load gmake/4.4.1
 module load fftw/3.3.10/gcc-12.3.0
