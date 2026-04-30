@@ -2,15 +2,15 @@
 
 # Install TotalView debugger on Myriad for Economics
 #
-# Version: 2019.2.18
-# April 2020
+# Version: 2026.1.3
+# April 2026
 
 APPNAME=${APPNAME:-TotalView}
-VERSION=${VERSION:-2019.2.18}
+VERSION=${VERSION:-2026.1.3}
 PLATFORM=${PLATFORM:-linux}
 ARCH=${ARCH:-x86-64}
-INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/$APPNAME/$VERSION}
-SRC_ARCHIVE=${SRC_ARCHIVE:-/shared/ucl/apps/$APPNAME/installers/tview.tgz}
+INSTALL_PREFIX=${INSTALL_PREFIX:-/myriadfs/shared/ucl/apps/$APPNAME/$VERSION}
+SRC_ARCHIVE=${SRC_ARCHIVE:-/myriadfs/shared/ucl/apps/TotalView/installers/totalview_2026.1.3_linux_x86-64.tar}
 
 dirname=/shared/ucl/apps/build_scripts
 INCLUDES_DIR=${INCLUDES_DIR:-${dirname}/includes}
@@ -22,8 +22,8 @@ temp_dir=`mktemp -d -p /dev/shm/$APPNAME`
 cd $temp_dir
 
 tar -xvf $SRC_ARCHIVE
-cd totalview/TotalView_Linux_${ARCH}
-tar -xvf totalview_${VERSION}_${PLATFORM}_${ARCH}.tar
+cd totalview.{VERSION}
+tar -xvf totalview_${PLATFORM}_${ARCH}.tar.Z
 cd totalview.${VERSION}
 
 # Run install script
