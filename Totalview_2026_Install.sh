@@ -22,7 +22,7 @@ temp_dir=`mktemp -d -p /dev/shm/$APPNAME`
 cd $temp_dir
 
 tar -xvf $SRC_ARCHIVE
-cd totalview.{VERSION}
+cd totalview.${VERSION}
 tar -xvf totalview_${PLATFORM}_${ARCH}.tar.Z
 cd totalview.${VERSION}
 
