@@ -23,7 +23,7 @@ _env_setup() {
   INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/${PACKAGE_NAME}/${PACKAGE_VERSION/atch/}${PACKAGE_VARIANT:+-$PACKAGE_VARIANT}/${COMPILER_TAG}}
   BUILD_DIR=${BUILD_DIR:-$(mktemp -d)}
   MODULE_DIR=${MODULE_DIR:-$(mktemp -d)}
-  PARALLEL_SCRATCH_DIR=/scratch/scratch/`whoami` #necessary for parallel tests
+  PARALLEL_SCRATCH_DIR=/home/`whoami`/Scratch #necessary for parallel tests
   SRC_URLS=https://www.hdfgroup.org/ftp/HDF5/current/src/hdf5-${PACKAGE_VERSION}.tar.gz
   BASENAME=$(basename -s .tar.gz $(cut -f 1 -d ' ' <<<$SRC_URLS))
 }
