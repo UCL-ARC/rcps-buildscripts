@@ -23,8 +23,8 @@ cd $temp_dir
 
 tar -xvf $SRC_ARCHIVE
 cd totalview.${VERSION}
-tar -xvf totalview_${PLATFORM}_${ARCH}.tar.Z
-cd totalview.${VERSION}
+#tar -xvf totalview_${PLATFORM}_${ARCH}.tar.Z
+#cd totalview.${VERSION}
 
 # Run install script
 
