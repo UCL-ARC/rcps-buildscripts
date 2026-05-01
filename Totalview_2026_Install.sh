@@ -33,9 +33,7 @@ echo ""
 echo "Installing using: ./Install -agree -directory $INSTALL_PREFIX -install totalview -platform ${PLATFORM}-${ARCH} -nosymlink"
 echo ""
 ./Install -agree -directory $INSTALL_PREFIX -install totalview -platform ${PLATFORM}-${ARCH} -nosymlink
-echo ""
-echo "Installing using: ./Install -agree -directory $INSTALL_PREFIX -install license -platform ${PLATFORM}-${ARCH} -nosymlink"
-echo ""
-./Install -agree -directory $INSTALL_PREFIX -install license -platform ${PLATFORM}-${ARCH} -nosymlink
+# Not necessary for current version
+#./Install -agree -directory $INSTALL_PREFIX -install license -platform ${PLATFORM}-${ARCH} -nosymlink
 
 echo "Done. Now need to install the license file by hand."
