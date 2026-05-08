@@ -3,7 +3,7 @@
 ###############################################
 # Installing STAR-CD for Brunel 
 #
-# Updated for version 2021.1 of Brunel in Young 2026
+# Updated for version 4.36.004 (2021.1) of Brunel in Young 2026
 
 dirname=$(dirname $0 2>/dev/null || pwd)
 INCLUDES_DIR=${INCLUDES_DIR:-${dirname}/includes}
