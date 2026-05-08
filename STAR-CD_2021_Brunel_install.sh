@@ -14,7 +14,7 @@ source ${INCLUDES_DIR}/source_includes.sh
 NAME=${NAME:-STAR-CD}
 VERSION=${VERSION:-2021.1}
 INSTALL_PREFIX=${INSTALL_PREFIX:-/apps/${NAME}/${VERSION}}
-SRC_ARCHIVE=${SRC_ARCHIVE:-/apps/pkg-store/${NAME}_${VERSION}-STAR-CD_2021.1-436004_202104290129-Linux_x86_64.tar}
+SRC_ARCHIVE=${SRC_ARCHIVE:-/apps/pkg-store/${NAME}_${VERSION}-436004_202104290129-Linux_x86_64.tar}
 GROUP=${GROUP:-ag-archpc-starcd}
 #ICE_VER=${ICE_VER:-4.28.053}
 #ICE_ARCH=${ICE_ARCH:-linux64_2.6-x86-glibc_2.5.0-gcc_4.4.3-ifort_11.0}
