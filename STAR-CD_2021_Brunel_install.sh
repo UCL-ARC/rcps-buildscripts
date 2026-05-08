@@ -31,7 +31,7 @@ tar -xvf $SRC_ARCHIVE
 
 
 # remove offending ancient libm
-#rm -f "${temp_dir}"/tools/software/P7ZIP/9.20/linux64*/lib/libm.so.6
+rm -f "${temp_dir}"/tools/software/P7ZIP/9.20/linux64*/lib/libm.so.6
 
 # pick components and answer questions interactively - choose A for all.
 sh setup
