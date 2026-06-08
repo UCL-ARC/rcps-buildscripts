@@ -24,7 +24,7 @@ mkdir -p "$install_prefix"
 cd "$install_prefix"
 tar -xvf "$src_archive"
 
-chgrp -R "$group" "$install_prefix"
+chgrp -R "$gv_group" "$install_prefix"
 chmod -R o-rwx "$install_prefix"
 
 make_module_v2 \
