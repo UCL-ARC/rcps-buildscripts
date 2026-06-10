@@ -1,0 +1,37 @@
+#!/bin/bash
+
+package_name="pipe-gifts"
+package_version="1.0.2"
+package_description="A tool for transferring files between users on the same node: 'pipe-give' and 'pipe-receive'."
+
+set -o errexit \
+    -o nounset \
+    -o pipefail
+
+source includes/source_includes.sh
+
+module purge
+
+make_build_env ""
+
+cd "$build_dir"
+wget -O pipe-gifts-1.0.2.tar.gz https://github.com/ikirker/pipe-gifts/archive/v1.0.2.tar.gz
+
+manifest \
+    sha256:d5a8196bde47edf3327635032fc067ca16399c2fd64949ca371c5b0c56e0cebd  v1.0.2.tar.gz \
+	
+
+tar -xf pipe-gifts-1.0.2.tar.gz
+
+cd pipe-gifts-1.0.2
+
+mkdir -p \
+    "$install_prefix/bin" \
+    "$install_prefix/doc"
+cp pipe-* "$install_prefix/bin"
+cp README.md "$install_prefix/doc"
+
+make_module_v2
+chmod a+rX "$module_dir"
+post_build_report
+

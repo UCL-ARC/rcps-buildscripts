@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# This is a UCL-RC shim to set up the scratch dir GAUSS_SCRDIR
+#  and also to be put as "gview" which is what people
+#  apparently expect GaussView to be run as?
+
+if [[ -n "$GAUSS_SCRDIR" ]]; then
+  if [[ ! -d "$GAUSS_SCRDIR" ]]; then
+    mkdir "$GAUSS_SCRDIR" || \
+      echo "Error: could not create Gaussian scratch directory: $GAUSS_SCRDIR" >&2
+  fi
+fi
+
+ran_with_dir="$(dirname "$0")"
+if [[ -n "$ran_with_dir" ]]; then
+  ran_with_dir="$ran_with_dir/"
+fi
+
+exec "${ran_with_dir}gview.sh"
+

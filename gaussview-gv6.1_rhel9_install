@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+# For RHEL9
+
+set -o errexit -o nounset -o pipefail
+
+package_name="gaussview"
+package_version="gv6.1"
+package_description="GaussView 6.1 is a graphical interface used with Gaussian 16."
+APPS_DIR="/apps"
+
+source includes/source_includes.sh
+
+src_archive="/apps/pkg-store/gaussview-6.1/tar/gv61-linux-x86_64.tbz"
+shasum=${shasum:-c9824fd0372c27425b53de350f3a83b27de75ca694219b3ef18cd7d92937db6c}
+gv_group="ag-archpc-gaussian16"
+
+set -e
+
+mkdir -p /dev/shm/gaussview
+make_build_env --tmp-root="/dev/shm/gaussview"
+
+mkdir -p "$install_prefix"
+cd "$install_prefix"
+tar -xvf "$src_archive"
+
+# copy in gview shim script from this repo
+cp "$APPS_DIR/build_scripts/files/gview" "$install_prefix/gv"
+
+chgrp -R "$gv_group" "$install_prefix"
+chmod -R o-rwx "$install_prefix"
+
+make_module_v2 \
+    -v GV_DIR="$install_prefix" \
+    -e PATH:"$install_prefix/bin" \
+    -e PATH:"$install_prefix"
+
+post_build_report 
