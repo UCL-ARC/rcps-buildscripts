@@ -25,7 +25,7 @@ cd "$install_prefix"
 tar -xvf "$src_archive"
 
 # copy in gview shim script from this repo
-cp files/gview "$install_prefix/gv"
+cp "$APPS_DIR/build_scripts/files/gview" "$install_prefix/gv"
 
 chgrp -R "$gv_group" "$install_prefix"
 chmod -R o-rwx "$install_prefix"
