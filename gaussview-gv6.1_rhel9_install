@@ -24,6 +24,9 @@ mkdir -p "$install_prefix"
 cd "$install_prefix"
 tar -xvf "$src_archive"
 
+# copy in gview shim script from this repo
+cp files/gview "$install_prefix/gv"
+
 chgrp -R "$gv_group" "$install_prefix"
 chmod -R o-rwx "$install_prefix"
 
