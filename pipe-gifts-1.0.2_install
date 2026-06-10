@@ -1,7 +1,7 @@
 #!/bin/bash
 
 package_name="pipe-gifts"
-package_version="1.0.1"
+package_version="1.0.2"
 package_description="A tool for transferring files between users on the same node: 'pipe-give' and 'pipe-receive'."
 
 set -o errexit \
@@ -15,15 +15,15 @@ module purge
 make_build_env ""
 
 cd "$build_dir"
-wget -O pipe-gifts-1.0.1.tar.gz https://github.com/ikirker/pipe-gifts/archive/v1.0.1.tar.gz
+wget -O pipe-gifts-1.0.2.tar.gz https://github.com/ikirker/pipe-gifts/archive/v1.0.2.tar.gz
 
 manifest \
-    sha256:7bb5875721ccccaf70d7bfe7903de1dc6e8efc916a78c88fbce2f1e97e06a9d7  pipe-gifts-1.0.1.tar.gz \
+    sha256:d5a8196bde47edf3327635032fc067ca16399c2fd64949ca371c5b0c56e0cebd  v1.0.2.tar.gz \
 	
 
-tar -xf pipe-gifts-1.0.1.tar.gz
+tar -xf pipe-gifts-1.0.2.tar.gz
 
-cd pipe-gifts-1.0.1
+cd pipe-gifts-1.0.2
 
 mkdir -p \
     "$install_prefix/bin" \
