@@ -21,7 +21,7 @@ APP_GROUP=${APP_GROUP:-ag-archpc-foldx}
 
 set -e
 
-if [ ! -e $SRC_ARCHIVE]
+if [ ! -e $SRC_ARCHIVE ]
 then
     echo ""
     echo "*** ERROR: Cannot find FoldX installer archive"
