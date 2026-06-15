@@ -18,7 +18,7 @@ cd "$build_dir"
 wget -O pipe-gifts-1.0.2.tar.gz https://github.com/ikirker/pipe-gifts/archive/v1.0.2.tar.gz
 
 manifest \
-    sha256:d5a8196bde47edf3327635032fc067ca16399c2fd64949ca371c5b0c56e0cebd  v1.0.2.tar.gz \
+    sha256:d5a8196bde47edf3327635032fc067ca16399c2fd64949ca371c5b0c56e0cebd  pipe-gifts-1.0.2.tar.gz \
 	
 
 tar -xf pipe-gifts-1.0.2.tar.gz
