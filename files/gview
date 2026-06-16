@@ -16,5 +16,6 @@ if [[ -n "$ran_with_dir" ]]; then
   ran_with_dir="$ran_with_dir/"
 fi
 
-exec "${ran_with_dir}gview.sh"
+# launch with -mesagl so it finds its MesaGL/libGL.so.1
+exec "${ran_with_dir}gview.sh" "-mesagl"
 
