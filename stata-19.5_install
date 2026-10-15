@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+set -e
+
+# This script installs StataMP 19.5 (two cores) 
+
+_env_setup() {
+    echo "Begin setup"
+    source includes/source_includes.sh
+    cd 
+    module purge
+    
+    package_description="Stata is a statistics, data management, and graphics system. Our license supports Stata running on up to two cores per job."
+    package_archive="/home/ccspapp/StataNow19Linux64.tar.gz"
+    package_name="stata"
+    package_version="19.5"
+
+    make_build_env --tmp-root=/dev/shm
+    install_prefix="/apps/StataMP/stata19.5"
+    module_dir="$install_prefix/.uclrc_modules"
+    echo "$install_prefix"
+    echo "$module_dir"
+    echo "End env_setup"
+}
+
+_file_setup() {
+    echo "Begin file_setup"
+    mkdir -p $install_prefix
+    cd "$install_prefix"
+    tar -xvzf "$package_archive"
+    echo "End file_setup"
+}
+
+_pre_build() {
+    # Nothing here.
+    cd ..
+}
+_build() {      
+    cd "$install_prefix"
+    echo "Building..."
+    ./install
+    ./stinit
+    echo "End building"
+}
+
+_post_build() {
+    cd "$install_prefix"
+    echo "Post-building..."
+    make_module_v2 \
+        -o "${module_dir}" \
+        -p "$install_prefix" \
+        -c stata
+    cd ..
+    echo "End post-building"
+}
+
+_clean_up() {
+    echo "Cleaning"
+    :
+}
+
+_test_(){    
+    echo "Testing"
+    # Test Stata 19.5
+    ${install_prefix}/stata -q -b "display 2+2+2"
+    cat stata.log
+    echo "End test"
+}
+
+_env_setup
+_file_setup
+_pre_build
+_build
+_post_build
+_clean_up
+_test_
