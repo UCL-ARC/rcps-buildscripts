@@ -1,0 +1,16 @@
+CXX17 = g++ -std=c++17
+CXX17FLAGS = -Wno-unused-variable -Wno-unused-function -fPIC
+OBJCXX = clang++ -std=c++17
+CPPFLAGS += -I/myriadfs/apps/spack/0.23/deploy/2026-07/spack/opt/spack/linux-rhel9-x86_64_v4/gcc-12.3.0/gmp-6.3.0-agqgyl7jffw7ln3hogxt6l3qgcnkcgx4/include
+CPPFLAGS += -I/myriadfs/apps/spack/0.23/deploy/2026-07/spack/opt/spack/linux-rhel9-x86_64_v4/gcc-12.3.0/gsl-2.8-dcpksgonxc3inlo3rjuegozlbxbtzhww/include
+CPPFLAGS += -I/myriadfs/apps/spack/0.23/deploy/2026-07/spack/opt/spack/linux-rhel9-x86_64_v4/gcc-12.3.0/proj-8.1.0-kzwegmztbhkajusycr3uzrqpqml73jyo/include
+CPPFLAGS += -I/myriadfs/apps/spack/0.23/deploy/2026-07/spack/opt/spack/linux-rhel9-x86_64_v4/gcc-12.3.0/xz-5.4.6-3gtcg454ey4xy7laqm4loz5rdweloxio/include
+CPPFLAGS += -I/myriadfs/apps/spack/0.23/deploy/2026-07/spack/opt/spack/linux-rhel9-x86_64_v4/gcc-12.3.0/bzip2-1.0.8-cowfq3mw2rwekcvowt5s6rsfpo7zltiw/include
+CPPFLAGS += -I/myriadfs/apps/spack/0.23/deploy/2026-07/spack/opt/spack/linux-rhel9-x86_64_v4/gcc-12.3.0/xproto-7.0.31-sayg7q7a4a5jpoowzbdfjxixts3h37kf/include
+CFLAGS += -I/myriadfs/apps/spack/0.23/deploy/2026-07/spack/opt/spack/linux-rhel9-x86_64_v4/gcc-12.3.0/proj-8.1.0-kzwegmztbhkajusycr3uzrqpqml73jyo/include
+LDFLAGS += -L/myriadfs/apps/spack/0.23/deploy/2026-07/spack/opt/spack/linux-rhel9-x86_64_v4/gcc-12.3.0/gmp-6.3.0-agqgyl7jffw7ln3hogxt6l3qgcnkcgx4/lib
+LDFLAGS += -L/myriadfs/apps/spack/0.23/deploy/2026-07/spack/opt/spack/linux-rhel9-x86_64_v4/gcc-12.3.0/gsl-2.8-dcpksgonxc3inlo3rjuegozlbxbtzhww/lib
+LDFLAGS += -L/myriadfs/apps/spack/0.23/deploy/2026-07/spack/opt/spack/linux-rhel9-x86_64_v4/gcc-12.3.0/proj-8.1.0-kzwegmztbhkajusycr3uzrqpqml73jyo/lib64
+LDFLAGS += -L/myriadfs/apps/spack/0.23/deploy/2026-07/spack/opt/spack/linux-rhel9-x86_64_v4/gcc-12.3.0/xz-5.4.6-3gtcg454ey4xy7laqm4loz5rdweloxio/lib
+LDFLAGS += -L/myriadfs/apps/spack/0.23/deploy/2026-07/spack/opt/spack/linux-rhel9-x86_64_v4/gcc-12.3.0/bzip2-1.0.8-cowfq3mw2rwekcvowt5s6rsfpo7zltiw/lib
+LDFLAGS += -L/myriadfs/apps/spack/0.23/deploy/2026-07/spack/opt/spack/linux-rhel9-x86_64_v4/gcc-12.3.0/xproto-7.0.31-sayg7q7a4a5jpoowzbdfjxixts3h37kf/lib
